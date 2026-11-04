@@ -1,0 +1,139 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/account/api/revision",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [],
+     "responseType": "revisions.revision.AccountRevision",
+     "responseTypes": {
+      "200": "revisions.revision.AccountRevision"
+     },
+     "noAuthentication": false,
+     "description": "Get the current and available API revisions",
+     "iamActions": [
+      {
+       "name": "account:apiovh:revision/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "revisions.revision.AccountRevisionInput",
+       "paramType": "body",
+       "fullType": "revisions.revision.AccountRevisionInput",
+       "required": true,
+       "description": "Request Body"
+      }
+     ],
+     "responseType": "revisions.revision.AccountRevision",
+     "responseTypes": {
+      "200": "revisions.revision.AccountRevision"
+     },
+     "noAuthentication": false,
+     "description": "Update the current API revision",
+     "iamActions": [
+      {
+       "name": "account:apiovh:revision/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  }
+ ],
+ "resourcePath": "/account",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "revisions.revision.AccountRevision": {
+   "id": "AccountRevision",
+   "namespace": "revisions.revision",
+   "description": "API revision resource",
+   "properties": {
+    "availableRevisions": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Available API revisions to transition to",
+     "required": false
+    },
+    "currentState": {
+     "type": "revisions.revision.AccountRevisionCurrentState",
+     "fullType": "revisions.revision.AccountRevisionCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the API revision",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "revisions.revision.AccountRevisionTargetSpec",
+     "fullType": "revisions.revision.AccountRevisionTargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Target specification for the API revision",
+     "required": false
+    }
+   }
+  },
+  "revisions.revision.AccountRevisionCurrentState": {
+   "id": "AccountRevisionCurrentState",
+   "namespace": "revisions.revision",
+   "description": "Current state of the API revision",
+   "properties": {
+    "revision": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Currently active API revision",
+     "required": false
+    }
+   }
+  },
+  "revisions.revision.AccountRevisionInput": {
+   "id": "AccountRevisionInput",
+   "namespace": "revisions.revision",
+   "description": "Input payload to update the API revision",
+   "properties": {
+    "targetSpec": {
+     "type": "revisions.revision.AccountRevisionTargetSpec",
+     "fullType": "revisions.revision.AccountRevisionTargetSpec",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Requested target specification",
+     "required": true
+    }
+   }
+  },
+  "revisions.revision.AccountRevisionTargetSpec": {
+   "id": "AccountRevisionTargetSpec",
+   "namespace": "revisions.revision",
+   "description": "Target specification for the API revision",
+   "properties": {
+    "revision": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "API revision to set as active",
+     "required": true
+    }
+   }
+  }
+ }
+}

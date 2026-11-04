@@ -1,0 +1,433 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/videocenter/resource",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "videocenter.ServiceWithIAM[]",
+     "responseTypes": {
+      "200": "videocenter.Service[]"
+     },
+     "noAuthentication": false,
+     "description": "Get all services",
+     "iamActions": [
+      {
+       "name": "videocenter:apiovh:service/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/videocenter/resource/{serviceId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "videocenter.ServiceWithIAM",
+     "responseTypes": {
+      "200": "videocenter.ServiceWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Get a service",
+     "iamActions": [
+      {
+       "name": "videocenter:apiovh:service/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/videocenter/resource/{serviceId}/auth/token",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "videocenter.AuthTokenRequest",
+       "paramType": "body",
+       "fullType": "videocenter.AuthTokenRequest",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "videocenter.AuthTokenResponse",
+     "responseTypes": {
+      "200": "videocenter.AuthTokenResponse"
+     },
+     "noAuthentication": false,
+     "description": "Generate an Auth Token",
+     "iamActions": [
+      {
+       "name": "videocenter:apiovh:service/auth/token",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  }
+ ],
+ "resourcePath": "/videocenter",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "common.ResourceStatusEnum": {
+   "id": "ResourceStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a resource",
+   "enum": [
+    "CREATING",
+    "CREATION_PLANNED",
+    "DELETING",
+    "ERROR",
+    "OUT_OF_SYNC",
+    "READY",
+    "SUSPENDED",
+    "UNKNOWN",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "iam.ResourceMetadata": {
+   "id": "ResourceMetadata",
+   "namespace": "iam",
+   "description": "IAM resource metadata embedded in services models",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource display name",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the resource",
+     "required": false
+    },
+    "state": {
+     "type": "iam.ResourceMetadata.StateEnum",
+     "fullType": "iam.ResourceMetadata.StateEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource state",
+     "required": false
+    },
+    "tags": {
+     "type": "map[string]string",
+     "fullType": "map[string]string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource tags. Tags that were internally computed are prefixed with ovh:",
+     "required": false
+    },
+    "urn": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique resource name used in policies",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata.StateEnum": {
+   "id": "StateEnum",
+   "namespace": "iam.ResourceMetadata",
+   "description": "Resource state",
+   "enum": [
+    "EXPIRED",
+    "IN_CREATION",
+    "OK",
+    "SUSPENDED"
+   ],
+   "enumType": "string"
+  },
+  "iam.resource.TagFilter": {
+   "id": "TagFilter",
+   "namespace": "iam.resource",
+   "description": "Resource tag filter",
+   "properties": {
+    "operator": {
+     "type": "iam.resource.TagFilter.OperatorEnum",
+     "fullType": "iam.resource.TagFilter.OperatorEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operator to use in order to filter on the value (defaults to 'EQ')",
+     "required": false
+    },
+    "value": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Value to use in order to filter tags",
+     "required": false
+    }
+   }
+  },
+  "iam.resource.TagFilter.OperatorEnum": {
+   "id": "OperatorEnum",
+   "namespace": "iam.resource.TagFilter",
+   "description": "Operator that can be used in order to filter resources tags",
+   "enum": [
+    "EQ",
+    "EXISTS",
+    "ILIKE",
+    "LIKE",
+    "NEQ",
+    "NEXISTS"
+   ],
+   "enumType": "string"
+  },
+  "videocenter.AuthTokenRequest": {
+   "id": "AuthTokenRequest",
+   "namespace": "videocenter",
+   "description": "Request for a token granting access to the video player.",
+   "properties": {
+    "language": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Language the player interface and its messages should be shown in.",
+     "required": true
+    }
+   }
+  },
+  "videocenter.AuthTokenResponse": {
+   "id": "AuthTokenResponse",
+   "namespace": "videocenter",
+   "description": "Token granting access to the video player.",
+   "properties": {
+    "token": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "JWT",
+     "required": false
+    }
+   }
+  },
+  "videocenter.Service": {
+   "id": "Service",
+   "namespace": "videocenter",
+   "description": "Video public service",
+   "properties": {
+    "currentState": {
+     "type": "videocenter.ServiceCurrentState",
+     "fullType": "videocenter.ServiceCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "What the service currently holds and how much of its offer is used.",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the service",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the service is ready to use, still being set up, or in error.",
+     "required": false
+    }
+   }
+  },
+  "videocenter.ServiceCurrentState": {
+   "id": "ServiceCurrentState",
+   "namespace": "videocenter",
+   "description": "Current state of a public service",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the service",
+     "required": false
+    },
+    "offerName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Commercial offer the service runs on, which sets the video count and duration it is allowed.",
+     "required": false
+    },
+    "vodCount": {
+     "type": "videocenter.ServiceCurrentStateVodCount",
+     "fullType": "videocenter.ServiceCurrentStateVodCount",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Video count",
+     "required": false
+    },
+    "vodDurationMinutes": {
+     "type": "videocenter.ServiceCurrentStateVodDurationMinutes",
+     "fullType": "videocenter.ServiceCurrentStateVodDurationMinutes",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Video duration minutes",
+     "required": false
+    }
+   }
+  },
+  "videocenter.ServiceCurrentStateVodCount": {
+   "id": "ServiceCurrentStateVodCount",
+   "namespace": "videocenter",
+   "description": "Video count of current state",
+   "properties": {
+    "allocated": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The total number of hosted videos (actual usage)",
+     "required": false
+    },
+    "hostable": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The total number of hostable videos (maximum capacity)",
+     "required": false
+    }
+   }
+  },
+  "videocenter.ServiceCurrentStateVodDurationMinutes": {
+   "id": "ServiceCurrentStateVodDurationMinutes",
+   "namespace": "videocenter",
+   "description": "Video duration minutes of current state",
+   "properties": {
+    "allocated": {
+     "type": "double",
+     "fullType": "double",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The total used duration of video (actual usage)",
+     "required": false
+    },
+    "hostable": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The total number of hostable minutes of videos (maximum capacity)",
+     "required": false
+    }
+   }
+  },
+  "videocenter.ServiceWithIAM": {
+   "id": "Service",
+   "namespace": "videocenter",
+   "description": "Video public service",
+   "properties": {
+    "currentState": {
+     "type": "videocenter.ServiceCurrentState",
+     "fullType": "videocenter.ServiceCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "What the service currently holds and how much of its offer is used.",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the service",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the service is ready to use, still being set up, or in error.",
+     "required": false
+    }
+   }
+  }
+ }
+}

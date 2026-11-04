@@ -1,0 +1,1551 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/networkDefense/vac/event",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "after",
+       "dataType": "datetime",
+       "paramType": "query",
+       "fullType": "datetime",
+       "required": false,
+       "description": "Query events which started after the given date"
+      },
+      {
+       "name": "before",
+       "dataType": "datetime",
+       "paramType": "query",
+       "fullType": "datetime",
+       "required": false,
+       "description": "Query events which ended before the given date"
+      },
+      {
+       "name": "ongoingOnly",
+       "dataType": "boolean",
+       "paramType": "query",
+       "fullType": "boolean",
+       "required": false,
+       "description": "Query for ongoing events only. If this is set, 'after' and 'before' parameters are ignored"
+      },
+      {
+       "name": "region",
+       "dataType": "networkDefense.RegionEnum",
+       "paramType": "query",
+       "fullType": "networkDefense.RegionEnum",
+       "required": false,
+       "description": "Query events for the given region"
+      },
+      {
+       "name": "subnets",
+       "dataType": "ipBlock[]",
+       "paramType": "query",
+       "fullType": "ipBlock[]",
+       "required": false,
+       "description": "Query events for the given subnets"
+      }
+     ],
+     "responseType": "networkDefense.Vac.EventsResponse",
+     "responseTypes": {
+      "200": "networkDefense.Vac.EventsResponse"
+     },
+     "noAuthentication": false,
+     "description": "List VAC detection events",
+     "longDescription": "Returns the detection events of the VAC DDoS protection, with their start and end dates and attack vectors when available. Filter by date range, region or subnet. Ongoing events, not finished, can be requested on their own.",
+     "iamActions": [
+      {
+       "name": "ip:apiovh:networkDefense/vac/event/get",
+       "required": false
+      }
+     ]
+    }
+   ],
+   "description": "Operations on the detection events of the VAC DDoS protection."
+  },
+  {
+   "path": "/networkDefense/vac/reference/profile",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      }
+     ],
+     "responseType": "networkDefense.Vac.Profile[]",
+     "responseTypes": {
+      "200": "networkDefense.Vac.Profile[]"
+     },
+     "noAuthentication": false,
+     "description": "List VAC network traffic profiles",
+     "longDescription": "Returns the list of VAC DDoS protection network traffic profiles available to the account. Every profile is an expert-curated configuration for a workload type, such as a VPN or a Web Server, with the sensitivity levels it offers. A RETIRED profile cannot be assigned to a policy."
+    }
+   ],
+   "description": "Read-only catalog of VAC DDoS protection network traffic profiles available for policing."
+  },
+  {
+   "path": "/networkDefense/vac/reference/profile/{profileId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "profileId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Profile ID"
+      }
+     ],
+     "responseType": "networkDefense.Vac.Profile",
+     "responseTypes": {
+      "200": "networkDefense.Vac.Profile"
+     },
+     "noAuthentication": false,
+     "description": "Get a VAC network traffic profile",
+     "longDescription": "Returns a VAC DDoS protection network traffic profile with its name, description, sensitivity levels and lifecycle state.",
+     "errors": [
+      "Client::NotFound::ProfileDoesNotExist"
+     ]
+    }
+   ],
+   "description": "Read-only catalog of VAC DDoS protection network traffic profiles available for policing."
+  },
+  {
+   "path": "/networkDefense/vac/resource",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "networkDefense.Vac.ResourceWithIAM[]",
+     "responseTypes": {
+      "200": "networkDefense.Vac.Resource[]"
+     },
+     "noAuthentication": false,
+     "description": "List VAC resources",
+     "longDescription": "Returns the list of VAC DDoS protection resources within the account. Every resource groups policies, profile and sensitivity with target IP address prefixes in order to tune detection and mitigation rules.",
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Manage your VAC DDoS protection resources. Every resource groups policies within a user account."
+  },
+  {
+   "path": "/networkDefense/vac/resource/{resourceName}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.ResourceWithIAM",
+     "responseTypes": {
+      "200": "networkDefense.Vac.ResourceWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Get a VAC resource",
+     "longDescription": "Returns a VAC DDoS protection resource with its name, status and creation and update dates. The status is READY, or DELETING while the resource is being removed.",
+     "errors": [
+      "Client::NotFound::ServiceDoesNotExist"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "networkDefense.Vac.ResourceUpdate",
+       "paramType": "body",
+       "fullType": "networkDefense.Vac.ResourceUpdate",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.Resource",
+     "responseTypes": {
+      "200": "networkDefense.Vac.Resource"
+     },
+     "noAuthentication": false,
+     "description": "Rename a VAC resource",
+     "longDescription": "Changes the name of a VAC DDoS protection resource. No other field can be updated through this call.",
+     "errors": [
+      "Client::BadRequest::FieldTooLong",
+      "Client::BadRequest::ImmutableField",
+      "Client::NotFound::ServiceDoesNotExist"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Manage your VAC DDoS protection resources. Every resource groups policies within a user account."
+  },
+  {
+   "path": "/networkDefense/vac/resource/{resourceName}/policy",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.PolicyAsyncResourceWithIAM[]",
+     "responseTypes": {
+      "200": "networkDefense.Vac.PolicyAsyncResource[]"
+     },
+     "noAuthentication": false,
+     "description": "List VAC policies",
+     "longDescription": "Returns the list of policies within a VAC DDoS protection resource. Every policy applies a profile and a sensitivity level to target IP address prefixes, and carries the configuration requested and the one currently enforced.",
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/policy/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "networkDefense.Vac.PolicyAsyncAdd",
+       "paramType": "body",
+       "fullType": "networkDefense.Vac.PolicyAsyncAdd",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "force",
+       "dataType": "boolean",
+       "paramType": "query",
+       "fullType": "boolean",
+       "required": false,
+       "description": "Overwrite the protection settings that were not set via a policy on the targets this request adds. Without it, such a request is refused. The previous settings are lost: you cannot restore them yourself. The 'force' flag is not stored in the policy spec."
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.PolicyAsyncResource",
+     "responseTypes": {
+      "200": "networkDefense.Vac.PolicyAsyncResource"
+     },
+     "noAuthentication": false,
+     "description": "Create a VAC policy",
+     "longDescription": "Creates a policy within a VAC DDoS protection resource, applying a profile and a sensitivity level to target IP address prefixes in order to tune detection and mitigation rules. Async call, follow resourceStatus for operation progress. A target whose prefix carries protection settings that were not set via a policy is refused, unless you send force=true to overwrite them.",
+     "errors": [
+      "Client::BadRequest::DuplicateTarget",
+      "Client::BadRequest::InvalidPrefix",
+      "Client::BadRequest::ProfileDoesNotExist",
+      "Client::BadRequest::ProfileNotAssignable",
+      "Client::BadRequest::ProfileRetired",
+      "Client::BadRequest::RequiredField",
+      "Client::BadRequest::SensitivityNotDefined",
+      "Client::BadRequest::TooManyTargets",
+      "Client::Forbidden::DestinationNotAllowed",
+      "Client::NotFound::ServiceDoesNotExist",
+      "Client::Conflict::PolicyNameAlreadyExists",
+      "Client::Conflict::PrefixAlreadyAssigned",
+      "Client::Conflict::QuotaExceeded",
+      "Client::Conflict::ResourceBusy",
+      "Client::Conflict::UnmanagedConfiguration"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/policy/create",
+       "required": true
+      },
+      {
+       "name": "ip:apiovh:networkDefense/vac/protect",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Manage policies. Each policy links a network traffic profile, sensitivity level and state with target IP address prefixes in order to tune detection and mitigation behavior."
+  },
+  {
+   "path": "/networkDefense/vac/resource/{resourceName}/policy/{policyId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "policyId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Policy ID"
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.PolicyAsyncResource",
+     "responseTypes": {
+      "200": "networkDefense.Vac.PolicyAsyncResource"
+     },
+     "noAuthentication": false,
+     "description": "Delete a VAC policy",
+     "longDescription": "Deletes a policy from a VAC DDoS protection resource. All settings of linked target IP address prefixes return to their default states.",
+     "errors": [
+      "Client::NotFound::PolicyDoesNotExist",
+      "Client::Conflict::ResourceBusy"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/policy/delete",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "policyId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Policy ID"
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.PolicyAsyncResourceWithIAM",
+     "responseTypes": {
+      "200": "networkDefense.Vac.PolicyAsyncResourceWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Get a VAC policy",
+     "longDescription": "Returns a policy with the configuration requested and the one currently enforced, including the status of every protected IP address prefix.",
+     "errors": [
+      "Client::NotFound::PolicyDoesNotExist"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/policy/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "networkDefense.Vac.PolicyAsyncUpdate",
+       "paramType": "body",
+       "fullType": "networkDefense.Vac.PolicyAsyncUpdate",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "force",
+       "dataType": "boolean",
+       "paramType": "query",
+       "fullType": "boolean",
+       "required": false,
+       "description": "Overwrite the protection settings that were not set via a policy on the targets this request adds. Without it, such a request is refused. The previous settings are lost: you cannot restore them yourself. The 'force' flag is not stored in the policy spec."
+      },
+      {
+       "name": "policyId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Policy ID"
+      },
+      {
+       "name": "resourceName",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Resource name"
+      }
+     ],
+     "responseType": "networkDefense.Vac.PolicyAsyncResource",
+     "responseTypes": {
+      "200": "networkDefense.Vac.PolicyAsyncResource"
+     },
+     "noAuthentication": false,
+     "description": "Update a VAC policy",
+     "longDescription": "Updates the name, enabled state, targets, profile and sensitivity level of a policy. The targets sent fully replace the previous ones: an omitted or empty list of targets removes every target from the policy. Removed target IPs reset their VAC DDoS protection settings to the default state. Send the checksum from the last read; a stale value is rejected. A new target whose prefix carries protection settings that were not set via a policy is refused, unless you send force=true to overwrite them.",
+     "errors": [
+      "Client::BadRequest::DuplicateTarget",
+      "Client::BadRequest::InvalidPrefix",
+      "Client::BadRequest::ProfileDoesNotExist",
+      "Client::BadRequest::ProfileNotAssignable",
+      "Client::BadRequest::ProfileRetired",
+      "Client::BadRequest::RequiredField",
+      "Client::BadRequest::SensitivityNotDefined",
+      "Client::BadRequest::TooManyTargets",
+      "Client::Forbidden::DestinationNotAllowed",
+      "Client::NotFound::PolicyDoesNotExist",
+      "Client::Conflict::PolicyNameAlreadyExists",
+      "Client::Conflict::PrefixAlreadyAssigned",
+      "Client::Conflict::ResourceBusy",
+      "Client::Conflict::TargetAlreadyDeclared",
+      "Client::Conflict::UnmanagedConfiguration",
+      "Client::PreconditionFailed::InvalidChecksum"
+     ],
+     "iamActions": [
+      {
+       "name": "vac:apiovh:resource/policy/edit",
+       "required": true
+      },
+      {
+       "name": "ip:apiovh:networkDefense/vac/protect",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Manage policies. Each policy links a network traffic profile, sensitivity level and state with target IP address prefixes in order to tune detection and mitigation behavior."
+  },
+  {
+   "path": "/networkDefense/vac/traffic",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Stable production version",
+      "value": "PRODUCTION"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "after",
+       "dataType": "datetime",
+       "paramType": "query",
+       "fullType": "datetime",
+       "required": true,
+       "description": "Query statistics after the given date"
+      },
+      {
+       "name": "before",
+       "dataType": "datetime",
+       "paramType": "query",
+       "fullType": "datetime",
+       "required": false,
+       "description": "Query statistics before the given date"
+      },
+      {
+       "name": "subnet",
+       "dataType": "ipBlock",
+       "paramType": "query",
+       "fullType": "ipBlock",
+       "required": true,
+       "description": "Query statistics for the given subnet (currently, only IPv4/32 or IPv6/64 are supported)"
+      }
+     ],
+     "responseType": "networkDefense.Vac.TrafficResponse",
+     "responseTypes": {
+      "200": "networkDefense.Vac.TrafficResponse"
+     },
+     "noAuthentication": false,
+     "description": "Get VAC traffic statistics",
+     "longDescription": "Returns the traffic dropped and passed by the VAC DDoS protection after a detection event. Request by subnet, IPv4 /32 or IPv6 /64 CIDR, in bits and packets per second, over a date range.",
+     "iamActions": [
+      {
+       "name": "ip:apiovh:networkDefense/vac/traffic/get",
+       "required": false
+      }
+     ]
+    }
+   ],
+   "description": "Operations on the VAC DDoS protection network traffic data."
+  }
+ ],
+ "resourcePath": "/networkDefense",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "common.ResourceStatusEnum": {
+   "id": "ResourceStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a resource",
+   "enum": [
+    "CREATING",
+    "CREATION_PLANNED",
+    "DELETING",
+    "ERROR",
+    "OUT_OF_SYNC",
+    "READY",
+    "SUSPENDED",
+    "UNKNOWN",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "iam.ResourceMetadata": {
+   "id": "ResourceMetadata",
+   "namespace": "iam",
+   "description": "IAM resource metadata embedded in services models",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource display name",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the resource",
+     "required": false
+    },
+    "state": {
+     "type": "iam.ResourceMetadata.StateEnum",
+     "fullType": "iam.ResourceMetadata.StateEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource state",
+     "required": false
+    },
+    "tags": {
+     "type": "map[string]string",
+     "fullType": "map[string]string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource tags. Tags that were internally computed are prefixed with ovh:",
+     "required": false
+    },
+    "urn": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique resource name used in policies",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata.StateEnum": {
+   "id": "StateEnum",
+   "namespace": "iam.ResourceMetadata",
+   "description": "Resource state",
+   "enum": [
+    "EXPIRED",
+    "IN_CREATION",
+    "OK",
+    "SUSPENDED"
+   ],
+   "enumType": "string"
+  },
+  "iam.resource.TagFilter": {
+   "id": "TagFilter",
+   "namespace": "iam.resource",
+   "description": "Resource tag filter",
+   "properties": {
+    "operator": {
+     "type": "iam.resource.TagFilter.OperatorEnum",
+     "fullType": "iam.resource.TagFilter.OperatorEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operator to use in order to filter on the value (defaults to 'EQ')",
+     "required": false
+    },
+    "value": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Value to use in order to filter tags",
+     "required": false
+    }
+   }
+  },
+  "iam.resource.TagFilter.OperatorEnum": {
+   "id": "OperatorEnum",
+   "namespace": "iam.resource.TagFilter",
+   "description": "Operator that can be used in order to filter resources tags",
+   "enum": [
+    "EQ",
+    "EXISTS",
+    "ILIKE",
+    "LIKE",
+    "NEQ",
+    "NEXISTS"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.RegionEnum": {
+   "id": "RegionEnum",
+   "namespace": "networkDefense",
+   "description": "Representation of a Region",
+   "enum": [
+    "CA",
+    "EU",
+    "US"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.Vac.Event": {
+   "id": "Event",
+   "namespace": "networkDefense.Vac",
+   "description": "DDoS mitigation event. It typically starts when the DDoS detection system sends an alert, and the traffic of the subnet is routed through the mitigation system (VAC)",
+   "properties": {
+    "endedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "End date of the event. It can be null if the event is ongoing.",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Start date of the event",
+     "required": false
+    },
+    "subnet": {
+     "type": "ipBlock",
+     "fullType": "ipBlock",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "IP subnet affected by the event",
+     "required": false
+    },
+    "vectors": {
+     "type": "networkDefense.VectorsEnum[]",
+     "fullType": "networkDefense.VectorsEnum[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Attack vector",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.EventsResponse": {
+   "id": "EventsResponse",
+   "namespace": "networkDefense.Vac",
+   "description": "List of DDoS mitigation events.",
+   "properties": {
+    "events": {
+     "type": "networkDefense.Vac.Event[]",
+     "fullType": "networkDefense.Vac.Event[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "List of events",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PolicyAsyncAdd": {
+   "id": "PolicyAsyncAdd",
+   "namespace": "networkDefense.Vac",
+   "description": "Fields to create a policy.",
+   "properties": {
+    "targetSpec": {
+     "type": "networkDefense.Vac.PolicySpecInput",
+     "fullType": "networkDefense.Vac.PolicySpecInput",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Protection configuration to apply to the policy.",
+     "required": true
+    }
+   }
+  },
+  "networkDefense.Vac.PolicyAsyncResource": {
+   "id": "PolicyAsyncResource",
+   "namespace": "networkDefense.Vac",
+   "description": "A protection policy within a VAC resource. Changes are applied in the background, so its status shows whether the policy is ready or a change is still being applied.",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Checksum of the current configuration, used to detect concurrent changes. Provide it on update to avoid overwriting another change.",
+     "required": false
+    },
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the policy was created",
+     "required": false
+    },
+    "currentState": {
+     "type": "networkDefense.Vac.PolicyState",
+     "fullType": "networkDefense.Vac.PolicyState",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Configuration currently being enforced. Null while the policy is still being created (CREATING).",
+     "required": false
+    },
+    "errorMessage": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Details of the last error, set when the status is ERROR.",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Policy identifier",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the policy.",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "networkDefense.Vac.PolicySpec",
+     "fullType": "networkDefense.Vac.PolicySpec",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Configuration you requested. While a change is being applied (CREATING, UPDATING or ERROR) it differs from currentState; once READY it mirrors currentState. Null while the policy is being deleted.",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date and time the policy was last updated",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PolicyAsyncResourceWithIAM": {
+   "id": "PolicyAsyncResource",
+   "namespace": "networkDefense.Vac",
+   "description": "A protection policy within a VAC resource. Changes are applied in the background, so its status shows whether the policy is ready or a change is still being applied.",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Checksum of the current configuration, used to detect concurrent changes. Provide it on update to avoid overwriting another change.",
+     "required": false
+    },
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the policy was created",
+     "required": false
+    },
+    "currentState": {
+     "type": "networkDefense.Vac.PolicyState",
+     "fullType": "networkDefense.Vac.PolicyState",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Configuration currently being enforced. Null while the policy is still being created (CREATING).",
+     "required": false
+    },
+    "errorMessage": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Details of the last error, set when the status is ERROR.",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Policy identifier",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the policy.",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "networkDefense.Vac.PolicySpec",
+     "fullType": "networkDefense.Vac.PolicySpec",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Configuration you requested. While a change is being applied (CREATING, UPDATING or ERROR) it differs from currentState; once READY it mirrors currentState. Null while the policy is being deleted.",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date and time the policy was last updated",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PolicyAsyncUpdate": {
+   "id": "PolicyAsyncUpdate",
+   "namespace": "networkDefense.Vac",
+   "description": "Fields to update a policy.",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Checksum returned by the last read, used to detect concurrent changes. A stale value is rejected with HTTP 412.",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "networkDefense.Vac.PolicySpecInput",
+     "fullType": "networkDefense.Vac.PolicySpecInput",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Protection configuration to apply to the policy.",
+     "required": true
+    }
+   }
+  },
+  "networkDefense.Vac.PolicySpec": {
+   "id": "PolicySpec",
+   "namespace": "networkDefense.Vac",
+   "description": "Protection configuration of a policy: its name, the targets it protects, and the profile and sensitivity enforced on those targets.",
+   "properties": {
+    "enabled": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the policy is active. A disabled policy keeps its configuration but does not protect any traffic.",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the policy. Renaming it does not change the protection being enforced.",
+     "required": false
+    },
+    "profileId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the protection profile, chosen from the available profile catalog.",
+     "required": false
+    },
+    "sensitivity": {
+     "type": "networkDefense.Vac.SensitivityEnum",
+     "fullType": "networkDefense.Vac.SensitivityEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Protection sensitivity level",
+     "required": false
+    },
+    "targets": {
+     "type": "networkDefense.Vac.TargetDefinition[]",
+     "fullType": "networkDefense.Vac.TargetDefinition[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "The complete set of targets the policy protects, excluding the ones being removed. Only the PREFIX type is available today.",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PolicySpecInput": {
+   "id": "PolicySpecInput",
+   "namespace": "networkDefense.Vac",
+   "description": "Protection configuration to apply to a policy: its name, the targets to protect, and the profile and sensitivity to enforce on them.",
+   "properties": {
+    "enabled": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Whether the policy is active. Defaults to true when omitted.",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Name for the policy. Renaming it does not change the protection being enforced.",
+     "required": true
+    },
+    "profileId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Identifier of the protection profile, chosen from the available profile catalog.",
+     "required": true
+    },
+    "sensitivity": {
+     "type": "networkDefense.Vac.SensitivityEnum",
+     "fullType": "networkDefense.Vac.SensitivityEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Protection sensitivity level",
+     "required": true
+    },
+    "targets": {
+     "type": "networkDefense.Vac.TargetDefinition[]",
+     "fullType": "networkDefense.Vac.TargetDefinition[]",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "The complete set of targets to protect. Every write fully replaces the previous set: omitting this field or sending an empty list removes every target. At most 1000 entries. Changing only the targets is always accepted, even while another change is still being applied.",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PolicyState": {
+   "id": "PolicyState",
+   "namespace": "networkDefense.Vac",
+   "description": "Protection configuration currently enforced by a policy, including the targets it currently holds, together with the read-only details of the enforced deployment.",
+   "properties": {
+    "enabled": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the policy is active. A disabled policy keeps its configuration but does not protect any traffic.",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the policy. Renaming it does not change the protection being enforced.",
+     "required": false
+    },
+    "profileId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the protection profile, chosen from the available profile catalog.",
+     "required": false
+    },
+    "profileVersion": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Version of the enforced configuration, increased each time a change is applied.",
+     "required": false
+    },
+    "sensitivity": {
+     "type": "networkDefense.Vac.SensitivityEnum",
+     "fullType": "networkDefense.Vac.SensitivityEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Protection sensitivity level",
+     "required": false
+    },
+    "serviceId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the VAC resource this policy belongs to",
+     "required": false
+    },
+    "targets": {
+     "type": "networkDefense.Vac.TargetState[]",
+     "fullType": "networkDefense.Vac.TargetState[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "The targets currently held by the policy, each with the status of every prefix it protects. Also includes the targets removed from the configuration that are still being taken down, so it can list more targets than the configuration does.",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.PrefixDefinition": {
+   "id": "PrefixDefinition",
+   "namespace": "networkDefense.Vac",
+   "description": "A PREFIX target: a single IP range in CIDR notation.",
+   "properties": {
+    "cidr": {
+     "type": "ipBlock",
+     "fullType": "ipBlock",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "CIDR notation, e.g. \"192.0.2.0/24\"",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.Profile": {
+   "id": "Profile",
+   "namespace": "networkDefense.Vac",
+   "description": "A VAC profile: an expert-curated protection configuration for a workload type (e.g. DNS server, web server). Read-only catalog entry, filtered by per-customer eligibility",
+   "properties": {
+    "description": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Human-readable description of the profile's intended use case",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Profile identifier",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Profile name, e.g. \"DNS server\"",
+     "required": false
+    },
+    "sensitivities": {
+     "type": "networkDefense.Vac.SensitivityEnum[]",
+     "fullType": "networkDefense.Vac.SensitivityEnum[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Sensitivity levels offered for this profile",
+     "required": false
+    },
+    "state": {
+     "type": "networkDefense.Vac.ProfileStateEnum",
+     "fullType": "networkDefense.Vac.ProfileStateEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Lifecycle state of the profile. Only RETIRED blocks new policy assignments",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.ProfileStateEnum": {
+   "id": "ProfileStateEnum",
+   "namespace": "networkDefense.Vac",
+   "description": "Lifecycle state of a VAC profile. Only RETIRED blocks new policy assignments; BETA and DEPRECATED profiles remain selectable.",
+   "enum": [
+    "ACTIVE",
+    "BETA",
+    "DEPRECATED",
+    "RETIRED"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.Vac.ResolvedPrefix": {
+   "id": "ResolvedPrefix",
+   "namespace": "networkDefense.Vac",
+   "description": "One IP prefix protected by a target, with its current status.",
+   "properties": {
+    "cidr": {
+     "type": "ipBlock",
+     "fullType": "ipBlock",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "CIDR notation, e.g. \"192.0.2.0/24\"",
+     "required": false
+    },
+    "status": {
+     "type": "networkDefense.Vac.TargetStatusEnum",
+     "fullType": "networkDefense.Vac.TargetStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of this prefix.",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.Resource": {
+   "id": "Resource",
+   "namespace": "networkDefense.Vac",
+   "description": "A VAC resource groups your anti-DDoS protection policies. It holds no protection settings of its own, so its status only reflects whether it is being deleted.",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the resource was created",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Resource identifier",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name you chose for the resource",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the resource. For a VAC resource this is only ever READY or DELETING.",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date and time the resource was last updated",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.ResourceUpdate": {
+   "id": "ResourceUpdate",
+   "namespace": "networkDefense.Vac",
+   "description": "Fields that can be changed on a VAC resource.",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "New name for the resource",
+     "required": true
+    }
+   }
+  },
+  "networkDefense.Vac.ResourceWithIAM": {
+   "id": "Resource",
+   "namespace": "networkDefense.Vac",
+   "description": "A VAC resource groups your anti-DDoS protection policies. It holds no protection settings of its own, so its status only reflects whether it is being deleted.",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the resource was created",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Resource identifier",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name you chose for the resource",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the resource. For a VAC resource this is only ever READY or DELETING.",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date and time the resource was last updated",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.SensitivityEnum": {
+   "id": "SensitivityEnum",
+   "namespace": "networkDefense.Vac",
+   "description": "Protection sensitivity level chosen for a policy. A higher sensitivity means tighter detection thresholds and a more aggressive mitigation profile.",
+   "enum": [
+    "HIGH",
+    "LOW",
+    "MEDIUM"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.Vac.TargetDefinition": {
+   "id": "TargetDefinition",
+   "namespace": "networkDefense.Vac",
+   "description": "One target declared in a policy's configuration: what the policy protects. A target is identified by its value, not by an identifier. Only the PREFIX type is available today, so the prefix field must be set.",
+   "properties": {
+    "prefix": {
+     "type": "networkDefense.Vac.PrefixDefinition",
+     "fullType": "networkDefense.Vac.PrefixDefinition",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "The IP range for the PREFIX target.",
+     "required": true
+    }
+   }
+  },
+  "networkDefense.Vac.TargetState": {
+   "id": "TargetState",
+   "namespace": "networkDefense.Vac",
+   "description": "One target currently held by a policy, with the status of every IP prefix it protects. A target listed here but no longer present in the policy's configuration is being taken down: its prefixes stay DELETING until they are cleared.",
+   "properties": {
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Read-only target identifier. It is not part of the policy configuration: a target is declared by its value.",
+     "required": false
+    },
+    "prefix": {
+     "type": "networkDefense.Vac.PrefixDefinition",
+     "fullType": "networkDefense.Vac.PrefixDefinition",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "The IP range, set when the target type is PREFIX.",
+     "required": false
+    },
+    "resolved": {
+     "type": "networkDefense.Vac.ResolvedPrefix[]",
+     "fullType": "networkDefense.Vac.ResolvedPrefix[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The IP prefixes this target currently protects, each with its status. A PREFIX target always has exactly one entry.",
+     "required": false
+    },
+    "type": {
+     "type": "networkDefense.Vac.TargetTypeEnum",
+     "fullType": "networkDefense.Vac.TargetTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of target, which determines which definition field is set.",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.TargetStatusEnum": {
+   "id": "TargetStatusEnum",
+   "namespace": "networkDefense.Vac",
+   "description": "Status of a single protected prefix within a policy. Each target protects one or more prefixes, each carrying this status.",
+   "enum": [
+    "ACTIVE",
+    "DELETING",
+    "PENDING"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.Vac.TargetTypeEnum": {
+   "id": "TargetTypeEnum",
+   "namespace": "networkDefense.Vac",
+   "description": "Type of a policy target. Only PREFIX (a single CIDR range) is available today; other types will be added in the future.",
+   "enum": [
+    "PREFIX"
+   ],
+   "enumType": "string"
+  },
+  "networkDefense.Vac.TrafficResponse": {
+   "id": "TrafficResponse",
+   "namespace": "networkDefense.Vac",
+   "description": "DDoS mitigation traffic statistics. All arrays have the same length. The Nth item of the dropped or passed arrays matches the Nth timestamp",
+   "properties": {
+    "bps": {
+     "type": "networkDefense.Vac.TrafficResponseData",
+     "fullType": "networkDefense.Vac.TrafficResponseData",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Bits per seconds statistics",
+     "required": false
+    },
+    "pps": {
+     "type": "networkDefense.Vac.TrafficResponseData",
+     "fullType": "networkDefense.Vac.TrafficResponseData",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Packets per seconds statistics",
+     "required": false
+    },
+    "timestamps": {
+     "type": "datetime[]",
+     "fullType": "datetime[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Timestamps of the statistics points",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.Vac.TrafficResponseData": {
+   "id": "TrafficResponseData",
+   "namespace": "networkDefense.Vac",
+   "description": "DDoS mitigation traffic statistics",
+   "properties": {
+    "dropped": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Volume of traffic dropped by the VAC (DDoS protection)",
+     "required": false
+    },
+    "passed": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Volume of traffic which was not dropped by the VAC (DDoS protection)",
+     "required": false
+    }
+   }
+  },
+  "networkDefense.VectorsEnum": {
+   "id": "VectorsEnum",
+   "namespace": "networkDefense",
+   "description": "Network Defense DDoS attack vectors",
+   "enum": [
+    "CHARGEN",
+    "DNS",
+    "DNS_TO_OVH",
+    "FRAGMENT",
+    "ICMP",
+    "IP_NULL",
+    "NTP",
+    "OTHER",
+    "TCP_ACK",
+    "TCP_FIN",
+    "TCP_NULL",
+    "TCP_PSH",
+    "TCP_RST",
+    "TCP_SYN",
+    "UDP",
+    "VECTOR_TYPE_UNSPECIFIED"
+   ],
+   "enumType": "string"
+  }
+ }
+}

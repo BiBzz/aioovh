@@ -1,0 +1,4126 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/backupServices/reference/managedBackupVaultRegion",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [],
+     "responseType": "map[string]backup.reference.ManagedBackupVaultRegion",
+     "responseTypes": {
+      "200": "map[string]backup.reference.ManagedBackupVaultRegion"
+     },
+     "noAuthentication": false,
+     "description": "Lists, per region where a Hosted Private Cloud is located, the region hosting the vaults of its Managed Backup service and the regions allowed as replication secondary site"
+    }
+   ],
+   "description": "Regions hosting the vaults of the Managed Backup services, and the regions allowed for their replica, for each region where a Hosted Private Cloud can be located"
+  },
+  {
+   "path": "/backupServices/tenant",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "backup.tenantWithIAM[]",
+     "responseTypes": {
+      "200": "backup.tenant[]"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the backup tenants you manage",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      }
+     ],
+     "responseType": "backup.tenantWithIAM",
+     "responseTypes": {
+      "200": "backup.tenantWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the details of your backup tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vault",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "backup.tenant.vaultWithIAM[]",
+     "responseTypes": {
+      "200": "backup.tenant.vault[]"
+     },
+     "noAuthentication": false,
+     "description": "Lists vaults for your tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vault/{vaultId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vaultId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Vault ID"
+      }
+     ],
+     "responseType": "backup.tenant.vaultWithIAM",
+     "responseTypes": {
+      "200": "backup.tenant.vaultWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves specific vault details",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vault.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vault.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vaultId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Vault ID"
+      }
+     ],
+     "responseType": "backup.tenant.vault",
+     "responseTypes": {
+      "200": "backup.tenant.vault"
+     },
+     "noAuthentication": false,
+     "description": "Updates vault display name and cloud repository",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vaultId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Vault ID"
+      }
+     ],
+     "responseType": "backup.tenant.vault.bucket[]",
+     "responseTypes": {
+      "200": "backup.tenant.vault.bucket[]"
+     },
+     "noAuthentication": false,
+     "description": "Lists buckets of the vault",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "bucketId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Bucket ID"
+      },
+      {
+       "name": "vaultId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Vault ID"
+      }
+     ],
+     "responseType": "backup.tenant.vault.bucket",
+     "responseTypes": {
+      "200": "backup.tenant.vault.bucket"
+     },
+     "noAuthentication": false,
+     "description": "Gets specific vault bucket details",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}/credentials",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "bucketId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Bucket ID"
+      },
+      {
+       "name": "vaultId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Vault ID"
+      }
+     ],
+     "responseType": "backup.tenant.vault.bucket.Credentials",
+     "responseTypes": {
+      "200": "backup.tenant.vault.bucket.Credentials"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves S3™*-compatible credentials and connection endpoint for a vault bucket",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vault/credentials/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "S3™*-compatible credentials and endpoint of the vault bucket"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "backup.tenant.vspcWithIAM[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc[]"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves list of VSPC tenants",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspcWithIAM",
+     "responseTypes": {
+      "200": "backup.tenant.vspcWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves details of a specific VSPC tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc",
+     "responseTypes": {
+      "200": "backup.tenant.vspc"
+     },
+     "noAuthentication": false,
+     "description": "Updates the display name of a VSPC tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupAgent[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupAgent[]"
+     },
+     "noAuthentication": false,
+     "description": "Lists backup agents",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.backupAgent.CreateSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.backupAgent.CreateSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "void",
+     "responseTypes": {
+      "200": "void"
+     },
+     "noAuthentication": false,
+     "description": "Creates backup agent",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "backupAgentId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup agent ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "void",
+     "responseTypes": {
+      "200": "void"
+     },
+     "noAuthentication": false,
+     "description": "Deletes backup agent",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/edit",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupAgentId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup agent ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupAgent",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupAgent"
+     },
+     "noAuthentication": false,
+     "description": "Gets specific backup agent details",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.backupAgent.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.backupAgent.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupAgentId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup agent ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "void",
+     "responseTypes": {
+      "200": "void"
+     },
+     "noAuthentication": false,
+     "description": "Updates backup agent",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicensesWithIAM[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicenses[]"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the Backup Licenses subscription list of the VSPC tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Backup Licenses subscription of the VSPC tenant"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicensesWithIAM",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicensesWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the Backup Licenses subscription of the VSPC tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Backup Licenses subscription of the VSPC tenant"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicenses.backupServer[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicenses.backupServer[]"
+     },
+     "noAuthentication": false,
+     "description": "Lists backup servers of the Backup Licenses subscription",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicenses.backupServer",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicenses.backupServer"
+     },
+     "noAuthentication": false,
+     "description": "Registers an additional backup server under the Backup Licenses subscription",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServerId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup server ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "void",
+     "responseTypes": {
+      "200": "void"
+     },
+     "noAuthentication": false,
+     "description": "Deregisters a backup server from the Backup Licenses subscription; the subscription and license types are retained",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/delete",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServerId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup server ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicenses.backupServer",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicenses.backupServer"
+     },
+     "noAuthentication": false,
+     "description": "Gets specific backup server details",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupLicensesId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Backup licenses ID"
+      },
+      {
+       "name": "backupServerId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup server ID"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.backupLicenses.backupServer",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.backupLicenses.backupServer"
+     },
+     "noAuthentication": false,
+     "description": "Updates a backup server; IP and display name changes apply immediately, a license type change is applied on the 1st of the next month",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/backupLicenses/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupPolicies",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "string[]",
+     "responseTypes": {
+      "200": "string[]"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the list of backup policies available in your VSPC",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackupWithIAM[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup[]"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the Managed Backup services of the VSPC tenant, one per protected Hosted Private Cloud; empty when the Managed Backup add-on is not enabled",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Managed Backup services of the VSPC tenant, one per protected Hosted Private Cloud; services are ordered and terminated through the OVHcloud Control Panel"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackupWithIAM",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackupWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves a Managed Backup service of the VSPC tenant",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "backup.tenant.vspc.managedBackup.TargetSpec",
+       "paramType": "body",
+       "fullType": "backup.tenant.vspc.managedBackup.TargetSpec",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackup",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup"
+     },
+     "noAuthentication": false,
+     "description": "Updates the display name of a Managed Backup service",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Managed Backup services of the VSPC tenant, one per protected Hosted Private Cloud; services are ordered and terminated through the OVHcloud Control Panel"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/consumption",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackup.Consumption",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup.Consumption"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the current billable consumption of the Managed Backup service: number of backed up virtual machines per vault level and size band with the matching plan code; no price is returned",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Current billable consumption of the Managed Backup service"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/resetPassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackup",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup"
+     },
+     "noAuthentication": false,
+     "description": "Resets the password of your account on the Veeam Backup & Replication web interface of the Managed Backup service",
+     "longDescription": "The account is the one reported in currentState.vbrLogin. The new password is generated by the platform and delivered to the contacts of your account; it is never returned by the API. Accepted on a READY or SUSPENDED service without a password reset already in progress",
+     "errors": [
+      "Client::Forbidden::Busy",
+      "Client::Conflict::ResourceInInvalidState"
+     ],
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/resetPassword",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Password reset of the Veeam Backup & Replication web interface account"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackup.virtualMachine[]",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup.virtualMachine[]"
+     },
+     "noAuthentication": false,
+     "description": "Lists the virtual machines known to the Managed Backup service with their protection state, billing dimensions and last backup information",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Virtual machines of the protected Hosted Private Cloud known to the Managed Backup service"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine/{virtualMachineId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "managedBackupId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Managed backup ID"
+      },
+      {
+       "name": "virtualMachineId",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Virtual machine ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managedBackup.virtualMachine",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managedBackup.virtualMachine"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the protection state, billing dimensions and last backup information of a virtual machine",
+     "errors": [
+      "Client::BadRequest::InvalidParameter",
+      "Client::NotFound::VirtualMachineDoesNotExist"
+     ],
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/managedBackup/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Virtual machines of the protected Hosted Private Cloud known to the Managed Backup service"
+  },
+  {
+   "path": "/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managementAgent",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupServicesId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Backup services ID"
+      },
+      {
+       "name": "vspcTenantId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Vspc tenant ID"
+      }
+     ],
+     "responseType": "backup.tenant.vspc.managementAgent",
+     "responseTypes": {
+      "200": "backup.tenant.vspc.managementAgent"
+     },
+     "noAuthentication": false,
+     "description": "Retrieves the download link for the management agent",
+     "iamActions": [
+      {
+       "name": "backupServices:apiovh:vspc/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  }
+ ],
+ "resourcePath": "/backupServices",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "backup.AddonEnum": {
+   "id": "AddonEnum",
+   "namespace": "backup",
+   "description": "Add-on features that can be enabled on a VSPC tenant",
+   "enum": [
+    "BACKUP_AGENT",
+    "BACKUP_LICENSES",
+    "MANAGED_BACKUP"
+   ],
+   "enumType": "string"
+  },
+  "backup.AgentProductTypeEnum": {
+   "id": "AgentProductTypeEnum",
+   "namespace": "backup",
+   "description": "Backup agent target product type for your environment",
+   "enum": [
+    "ON_PREMISE",
+    "OVHCLOUD_BAREMETAL",
+    "OVHCLOUD_PUBLIC_CLOUD",
+    "OVHCLOUD_VPS"
+   ],
+   "enumType": "string"
+  },
+  "backup.AgentStatusEnum": {
+   "id": "AgentStatusEnum",
+   "namespace": "backup",
+   "description": "Indicates the status of the backup agent",
+   "enum": [
+    "CREATING",
+    "DISABLED",
+    "ENABLED",
+    "NOT_CONFIGURED",
+    "NOT_INSTALLED",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "backup.BackupServerOsTypeEnum": {
+   "id": "BackupServerOsTypeEnum",
+   "namespace": "backup",
+   "description": "Operating system of the backup server as reported by VSPC discovery",
+   "enum": [
+    "LINUX_APPLIANCE",
+    "OTHER",
+    "ROCKY_LINUX",
+    "WINDOWS"
+   ],
+   "enumType": "string"
+  },
+  "backup.BackupServerStatusEnum": {
+   "id": "BackupServerStatusEnum",
+   "namespace": "backup",
+   "description": "Indicates the status of the backup server (extends backup.AgentStatusEnum with ERROR)",
+   "enum": [
+    "CREATING",
+    "DELETING",
+    "DISABLED",
+    "ENABLED",
+    "ERROR",
+    "NOT_CONFIGURED",
+    "NOT_INSTALLED",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "backup.BucketPerformanceEnum": {
+   "id": "BucketPerformanceEnum",
+   "namespace": "backup",
+   "description": "Defines performance levels for a bucket",
+   "enum": [
+    "HIGH_PERF",
+    "STANDARD"
+   ],
+   "enumType": "string"
+  },
+  "backup.BucketRoleEnum": {
+   "id": "BucketRoleEnum",
+   "namespace": "backup",
+   "description": "Roles that a bucket can assume",
+   "enum": [
+    "PRIMARY",
+    "REPLICA"
+   ],
+   "enumType": "string"
+  },
+  "backup.LicenseStatusEnum": {
+   "id": "LicenseStatusEnum",
+   "namespace": "backup",
+   "description": "Indicates the installation status of the Veeam license on the backup server",
+   "enum": [
+    "CREATING",
+    "DELETING",
+    "EXPIRED",
+    "INSTALLED",
+    "NOT_INSTALLED",
+    "NOT_SUPPORTED",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "backup.LicenseTypeEnum": {
+   "id": "LicenseTypeEnum",
+   "namespace": "backup",
+   "description": "Veeam license type applied to a backup server",
+   "enum": [
+    "VEEAM_BACKUP_REPLICATION_ENTERPRISE_PLUS",
+    "VEEAM_DATA_PLATFORM_ADVANCED",
+    "VEEAM_DATA_PLATFORM_FOUNDATION",
+    "VEEAM_DATA_PLATFORM_PREMIUM"
+   ],
+   "enumType": "string"
+  },
+  "backup.ManagedBackupSizeBandEnum": {
+   "id": "ManagedBackupSizeBandEnum",
+   "namespace": "backup",
+   "description": "Billing size band of a protected virtual machine; each value is the exclusive upper bound of the used size, a size on a boundary falls into the upper band",
+   "enum": [
+    "MAX_1TB",
+    "MAX_250GB",
+    "MAX_2TB",
+    "MAX_4TB",
+    "MAX_6TB",
+    "MAX_8TB"
+   ],
+   "enumType": "string"
+  },
+  "backup.ManagedBackupVaultLevelEnum": {
+   "id": "ManagedBackupVaultLevelEnum",
+   "namespace": "backup",
+   "description": "Protection level of a Managed Backup vault, selected per virtual machine with the vSphere tag of the same name (standard, advanced or premium)",
+   "enum": [
+    "ADVANCED",
+    "PREMIUM",
+    "STANDARD"
+   ],
+   "enumType": "string"
+  },
+  "backup.ManagedBackupVmProtectionStatusEnum": {
+   "id": "ManagedBackupVmProtectionStatusEnum",
+   "namespace": "backup",
+   "description": "Indicates whether a virtual machine carries a valid Managed Backup vault tag; independent of the result of its backups",
+   "enum": [
+    "PROTECTED",
+    "UNPROTECTED"
+   ],
+   "enumType": "string"
+  },
+  "backup.ManagementAgentStatusEnum": {
+   "id": "ManagementAgentStatusEnum",
+   "namespace": "backup",
+   "description": "Indicates the status of the VSPC management agent on the backup server",
+   "enum": [
+    "CONNECTED",
+    "ERROR",
+    "INSTALLED",
+    "NOT_CONNECTED",
+    "NOT_INSTALLED",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "backup.RegionCodeEnum": {
+   "id": "RegionCodeEnum",
+   "namespace": "backup",
+   "description": "Short S3 region code of the Object Storage endpoint, entered in lower case",
+   "enum": [
+    "ap-south-mum",
+    "ap-southeast-syd",
+    "bhs",
+    "ca-east-tor",
+    "de",
+    "eu-south-mil",
+    "eu-west-par",
+    "gra",
+    "rbx",
+    "sbg",
+    "sgp",
+    "uk",
+    "waw"
+   ],
+   "enumType": "string"
+  },
+  "backup.VaultProductLineEnum": {
+   "id": "VaultProductLineEnum",
+   "namespace": "backup",
+   "description": "Product line that owns the vault",
+   "enum": [
+    "BACKUP_AGENT",
+    "BACKUP_LICENSES",
+    "MANAGED_BACKUP"
+   ],
+   "enumType": "string"
+  },
+  "backup.VaultTypeEnum": {
+   "id": "VaultTypeEnum",
+   "namespace": "backup",
+   "description": "Indicates a vault billing type",
+   "enum": [
+    "BUNDLE",
+    "PAYGO"
+   ],
+   "enumType": "string"
+  },
+  "backup.VspcTypeEnum": {
+   "id": "VspcTypeEnum",
+   "namespace": "backup",
+   "description": "VSPC infrastructure type backing the tenant, set by the platform at provisioning; BASIC carries backup agents, ADVANCED carries Backup Licenses and Managed Backup",
+   "enum": [
+    "ADVANCED",
+    "BASIC"
+   ],
+   "enumType": "string"
+  },
+  "backup.reference.ManagedBackupVaultRegion": {
+   "id": "ManagedBackupVaultRegion",
+   "namespace": "backup.reference",
+   "description": "Regions hosting the vaults of the Managed Backup service of a Hosted Private Cloud located in a given region, and the regions allowed for their replica; static reference data, identical for every customer",
+   "properties": {
+    "primaryRegionName": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Region hosting the backup stack and the primary copy of the vaults for a Hosted Private Cloud located in this region, as reported in the vaultRegion of a Managed Backup service",
+     "required": false
+    },
+    "secondaryRegions": {
+     "type": "backup.reference.ManagedBackupVaultRegionCandidate[]",
+     "fullType": "backup.reference.ManagedBackupVaultRegionCandidate[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Regions that can be chosen as replication secondary site when ordering a Managed Backup service for a Hosted Private Cloud located in this region",
+     "required": false
+    }
+   }
+  },
+  "backup.reference.ManagedBackupVaultRegionCandidate": {
+   "id": "ManagedBackupVaultRegionCandidate",
+   "namespace": "backup.reference",
+   "description": "A region that can be chosen as replication secondary site",
+   "properties": {
+    "name": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Region that can be chosen as replication secondary site",
+     "required": false
+    },
+    "preferred": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "True for the default secondary region proposed at order time; absent for the other candidates",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant": {
+   "id": "tenant",
+   "namespace": "backup",
+   "description": "Backup tenant resource",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the backup tenant is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.CurrentState",
+     "fullType": "backup.tenant.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current operational state of the backup tenant",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks that are currently running for the backup tenant",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup tenant",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Readiness status of the backup tenant",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.TargetSpec",
+     "fullType": "backup.tenant.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of the target state of the backup tenant",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the backup tenant is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant",
+   "description": "Shows the current state of a backup tenant with its associated VSPC tenants and vaults",
+   "properties": {
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier for the backup tenant",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the backup tenant",
+     "required": false
+    },
+    "vaults": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of vault resource names associated with the backup tenant",
+     "required": false
+    },
+    "vspcTenants": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of VSPC tenant resource names associated with the backup tenant",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant",
+   "description": "Specifies the target state of your backup tenant",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "The display name of your backup tenant",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vault": {
+   "id": "vault",
+   "namespace": "backup.tenant",
+   "description": "Represents a backup tenant vault",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you created the vault",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vault.CurrentState",
+     "fullType": "backup.tenant.vault.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of your vault",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks currently running on your vault",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of your vault; a UUID for Backup Agent and Backup Licenses vaults, the vault name for Managed Backup vaults",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of your vault",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vault.TargetSpec",
+     "fullType": "backup.tenant.vault.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of your vault target",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you last updated the vault",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vault.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vault",
+   "description": "Provides vault resource for a backup tenant",
+   "properties": {
+    "buckets": {
+     "type": "backup.tenant.vault.bucket[]",
+     "fullType": "backup.tenant.vault.bucket[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Provides list of vault buckets",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifies the vault uniquely; a UUID for Backup Agent and Backup Licenses vaults, the vault name for Managed Backup vaults",
+     "required": false
+    },
+    "includedSoftQuotaGb": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Included soft quota in GB for a Backup Licenses BUNDLE vault; null for PAYGO, BACKUP_AGENT, MANAGED_BACKUP or when not applicable",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the vault name",
+     "required": false
+    },
+    "region": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the region where the vault is located",
+     "required": false
+    },
+    "resourceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the vault resource name",
+     "required": false
+    },
+    "status": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the current status of the vault",
+     "required": false
+    },
+    "type": {
+     "type": "backup.VaultTypeEnum",
+     "fullType": "backup.VaultTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the vault type",
+     "required": false
+    },
+    "vaultProductLine": {
+     "type": "backup.VaultProductLineEnum",
+     "fullType": "backup.VaultProductLineEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Product line that owns the vault; interpret it together with type to tell the two PAYGO offers apart. Null for vaults created before this field existed",
+     "required": false
+    },
+    "vspcTenants": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Lists resource names of VSPC tenants linked to the vault",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vault.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant.vault",
+   "description": "Specifies the target state of your vault",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Display name of your vault",
+     "required": true
+    }
+   }
+  },
+  "backup.tenant.vault.bucket": {
+   "id": "bucket",
+   "namespace": "backup.tenant.vault",
+   "description": "Represents a bucket resource for a vault",
+   "properties": {
+    "encrypted": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Indicates whether the backup data stored in the bucket is encrypted; always true for Managed Backup buckets, null when not reported by the platform",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the unique identifier of the bucket",
+     "required": false
+    },
+    "immutability": {
+     "type": "backup.tenant.vault.bucket.Immutability",
+     "fullType": "backup.tenant.vault.bucket.Immutability",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Immutability settings of the bucket, enabled on the buckets of a PREMIUM Managed Backup vault; null when not reported by the platform",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the name of the bucket",
+     "required": false
+    },
+    "performance": {
+     "type": "backup.BucketPerformanceEnum",
+     "fullType": "backup.BucketPerformanceEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the performance tier of the bucket",
+     "required": false
+    },
+    "region": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the geographic region where the bucket is located",
+     "required": false
+    },
+    "role": {
+     "type": "backup.BucketRoleEnum",
+     "fullType": "backup.BucketRoleEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the role assigned to the bucket",
+     "required": false
+    },
+    "status": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specifies the current status of the bucket",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vault.bucket.Credentials": {
+   "id": "Credentials",
+   "namespace": "backup.tenant.vault.bucket",
+   "description": "S3 credentials and connection endpoint of a vault bucket; credentials are sensitive, never log or cache them",
+   "properties": {
+    "accessKey": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "S3 access key",
+     "required": false
+    },
+    "bucketName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the bucket these credentials belong to",
+     "required": false
+    },
+    "endpoint": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "S3 endpoint URL to configure in your environment",
+     "required": false
+    },
+    "regionCode": {
+     "type": "backup.RegionCodeEnum",
+     "fullType": "backup.RegionCodeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Short region code of the bucket",
+     "required": false
+    },
+    "secretKey": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "S3 secret key, sensitive value",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vault.bucket.Immutability": {
+   "id": "Immutability",
+   "namespace": "backup.tenant.vault.bucket",
+   "description": "Immutability settings of a vault bucket; when enabled, no one can modify or delete a restore point during the retention period",
+   "properties": {
+    "enabled": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates whether restore points stored in the bucket are immutable",
+     "required": false
+    },
+    "retentionDays": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Number of days during which a restore point can neither be modified nor deleted; null when immutability is disabled",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vaultWithIAM": {
+   "id": "vault",
+   "namespace": "backup.tenant",
+   "description": "Represents a backup tenant vault",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you created the vault",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vault.CurrentState",
+     "fullType": "backup.tenant.vault.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of your vault",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks currently running on your vault",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of your vault; a UUID for Backup Agent and Backup Licenses vaults, the vault name for Managed Backup vaults",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of your vault",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vault.TargetSpec",
+     "fullType": "backup.tenant.vault.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of your vault target",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you last updated the vault",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc": {
+   "id": "vspc",
+   "namespace": "backup.tenant",
+   "description": "Represents a VSPC tenant",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the tenant is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.CurrentState",
+     "fullType": "backup.tenant.vspc.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the tenant",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks currently running for the tenant",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the tenant",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates whether the vault is ready",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.TargetSpec",
+     "fullType": "backup.tenant.vspc.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of the target for the tenant",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the tenant is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vspc",
+   "description": "Details about a VSPC tenant",
+   "properties": {
+    "accessUrl": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URL you use to access the tenant",
+     "required": false
+    },
+    "backupAgents": {
+     "type": "backup.tenant.vspc.backupAgent.CurrentState[]",
+     "fullType": "backup.tenant.vspc.backupAgent.CurrentState[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Backup agents associated with the tenant",
+     "required": false
+    },
+    "backupLicensesId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Backup Licenses subscription identifier of the tenant; null when the Backup Licenses add-on is not enabled",
+     "required": false
+    },
+    "companyName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of your tenant company in VSPC",
+     "required": false
+    },
+    "enabledAddons": {
+     "type": "backup.AddonEnum[]",
+     "fullType": "backup.AddonEnum[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Add-ons active on this tenant",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the tenant",
+     "required": false
+    },
+    "managedBackupIds": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Managed Backup service identifiers of the tenant, one per protected Hosted Private Cloud, each formatted managed-backup- followed by the Hosted Private Cloud service name; null when the Managed Backup add-on is not enabled",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Display name of the tenant",
+     "required": false
+    },
+    "region": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Region where the tenant is located",
+     "required": false
+    },
+    "status": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the tenant",
+     "required": false
+    },
+    "vaults": {
+     "type": "backup.tenant.vspc.vault[]",
+     "fullType": "backup.tenant.vspc.vault[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Vaults linked to the tenant",
+     "required": false
+    },
+    "vspcType": {
+     "type": "backup.VspcTypeEnum",
+     "fullType": "backup.VspcTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "VSPC infrastructure type backing this tenant; BASIC carries backup agents, ADVANCED carries Backup Licenses and Managed Backup",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant.vspc",
+   "description": "Specifies the target state of your VSPC tenant",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Display name of the tenant",
+     "required": true
+    }
+   }
+  },
+  "backup.tenant.vspc.backupAgent": {
+   "id": "backupAgent",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represents a VSPC backup agent",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you create the backup agent",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.backupAgent.CurrentState",
+     "fullType": "backup.tenant.vspc.backupAgent.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the backup agent",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks that the backup agent performs",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup agent",
+     "required": false
+    },
+    "status": {
+     "type": "backup.AgentStatusEnum",
+     "fullType": "backup.AgentStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Shows whether the backup agent is ready",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.backupAgent.TargetSpec",
+     "fullType": "backup.tenant.vspc.backupAgent.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Target specification for the backup agent",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you update the backup agent",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupAgent.CreateSpec": {
+   "id": "CreateSpec",
+   "namespace": "backup.tenant.vspc.backupAgent",
+   "description": "Creates a VSPC backup agent",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Specifies the name of the backup agent",
+     "required": false
+    },
+    "ips": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Specifies the IP addresses assigned to the backup agent",
+     "required": false
+    },
+    "productResourceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Specifies the product resource name that the agent backs up",
+     "required": false
+    },
+    "region": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Specifies the geographic region where the backup agent operates",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupAgent.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vspc.backupAgent",
+   "description": "Represents a VSPC backup agent",
+   "properties": {
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup agent",
+     "required": false
+    },
+    "ips": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of IP addresses assigned to the backup agent",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the backup agent",
+     "required": false
+    },
+    "policy": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "VSPC backup policy configured for the agent",
+     "required": false
+    },
+    "productResourceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Resource name of the product backed up by the agent",
+     "required": false
+    },
+    "type": {
+     "type": "backup.AgentProductTypeEnum",
+     "fullType": "backup.AgentProductTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the product managed by the agent",
+     "required": false
+    },
+    "vaultId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Unique identifier of the vault storing the backup agent data",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupAgent.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant.vspc.backupAgent",
+   "description": "Specifies the desired target state of a backup agent",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Human readable name of the backup agent",
+     "required": false
+    },
+    "ips": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "IP addresses assigned to the backup agent",
+     "required": false
+    },
+    "policy": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Name of the backup policy applied to the agent",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses": {
+   "id": "backupLicenses",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represents the Backup Licenses subscription",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the subscription is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.backupLicenses.CurrentState",
+     "fullType": "backup.tenant.vspc.backupLicenses.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the subscription",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks running on the subscription",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the Backup Licenses subscription",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of the subscription",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the subscription is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vspc.backupLicenses",
+   "description": "Current state of the Backup Licenses subscription with a flat summary of its backup servers",
+   "properties": {
+    "backupServers": {
+     "type": "backup.tenant.vspc.backupLicenses.backupServer.Summary[]",
+     "fullType": "backup.tenant.vspc.backupLicenses.backupServer.Summary[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Backup servers registered as members of the subscription",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the Backup Licenses subscription",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses.backupServer": {
+   "id": "backupServer",
+   "namespace": "backup.tenant.vspc.backupLicenses",
+   "description": "Represents a backup server, member of the Backup Licenses subscription",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you register the backup server",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.backupLicenses.backupServer.CurrentState",
+     "fullType": "backup.tenant.vspc.backupLicenses.backupServer.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the backup server",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks running on the backup server",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup server",
+     "required": false
+    },
+    "status": {
+     "type": "backup.BackupServerStatusEnum",
+     "fullType": "backup.BackupServerStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Shows whether the backup server is ready",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+     "fullType": "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Target specification for the backup server",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when you update the backup server",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses.backupServer.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vspc.backupLicenses.backupServer",
+   "description": "Observed state of a backup server registered under the Backup Licenses subscription",
+   "properties": {
+    "backupServerVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Veeam Backup & Replication version reported by discovery",
+     "required": false
+    },
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the backup server",
+     "required": false
+    },
+    "externalIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "External IP addresses of the backup server used for the cloud gateway allowlist",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup server",
+     "required": false
+    },
+    "licenseStatus": {
+     "type": "backup.LicenseStatusEnum",
+     "fullType": "backup.LicenseStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Installation status of the Veeam license",
+     "required": false
+    },
+    "licenseType": {
+     "type": "backup.LicenseTypeEnum",
+     "fullType": "backup.LicenseTypeEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "License type currently applied",
+     "required": false
+    },
+    "licenseTypeRequested": {
+     "type": "backup.LicenseTypeEnum",
+     "fullType": "backup.LicenseTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "License type requested by the customer, echo of the target specification",
+     "required": false
+    },
+    "managementAgentStatus": {
+     "type": "backup.ManagementAgentStatusEnum",
+     "fullType": "backup.ManagementAgentStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Status of the management agent on the backup server",
+     "required": false
+    },
+    "osType": {
+     "type": "backup.BackupServerOsTypeEnum",
+     "fullType": "backup.BackupServerOsTypeEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operating system reported by discovery",
+     "required": false
+    },
+    "privateIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Private IP addresses of the backup server used as VSPC discovery match key; null when not provided",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses.backupServer.Summary": {
+   "id": "Summary",
+   "namespace": "backup.tenant.vspc.backupLicenses.backupServer",
+   "description": "Backup server details",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the backup server",
+     "required": false
+    },
+    "externalIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "External IP addresses of the backup server",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup server",
+     "required": false
+    },
+    "licenseStatus": {
+     "type": "backup.LicenseStatusEnum",
+     "fullType": "backup.LicenseStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Installation status of the Veeam license",
+     "required": false
+    },
+    "licenseType": {
+     "type": "backup.LicenseTypeEnum",
+     "fullType": "backup.LicenseTypeEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "License type currently applied",
+     "required": false
+    },
+    "licenseTypeRequested": {
+     "type": "backup.LicenseTypeEnum",
+     "fullType": "backup.LicenseTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "License type requested by the customer",
+     "required": false
+    },
+    "managementAgentStatus": {
+     "type": "backup.ManagementAgentStatusEnum",
+     "fullType": "backup.ManagementAgentStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Status of the management agent on the backup server",
+     "required": false
+    },
+    "osType": {
+     "type": "backup.BackupServerOsTypeEnum",
+     "fullType": "backup.BackupServerOsTypeEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operating system reported by discovery",
+     "required": false
+    },
+    "privateIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Private IP addresses of the backup server used as VSPC discovery match key; null when not provided",
+     "required": false
+    },
+    "status": {
+     "type": "backup.BackupServerStatusEnum",
+     "fullType": "backup.BackupServerStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Shows whether the backup server is ready",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicenses.backupServer.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant.vspc.backupLicenses.backupServer",
+   "description": "Specifies the desired state of a backup server",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Name of the backup server",
+     "required": false
+    },
+    "externalIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "External IP addresses of the backup server",
+     "required": true
+    },
+    "licenseType": {
+     "type": "backup.LicenseTypeEnum",
+     "fullType": "backup.LicenseTypeEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Requested license type",
+     "required": true
+    },
+    "privateIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Private IP addresses used for discovery",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.backupLicensesWithIAM": {
+   "id": "backupLicenses",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represents the Backup Licenses subscription",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the subscription is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.backupLicenses.CurrentState",
+     "fullType": "backup.tenant.vspc.backupLicenses.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the subscription",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks running on the subscription",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the Backup Licenses subscription",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of the subscription",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the subscription is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup": {
+   "id": "managedBackup",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represents a Managed Backup service protecting one Hosted Private Cloud; ordered and terminated through the OVHcloud Control Panel",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the service is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.managedBackup.CurrentState",
+     "fullType": "backup.tenant.vspc.managedBackup.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the service",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks running on the service",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the Managed Backup service, formatted managed-backup- followed by the service name of the protected Hosted Private Cloud",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of the service; SUSPENDED while backup schedules are stopped",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.managedBackup.TargetSpec",
+     "fullType": "backup.tenant.vspc.managedBackup.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Target specification for the service",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the service is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup.Consumption": {
+   "id": "Consumption",
+   "namespace": "backup.tenant.vspc.managedBackup",
+   "description": "Current billable consumption of a Managed Backup service: number of backed up virtual machines per vault level and size band; no price is returned",
+   "properties": {
+    "billedVmCount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of virtual machines generating a billing line, the sum of the vmCount of all lines",
+     "required": false
+    },
+    "lines": {
+     "type": "backup.tenant.vspc.managedBackup.ConsumptionLine[]",
+     "fullType": "backup.tenant.vspc.managedBackup.ConsumptionLine[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "One line per non-empty combination of vault level and size band; empty while the service is suspended",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup.ConsumptionLine": {
+   "id": "ConsumptionLine",
+   "namespace": "backup.tenant.vspc.managedBackup",
+   "description": "Number of backed up virtual machines for one combination of vault level and size band",
+   "properties": {
+    "planCode": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Plan code of the consumption plan the line is billed on",
+     "required": false
+    },
+    "sizeBand": {
+     "type": "backup.ManagedBackupSizeBandEnum",
+     "fullType": "backup.ManagedBackupSizeBandEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Billing size band of the line",
+     "required": false
+    },
+    "vaultLevel": {
+     "type": "backup.ManagedBackupVaultLevelEnum",
+     "fullType": "backup.ManagedBackupVaultLevelEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Vault level of the line",
+     "required": false
+    },
+    "vmCount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of virtual machines whose last backup was validated in this vault level and size band",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup.CurrentState": {
+   "id": "CurrentState",
+   "namespace": "backup.tenant.vspc.managedBackup",
+   "description": "Observed state of a Managed Backup service, collected from the backup platform",
+   "properties": {
+    "hostedPrivateCloudServiceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Service name of the protected Hosted Private Cloud; set at order time, cannot be changed",
+     "required": false
+    },
+    "protectedVmCount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of virtual machines carrying a valid vault tag",
+     "required": false
+    },
+    "unprotectedVmCount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of virtual machines without a valid vault tag, not backed up and not billed",
+     "required": false
+    },
+    "vaultRegion": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Region hosting the backup stack and the primary copy of the vaults of the service",
+     "required": false
+    },
+    "vaultSecondaryRegion": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Region hosting the replicated copy of the ADVANCED and PREMIUM vaults of the service; chosen at order time, cannot be changed",
+     "required": false
+    },
+    "vbrLogin": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Username of your account on the Veeam Backup & Replication web interface; its password is delivered at activation and on every resetPassword action. Null while the service is being created",
+     "required": false
+    },
+    "vbrUrl": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "URL of the Veeam Backup & Replication web interface where backup jobs, restores and file-level recoveries are managed; null while the service is being created",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup.TargetSpec": {
+   "id": "TargetSpec",
+   "namespace": "backup.tenant.vspc.managedBackup",
+   "description": "Specifies the desired state of a Managed Backup service",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Display name of the service",
+     "required": true
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackup.virtualMachine": {
+   "id": "virtualMachine",
+   "namespace": "backup.tenant.vspc.managedBackup",
+   "description": "Protection state of a virtual machine of the Hosted Private Cloud covered by the Managed Backup service",
+   "properties": {
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "vSphere managed object reference of the virtual machine, vm- prefix included (e.g. vm-4021); a restored virtual machine is a new vSphere object with a new identifier",
+     "required": false
+    },
+    "lastBackupAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date and time of the last backup cycle that included the virtual machine; null when it has never been backed up",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the virtual machine in vSphere at the last refresh",
+     "required": false
+    },
+    "protectionStatus": {
+     "type": "backup.ManagedBackupVmProtectionStatusEnum",
+     "fullType": "backup.ManagedBackupVmProtectionStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates whether the virtual machine carries a valid vault tag; independent of the result of its backups",
+     "required": false
+    },
+    "refreshedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when this entry was last refreshed from the backup platform",
+     "required": false
+    },
+    "restorePointCount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of restore points currently held for the virtual machine; 0 when it has never been backed up",
+     "required": false
+    },
+    "sizeBand": {
+     "type": "backup.ManagedBackupSizeBandEnum",
+     "fullType": "backup.ManagedBackupSizeBandEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Billing size band validated at the last backup of the virtual machine; null when no backup has been validated yet",
+     "required": false
+    },
+    "vaultLevel": {
+     "type": "backup.ManagedBackupVaultLevelEnum",
+     "fullType": "backup.ManagedBackupVaultLevelEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Vault level resolved from the vSphere tag of the virtual machine at the last backup cycle; the tag category allows a single vault tag per virtual machine; null when the virtual machine is unprotected",
+     "required": false
+    },
+    "vmSizeGb": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Used size of the virtual machine in GB, measured at the last backup and used to compute its sizeBand; null when no measurement is available yet",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managedBackupWithIAM": {
+   "id": "managedBackup",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represents a Managed Backup service protecting one Hosted Private Cloud; ordered and terminated through the OVHcloud Control Panel",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the service is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.managedBackup.CurrentState",
+     "fullType": "backup.tenant.vspc.managedBackup.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the service",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current tasks running on the service",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the Managed Backup service, formatted managed-backup- followed by the service name of the protected Hosted Private Cloud",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates the readiness of the service; SUSPENDED while backup schedules are stopped",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.managedBackup.TargetSpec",
+     "fullType": "backup.tenant.vspc.managedBackup.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Target specification for the service",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the service is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.managementAgent": {
+   "id": "managementAgent",
+   "namespace": "backup.tenant.vspc",
+   "description": "Provides the download links for the Management Agent for all the supported OS",
+   "properties": {
+    "linuxDeployScript": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "URL of the script used to install the Linux Management Agent",
+     "required": false
+    },
+    "linuxUrl": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URL of the Management Agent download for Linux",
+     "required": false
+    },
+    "macUrl": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URL of the Management Agent download for MacOS",
+     "required": false
+    },
+    "windowsUrl": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URL of the Management Agent download for Windows",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspc.vault": {
+   "id": "vault",
+   "namespace": "backup.tenant.vspc",
+   "description": "Represent a vault linked to your VSPC tenant",
+   "properties": {
+    "allowedIps": {
+     "type": "ipBlock[]",
+     "fullType": "ipBlock[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Provides list of allowed IPs at the vault level",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the vault",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the vault",
+     "required": false
+    },
+    "performance": {
+     "type": "backup.BucketPerformanceEnum",
+     "fullType": "backup.BucketPerformanceEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Performance tier of the vault",
+     "required": false
+    },
+    "region": {
+     "type": "common.RegionEnum",
+     "fullType": "common.RegionEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Geographic region where the vault is located",
+     "required": false
+    },
+    "resourceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Resource name of the vault as used in the system",
+     "required": false
+    },
+    "status": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the vault",
+     "required": false
+    },
+    "type": {
+     "type": "backup.VaultTypeEnum",
+     "fullType": "backup.VaultTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Kind of vault",
+     "required": false
+    }
+   }
+  },
+  "backup.tenant.vspcWithIAM": {
+   "id": "vspc",
+   "namespace": "backup.tenant",
+   "description": "Represents a VSPC tenant",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the tenant is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.vspc.CurrentState",
+     "fullType": "backup.tenant.vspc.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the tenant",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks currently running for the tenant",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the tenant",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Indicates whether the vault is ready",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.vspc.TargetSpec",
+     "fullType": "backup.tenant.vspc.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of the target for the tenant",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time when the tenant is last updated",
+     "required": false
+    }
+   }
+  },
+  "backup.tenantWithIAM": {
+   "id": "tenant",
+   "namespace": "backup",
+   "description": "Backup tenant resource",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the backup tenant is created",
+     "required": false
+    },
+    "currentState": {
+     "type": "backup.tenant.CurrentState",
+     "fullType": "backup.tenant.CurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current operational state of the backup tenant",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of tasks that are currently running for the backup tenant",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup tenant",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Readiness status of the backup tenant",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "backup.tenant.TargetSpec",
+     "fullType": "backup.tenant.TargetSpec",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Specification of the target state of the backup tenant",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date and time the backup tenant is last updated",
+     "required": false
+    }
+   }
+  },
+  "common.CurrentTask": {
+   "id": "CurrentTask",
+   "namespace": "common",
+   "description": "Asynchronous operation currently running",
+   "properties": {
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the current task",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the task details",
+     "required": false
+    },
+    "status": {
+     "type": "common.CurrentTaskStatusEnum",
+     "fullType": "common.CurrentTaskStatusEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current global status of the current task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the current task",
+     "required": false
+    }
+   }
+  },
+  "common.CurrentTaskStatusEnum": {
+   "id": "CurrentTaskStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a task. A task in ERROR cannot be retried without your inputs. PENDING tasks will be executed as soon as possible. A RUNNING task is currently executing your original request. SCHEDULED is used for tasks that will be executed in the future",
+   "enum": [
+    "ERROR",
+    "PENDING",
+    "RUNNING",
+    "SCHEDULED",
+    "WAITING_USER_INPUT"
+   ],
+   "enumType": "string"
+  },
+  "common.RegionEnum": {
+   "id": "RegionEnum",
+   "namespace": "common",
+   "description": "OVHcloud region identifier",
+   "enum": [
+    "af-north-lz-rba",
+    "ap-south-mum",
+    "ap-southeast-sgp",
+    "ap-southeast-syd",
+    "ca-east-bhs",
+    "ca-east-tor",
+    "eu-central-lz-buh",
+    "eu-central-lz-prg",
+    "eu-central-lz-sof",
+    "eu-central-waw",
+    "eu-north-lz-cph",
+    "eu-north-lz-hel",
+    "eu-north-lz-osl",
+    "eu-north-lz-sto",
+    "eu-south-lz-lis",
+    "eu-south-lz-mad",
+    "eu-south-lz-mil",
+    "eu-south-mil",
+    "eu-west-eri",
+    "eu-west-gra",
+    "eu-west-gra-snc",
+    "eu-west-lim",
+    "eu-west-lz-ams",
+    "eu-west-lz-bru",
+    "eu-west-lz-dln",
+    "eu-west-lz-lux",
+    "eu-west-lz-mnc",
+    "eu-west-lz-mrs",
+    "eu-west-lz-vie",
+    "eu-west-lz-zrh",
+    "eu-west-par",
+    "eu-west-rbx",
+    "eu-west-rbx-snc",
+    "eu-west-sbg",
+    "eu-west-sbg-snc",
+    "us-central-lz-slc",
+    "us-central-lz-stl",
+    "us-east-lz-atl",
+    "us-east-lz-bos",
+    "us-east-lz-chi",
+    "us-east-lz-dal",
+    "us-east-lz-mia",
+    "us-east-lz-nyc",
+    "us-east-vin",
+    "us-west-hil",
+    "us-west-lz-den",
+    "us-west-lz-lax",
+    "us-west-lz-pao",
+    "us-west-lz-phx",
+    "us-west-lz-sea"
+   ],
+   "enumType": "string"
+  },
+  "common.ResourceStatusEnum": {
+   "id": "ResourceStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a resource",
+   "enum": [
+    "CREATING",
+    "CREATION_PLANNED",
+    "DELETING",
+    "ERROR",
+    "OUT_OF_SYNC",
+    "READY",
+    "SUSPENDED",
+    "UNKNOWN",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "common.TaskError": {
+   "id": "TaskError",
+   "namespace": "common",
+   "description": "Errors that occurred on the task",
+   "properties": {
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Error description",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata": {
+   "id": "ResourceMetadata",
+   "namespace": "iam",
+   "description": "IAM resource metadata embedded in services models",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource display name",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the resource",
+     "required": false
+    },
+    "state": {
+     "type": "iam.ResourceMetadata.StateEnum",
+     "fullType": "iam.ResourceMetadata.StateEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource state",
+     "required": false
+    },
+    "tags": {
+     "type": "map[string]string",
+     "fullType": "map[string]string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource tags. Tags that were internally computed are prefixed with ovh:",
+     "required": false
+    },
+    "urn": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique resource name used in policies",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata.StateEnum": {
+   "id": "StateEnum",
+   "namespace": "iam.ResourceMetadata",
+   "description": "Resource state",
+   "enum": [
+    "EXPIRED",
+    "IN_CREATION",
+    "OK",
+    "SUSPENDED"
+   ],
+   "enumType": "string"
+  },
+  "iam.resource.TagFilter": {
+   "id": "TagFilter",
+   "namespace": "iam.resource",
+   "description": "Resource tag filter",
+   "properties": {
+    "operator": {
+     "type": "iam.resource.TagFilter.OperatorEnum",
+     "fullType": "iam.resource.TagFilter.OperatorEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operator to use in order to filter on the value (defaults to 'EQ')",
+     "required": false
+    },
+    "value": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Value to use in order to filter tags",
+     "required": false
+    }
+   }
+  },
+  "iam.resource.TagFilter.OperatorEnum": {
+   "id": "OperatorEnum",
+   "namespace": "iam.resource.TagFilter",
+   "description": "Operator that can be used in order to filter resources tags",
+   "enum": [
+    "EQ",
+    "EXISTS",
+    "ILIKE",
+    "LIKE",
+    "NEQ",
+    "NEXISTS"
+   ],
+   "enumType": "string"
+  }
+ }
+}

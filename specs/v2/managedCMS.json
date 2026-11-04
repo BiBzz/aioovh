@@ -1,0 +1,4117 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/managedCMS/customerApproval",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "approvalCode",
+       "dataType": "managedCMS.CustomerApprovalCodeEnum",
+       "paramType": "query",
+       "fullType": "managedCMS.CustomerApprovalCodeEnum",
+       "required": false,
+       "description": "Code identifying the operation the customer approves"
+      },
+      {
+       "name": "resourceId",
+       "dataType": "string",
+       "paramType": "query",
+       "fullType": "string",
+       "required": false,
+       "description": "Identifier of the resource the approval targets"
+      },
+      {
+       "name": "resourceType",
+       "dataType": "managedCMS.CustomerApprovalResourceTypeEnum",
+       "paramType": "query",
+       "fullType": "managedCMS.CustomerApprovalResourceTypeEnum",
+       "required": false,
+       "description": "Type of the resource the approval targets"
+      }
+     ],
+     "responseType": "managedCMS.CustomerApproval[]",
+     "responseTypes": {
+      "200": "managedCMS.CustomerApproval[]"
+     },
+     "noAuthentication": false,
+     "description": "List customer approvals",
+     "longDescription": "Returns the customer approvals of the account. Filter them by approval code, resource type or resource ID.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:managedCMS/customerApproval/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "managedCMS.CustomerApprovalPostPayload",
+       "paramType": "body",
+       "fullType": "managedCMS.CustomerApprovalPostPayload",
+       "required": true,
+       "description": "Request Body"
+      }
+     ],
+     "responseType": "managedCMS.CustomerApproval",
+     "responseTypes": {
+      "200": "managedCMS.CustomerApproval"
+     },
+     "noAuthentication": false,
+     "description": "Register a customer approval",
+     "longDescription": "Registers whether the customer approves an operation on a resource.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:managedCMS/customerApproval/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/customerApproval/{customerApprovalId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "customerApprovalId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Customer approval ID"
+      }
+     ],
+     "responseType": "managedCMS.CustomerApproval",
+     "responseTypes": {
+      "200": "managedCMS.CustomerApproval"
+     },
+     "noAuthentication": false,
+     "description": "Get a customer approval",
+     "longDescription": "Returns the approved operation, the target resource, the decision and the registration date.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:managedCMS/customerApproval/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/reference/availableCMS",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      }
+     ],
+     "responseType": "managedCMS.CMSEnum[]",
+     "responseTypes": {
+      "200": "managedCMS.CMSEnum[]"
+     },
+     "noAuthentication": false,
+     "description": "List available CMS",
+     "longDescription": "Returns the content management systems a website can be created with."
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/reference/availableLanguages",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "cms",
+       "dataType": "managedCMS.CMSEnum",
+       "paramType": "query",
+       "fullType": "managedCMS.CMSEnum",
+       "required": true,
+       "description": "For which content management system"
+      }
+     ],
+     "responseType": "managedCMS.Language[]",
+     "responseTypes": {
+      "200": "managedCMS.Language[]"
+     },
+     "noAuthentication": false,
+     "description": "List available languages",
+     "longDescription": "Returns the languages a website can be configured with at creation, with their display name. Filter them by CMS."
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/reference/supportedPHPVersions",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "cms",
+       "dataType": "managedCMS.CMSEnum",
+       "paramType": "query",
+       "fullType": "managedCMS.CMSEnum",
+       "required": true,
+       "description": "For which content management system"
+      }
+     ],
+     "responseType": "managedCMS.PHPVersionEnum[]",
+     "responseTypes": {
+      "200": "managedCMS.PHPVersionEnum[]"
+     },
+     "noAuthentication": false,
+     "description": "List supported PHP versions",
+     "longDescription": "Returns the PHP versions a website can use. Filter them by CMS."
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "iamTags",
+       "dataType": "map[string][]iam.resource.TagFilter",
+       "paramType": "query",
+       "required": false,
+       "description": "Filter resources on IAM tags"
+      }
+     ],
+     "responseType": "managedCMS.ServiceWithIAM[]",
+     "responseTypes": {
+      "200": "managedCMS.Service[]"
+     },
+     "noAuthentication": false,
+     "description": "List services",
+     "longDescription": "Returns the Managed CMS services of the account.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "managedCMS.ServiceWithIAM",
+     "responseTypes": {
+      "200": "managedCMS.ServiceWithIAM"
+     },
+     "noAuthentication": false,
+     "description": "Get a service",
+     "longDescription": "Returns the plan, dashboard URLs and disk, visits and websites quotas of the service, with its running tasks.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "managedCMS.ServiceEditionBody",
+       "paramType": "body",
+       "fullType": "managedCMS.ServiceEditionBody",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "managedCMS.Service",
+     "responseTypes": {
+      "200": "managedCMS.Service"
+     },
+     "noAuthentication": false,
+     "description": "Update a service",
+     "longDescription": "Updates the service. Set flushCDNDate to a new date to flush the CDN of all its websites.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::Conflict::CurrentTaskAlreadyExists"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/dashboard/applicationPassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "managedCMS.DashboardApplicationPasswordCreation",
+       "paramType": "body",
+       "fullType": "managedCMS.DashboardApplicationPasswordCreation",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "managedCMS.ApplicationPassword",
+     "responseTypes": {
+      "200": "managedCMS.ApplicationPassword"
+     },
+     "noAuthentication": false,
+     "description": "Create an application password on a dashboard of the service",
+     "longDescription": "Each call creates a new application password on the existing administrator user; the previous ones stay valid. They can be revoked from the CMS administration.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::DashboardNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:dashboard/applicationPassword/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/flushCDN",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Flush the CDN of all websites",
+     "longDescription": "Flushes the CDN cache of all the websites of the service and returns the task. Fails if a task is already running on the service.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::Conflict::CurrentTaskAlreadyExists"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:cdn/flush",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/log/kind",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogKind[]",
+     "responseTypes": {
+      "200": "dbaas.logs.LogKind[]"
+     },
+     "noAuthentication": false,
+     "description": "List log kinds",
+     "longDescription": "Returns the names of the log kinds the service emits, which can be forwarded to a stream.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/kind/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Access to available log kind"
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/log/kind/{name}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "name",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Name"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogKind",
+     "responseTypes": {
+      "200": "dbaas.logs.LogKind"
+     },
+     "noAuthentication": false,
+     "description": "Get a log kind",
+     "longDescription": "Returns a log kind and the additional fields its logs carry.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/kind/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Access to available log kind"
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/log/subscription",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "kind",
+       "dataType": "string",
+       "paramType": "query",
+       "fullType": "string",
+       "required": false,
+       "description": "Filter on a specific kind (e.g., access)"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogSubscription[]",
+     "responseTypes": {
+      "200": "dbaas.logs.LogSubscription[]"
+     },
+     "noAuthentication": false,
+     "description": "List log subscriptions",
+     "longDescription": "Returns the identifiers of the log subscriptions of the service. Filter them by log kind with the kind parameter.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/subscription/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "dbaas.logs.LogSubscriptionCreation",
+       "paramType": "body",
+       "fullType": "dbaas.logs.LogSubscriptionCreation",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogSubscriptionResponse",
+     "responseTypes": {
+      "200": "dbaas.logs.LogSubscriptionResponse"
+     },
+     "noAuthentication": false,
+     "description": "Create a log subscription",
+     "longDescription": "Forwards the logs of one kind to a Logs Data Platform stream. The subscription is created asynchronously and the response returns the operation identifier.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/subscription/create",
+       "required": true
+      },
+      {
+       "name": "ldp:apiovh:output/graylog/stream/forwardTo",
+       "description": "Required on the targeted LDP service",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Create a subscription from managed CMS logs to a pre-existing LDP stream"
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/log/subscription/{subscriptionId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "subscriptionId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Subscription ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogSubscriptionResponse",
+     "responseTypes": {
+      "200": "dbaas.logs.LogSubscriptionResponse"
+     },
+     "noAuthentication": false,
+     "description": "Delete a log subscription",
+     "longDescription": "Stops forwarding logs to the stream. The deletion runs asynchronously and the response returns the operation identifier.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/subscription/delete",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "subscriptionId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Subscription ID"
+      }
+     ],
+     "responseType": "dbaas.logs.LogSubscription",
+     "responseTypes": {
+      "200": "dbaas.logs.LogSubscription"
+     },
+     "noAuthentication": false,
+     "description": "Get a log subscription",
+     "longDescription": "Returns the log kind and the destination stream of a subscription.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/subscription/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Create a subscription from managed CMS logs to a pre-existing LDP stream"
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/log/url",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "dbaas.logs.LogUrlCreation",
+       "paramType": "body",
+       "fullType": "dbaas.logs.LogUrlCreation",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "dbaas.logs.TemporaryLogsLink",
+     "responseTypes": {
+      "200": "dbaas.logs.TemporaryLogsLink"
+     },
+     "noAuthentication": false,
+     "description": "Generate a temporary log URL",
+     "longDescription": "Generates a temporary URL to read the logs of one kind. Returns the URL and its expiration date.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:log/url/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": "Generate a temporary URL to retrieve logs"
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/task",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "common.Task[]",
+     "responseTypes": {
+      "200": "common.Task[]"
+     },
+     "noAuthentication": false,
+     "description": "List tasks",
+     "longDescription": "Returns the current and recent tasks of the service.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:task/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/task/{taskId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "taskId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Task ID"
+      }
+     ],
+     "responseType": "common.Task",
+     "responseTypes": {
+      "200": "common.Task"
+     },
+     "noAuthentication": false,
+     "description": "Get a task",
+     "longDescription": "Returns the details and status of the task.",
+     "errors": [
+      "Client::NotFound::TaskNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:task/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "common.TaskWithInputs<map[managedCMS.TaskInputsEnum]any>",
+       "paramType": "body",
+       "fullType": "common.TaskWithInputs<map[managedCMS.TaskInputsEnum]any>",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "taskId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Task ID"
+      }
+     ],
+     "responseType": "common.Task",
+     "responseTypes": {
+      "200": "common.Task"
+     },
+     "noAuthentication": false,
+     "description": "Provide task input",
+     "longDescription": "Sends the input a task waits for. For a WordPress import, sends the elements to import: content, users, plugins, themes or the whole database. At least one active theme must be selected.",
+     "errors": [
+      "Client::BadRequest::IncompatibleArguments",
+      "Client::BadRequest::NoActiveThemeSelected",
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:task/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "managedCMS.Website[]",
+     "responseTypes": {
+      "200": "managedCMS.Website[]"
+     },
+     "noAuthentication": false,
+     "description": "List websites",
+     "longDescription": "Returns the websites of the service.",
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "managedCMS.WebsiteCreationBody",
+       "paramType": "body",
+       "fullType": "managedCMS.WebsiteCreationBody",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      }
+     ],
+     "responseType": "managedCMS.Website",
+     "responseTypes": {
+      "200": "managedCMS.Website"
+     },
+     "noAuthentication": false,
+     "description": "Create a website",
+     "longDescription": "Creates a WordPress website, imports one from its admin URL and credentials, or clones a website of the same service. The admin login of a created website must be an email address. Creation is asynchronous: follow its task in currentTasks.",
+     "errors": [
+      "Client::BadRequest::CreationAdminLoginMustBeEmail",
+      "Client::BadRequest::IncompatibleArguments",
+      "Client::BadRequest::InvalidImportAdminURL",
+      "Client::BadRequest::WebsitesQuotaReached",
+      "Client::BadRequest::WrongServiceStatus"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "managedCMS.Website",
+     "responseTypes": {
+      "200": "managedCMS.Website"
+     },
+     "noAuthentication": false,
+     "description": "Delete a website",
+     "longDescription": "Permanently deletes the website, with its files and database.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/delete",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "managedCMS.Website",
+     "responseTypes": {
+      "200": "managedCMS.Website"
+     },
+     "noAuthentication": false,
+     "description": "Get a website",
+     "longDescription": "Returns the CMS and PHP versions, domains, SFTP and database access, disk usage and planned update of the website.",
+     "errors": [
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "managedCMS.WebsiteEditionBody",
+       "paramType": "body",
+       "fullType": "managedCMS.WebsiteEditionBody",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "managedCMS.Website",
+     "responseTypes": {
+      "200": "managedCMS.Website"
+     },
+     "noAuthentication": false,
+     "description": "Update a website",
+     "longDescription": "Updates the domains, primary FQDN or planned update of the website. It can also flush its CDN, or reset its database, SFTP or PhpMyAdmin password.",
+     "errors": [
+      "Client::BadRequest::AutomaticBackupNotDeletable",
+      "Client::BadRequest::DiskQuotaReached",
+      "Client::BadRequest::IncompatibleArguments",
+      "Client::BadRequest::WrongBackupStatus",
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::BackupNotFound",
+      "Client::NotFound::WebsiteNotFound",
+      "Client::Conflict::CurrentTaskAlreadyExists"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/applicationPassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "managedCMS.ApplicationPassword",
+     "responseTypes": {
+      "200": "managedCMS.ApplicationPassword"
+     },
+     "noAuthentication": false,
+     "description": "Create an application password on the website",
+     "longDescription": "Each call creates a new application password on the existing administrator user; the previous ones stay valid. They can be revoked from the CMS administration.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/applicationPassword/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/backupDownload",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "backupId",
+       "dataType": "uuid",
+       "paramType": "query",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Identifier of the backup, as listed in the current state of the website"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "managedCMS.Backup",
+     "responseTypes": {
+      "200": "managedCMS.Backup"
+     },
+     "noAuthentication": false,
+     "description": "Get the download links of a backup of a website",
+     "longDescription": "Returns a backup of the website with its download links, one for its files and one for its database, available once the backup is READY. Backups are listed in the current state of the website.",
+     "errors": [
+      "Client::NotFound::BackupNotFound",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/backup/download",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/flushCDN",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Flush the website CDN",
+     "longDescription": "Flushes the CDN cache of the website and returns the task.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound",
+      "Client::Conflict::CurrentTaskAlreadyExists"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/cdn/flush",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/resetDatabasePassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Reset the database password",
+     "longDescription": "Generates a new database password and sets it on the database and in the WordPress configuration. Use it to revoke a leaked password: the new password is not returned.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/database/resetPassword",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/resetPhpMyAdminPassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "managedCMS.ResetTechnicalPasswordBody",
+       "paramType": "body",
+       "fullType": "managedCMS.ResetTechnicalPasswordBody",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Reset the PhpMyAdmin password",
+     "longDescription": "Sets a new PhpMyAdmin password for the website and returns the task. The password needs 9 to 30 alphanumeric characters, with at least one uppercase letter, one lowercase letter and one digit.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/phpMyAdmin/resetPassword",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/resetSftpPassword",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "managedCMS.ResetTechnicalPasswordBody",
+       "paramType": "body",
+       "fullType": "managedCMS.ResetTechnicalPasswordBody",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Reset the SFTP password",
+     "longDescription": "Sets a new SFTP password for the website and returns the task. The password needs 9 to 30 alphanumeric characters, with at least one uppercase letter, one lowercase letter and one digit.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/sftp/resetPassword",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/managedCMS/resource/{serviceId}/website/{websiteId}/snapshot",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Alpha version",
+      "value": "ALPHA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "name": "serviceId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Service ID"
+      },
+      {
+       "name": "websiteId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Website ID"
+      }
+     ],
+     "responseType": "common.CurrentTask",
+     "responseTypes": {
+      "200": "common.CurrentTask"
+     },
+     "noAuthentication": false,
+     "description": "Export a website backup",
+     "longDescription": "Exports a full backup of the website, files and database, and returns the task. The download links are sent by email.",
+     "errors": [
+      "Client::BadRequest::WrongServiceStatus",
+      "Client::BadRequest::WrongWebsiteStatus",
+      "Client::NotFound::WebsiteNotFound",
+      "Client::Conflict::CurrentTaskAlreadyExists"
+     ],
+     "iamActions": [
+      {
+       "name": "managedCMS:apiovh:website/snapshot/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  }
+ ],
+ "resourcePath": "/managedCMS",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "common.CurrentTask": {
+   "id": "CurrentTask",
+   "namespace": "common",
+   "description": "Asynchronous operation currently running",
+   "properties": {
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the current task",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the task details",
+     "required": false
+    },
+    "status": {
+     "type": "common.CurrentTaskStatusEnum",
+     "fullType": "common.CurrentTaskStatusEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current global status of the current task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the current task",
+     "required": false
+    }
+   }
+  },
+  "common.CurrentTaskStatusEnum": {
+   "id": "CurrentTaskStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a task. A task in ERROR cannot be retried without your inputs. PENDING tasks will be executed as soon as possible. A RUNNING task is currently executing your original request. SCHEDULED is used for tasks that will be executed in the future",
+   "enum": [
+    "ERROR",
+    "PENDING",
+    "RUNNING",
+    "SCHEDULED",
+    "WAITING_USER_INPUT"
+   ],
+   "enumType": "string"
+  },
+  "common.ResourceStatusEnum": {
+   "id": "ResourceStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a resource",
+   "enum": [
+    "CREATING",
+    "CREATION_PLANNED",
+    "DELETING",
+    "ERROR",
+    "OUT_OF_SYNC",
+    "READY",
+    "SUSPENDED",
+    "UNKNOWN",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "common.Task": {
+   "id": "Task",
+   "namespace": "common",
+   "description": "Asynchronous operation",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the task",
+     "required": false
+    },
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "finishedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Ending date of the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the task",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the related resource",
+     "required": false
+    },
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Description of the task",
+     "required": false
+    },
+    "progress": {
+     "type": "common.TaskProgress[]",
+     "fullType": "common.TaskProgress[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Progress steps of the asynchronous operation",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Starting date of the task",
+     "required": false
+    },
+    "status": {
+     "type": "common.TaskStatusEnum",
+     "fullType": "common.TaskStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current global status of the task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the task",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Last update of the task",
+     "required": false
+    }
+   }
+  },
+  "common.TaskError": {
+   "id": "TaskError",
+   "namespace": "common",
+   "description": "Errors that occurred on the task",
+   "properties": {
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Error description",
+     "required": false
+    }
+   }
+  },
+  "common.TaskProgress": {
+   "id": "TaskProgress",
+   "namespace": "common",
+   "description": "Detailed information about an asynchronous operation progress steps",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Progress step name",
+     "required": false
+    },
+    "status": {
+     "type": "common.TaskStatusEnum",
+     "fullType": "common.TaskStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the progress step",
+     "required": false
+    }
+   }
+  },
+  "common.TaskStatusEnum": {
+   "id": "TaskStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a task",
+   "enum": [
+    "DONE",
+    "ERROR",
+    "PENDING",
+    "RUNNING",
+    "SCHEDULED",
+    "WAITING_USER_INPUT"
+   ],
+   "enumType": "string"
+  },
+  "common.TaskWithInputs<T>": {
+   "id": "TaskWithInputs",
+   "namespace": "common",
+   "description": "Asynchronous operation",
+   "generics": [
+    "T"
+   ],
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the task",
+     "required": false
+    },
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "finishedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Ending date of the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the task",
+     "required": false
+    },
+    "inputs": {
+     "type": "T",
+     "fullType": "T",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "User inputs needed to unlock the task when status is 'WAITING_USER_INPUT'",
+     "required": true
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the related resource",
+     "required": false
+    },
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Description of the task",
+     "required": false
+    },
+    "progress": {
+     "type": "common.TaskProgress[]",
+     "fullType": "common.TaskProgress[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Progress steps of the asynchronous operation",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Starting date of the task",
+     "required": false
+    },
+    "status": {
+     "type": "common.TaskStatusEnum",
+     "fullType": "common.TaskStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current global status of the task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the task",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Last update of the task",
+     "required": false
+    }
+   }
+  },
+  "dbaas.logs.LogKind": {
+   "id": "LogKind",
+   "namespace": "dbaas.logs",
+   "description": "A kind of log a service can emit, which you can subscribe to and forward into a stream.",
+   "properties": {
+    "additionalReturnedFields": {
+     "type": "string[]",
+     "fullType": "string[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of additional log fields managed in this log kind",
+     "required": false
+    },
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the log kind",
+     "required": false
+    },
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Log kind display name",
+     "required": false
+    },
+    "kindId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Log kind ID",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Log kind name",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Last update date of the log kind",
+     "required": false
+    }
+   }
+  },
+  "dbaas.logs.LogSubscription": {
+   "id": "LogSubscription",
+   "namespace": "dbaas.logs",
+   "description": "A live forwarding of one kind of log from a service into a Logs Data Platform stream.",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the subscription",
+     "required": false
+    },
+    "kind": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Log kind name of this subscription",
+     "required": false
+    },
+    "resource": {
+     "type": "dbaas.logs.LogSubscriptionResource",
+     "fullType": "dbaas.logs.LogSubscriptionResource",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Subscribed resource, where the logs come from",
+     "required": false
+    },
+    "serviceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the destination log service",
+     "required": false
+    },
+    "streamId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Id of the destination log stream",
+     "required": false
+    },
+    "subscriptionId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the subscription, used to change or stop the forwarding.",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Last update date of the subscription",
+     "required": false
+    }
+   }
+  },
+  "dbaas.logs.LogSubscriptionCreation": {
+   "id": "LogSubscriptionCreation",
+   "namespace": "dbaas.logs",
+   "description": "Log subscription creation payload",
+   "properties": {
+    "kind": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Log kind name to subscribe to",
+     "required": true
+    },
+    "streamId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Customer log stream ID",
+     "required": true
+    }
+   }
+  },
+  "dbaas.logs.LogSubscriptionResource": {
+   "id": "LogSubscriptionResource",
+   "namespace": "dbaas.logs",
+   "description": "The service a log subscription collects its logs from.",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of subscribed resource",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of subscribed resource",
+     "required": false
+    }
+   }
+  },
+  "dbaas.logs.LogSubscriptionResponse": {
+   "id": "LogSubscriptionResponse",
+   "namespace": "dbaas.logs",
+   "description": "Asynchronous operation after subscribing or unsubscribing to a resource logs",
+   "properties": {
+    "operationId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the operation",
+     "required": false
+    },
+    "serviceName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Operation owner's service name",
+     "required": false
+    }
+   }
+  },
+  "dbaas.logs.LogUrlCreation": {
+   "id": "LogUrlCreation",
+   "namespace": "dbaas.logs",
+   "description": "Log temporary URL creation payload",
+   "properties": {
+    "kind": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Log kind name",
+     "required": true
+    }
+   }
+  },
+  "dbaas.logs.TemporaryLogsLink": {
+   "id": "TemporaryLogsLink",
+   "namespace": "dbaas.logs",
+   "description": "Temporary url information",
+   "properties": {
+    "expirationDate": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Temporary url expiration date",
+     "required": false
+    },
+    "url": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Temporary url",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata": {
+   "id": "ResourceMetadata",
+   "namespace": "iam",
+   "description": "IAM resource metadata embedded in services models",
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource display name",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the resource",
+     "required": false
+    },
+    "state": {
+     "type": "iam.ResourceMetadata.StateEnum",
+     "fullType": "iam.ResourceMetadata.StateEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource state",
+     "required": false
+    },
+    "tags": {
+     "type": "map[string]string",
+     "fullType": "map[string]string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Resource tags. Tags that were internally computed are prefixed with ovh:",
+     "required": false
+    },
+    "urn": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique resource name used in policies",
+     "required": false
+    }
+   }
+  },
+  "iam.ResourceMetadata.StateEnum": {
+   "id": "StateEnum",
+   "namespace": "iam.ResourceMetadata",
+   "description": "Resource state",
+   "enum": [
+    "EXPIRED",
+    "IN_CREATION",
+    "OK",
+    "SUSPENDED"
+   ],
+   "enumType": "string"
+  },
+  "iam.resource.TagFilter": {
+   "id": "TagFilter",
+   "namespace": "iam.resource",
+   "description": "Resource tag filter",
+   "properties": {
+    "operator": {
+     "type": "iam.resource.TagFilter.OperatorEnum",
+     "fullType": "iam.resource.TagFilter.OperatorEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Operator to use in order to filter on the value (defaults to 'EQ')",
+     "required": false
+    },
+    "value": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Value to use in order to filter tags",
+     "required": false
+    }
+   }
+  },
+  "iam.resource.TagFilter.OperatorEnum": {
+   "id": "OperatorEnum",
+   "namespace": "iam.resource.TagFilter",
+   "description": "Operator that can be used in order to filter resources tags",
+   "enum": [
+    "EQ",
+    "EXISTS",
+    "ILIKE",
+    "LIKE",
+    "NEQ",
+    "NEXISTS"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.ApplicationPassword": {
+   "id": "ApplicationPassword",
+   "namespace": "managedCMS",
+   "description": "Application password created on a website or a dashboard. The password is not stored and cannot be retrieved again.",
+   "properties": {
+    "login": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Login of the user the application password belongs to",
+     "required": false
+    },
+    "password": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Application password to authenticate as `login` on the CMS API, returned only in this response",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.Backup": {
+   "id": "Backup",
+   "namespace": "managedCMS",
+   "description": "Backup of a website, covering its files and its database, with its download links",
+   "properties": {
+    "databaseDownloadURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "URL to download the database of the backup, null while the backup is being created",
+     "required": false
+    },
+    "expiresAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date after which the backup is deleted, null while the backup is being created",
+     "required": false
+    },
+    "filesDownloadURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "URL to download the files of the backup, null while the backup is being created",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup",
+     "required": false
+    },
+    "sizeBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Size of the backup, in bytes, null while the backup is being created",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date the backup was triggered at",
+     "required": false
+    },
+    "status": {
+     "type": "managedCMS.BackupStatusEnum",
+     "fullType": "managedCMS.BackupStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Status of the backup",
+     "required": false
+    },
+    "type": {
+     "type": "managedCMS.BackupTypeEnum",
+     "fullType": "managedCMS.BackupTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the backup was taken automatically or requested by the customer",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.BackupStatusEnum": {
+   "id": "BackupStatusEnum",
+   "namespace": "managedCMS",
+   "description": "Status of a backup",
+   "enum": [
+    "CREATING",
+    "READY"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.BackupTypeEnum": {
+   "id": "BackupTypeEnum",
+   "namespace": "managedCMS",
+   "description": "How a backup was triggered",
+   "enum": [
+    "AUTOMATIC",
+    "MANUAL"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.CMSEnum": {
+   "id": "CMSEnum",
+   "namespace": "managedCMS",
+   "description": "Available content management systems",
+   "enum": [
+    "WORDPRESS"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.CMSSpecific.WebsiteCreationTargetSpecCreation": {
+   "id": "WebsiteCreationTargetSpecCreation",
+   "namespace": "managedCMS.CMSSpecific",
+   "description": "Parameters specific to the chosen content management system",
+   "properties": {
+    "wordpress": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteCreationTargetSpecCreation",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteCreationTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Specific parameters to create a WordPress website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WebsiteImportCheckResult": {
+   "id": "WebsiteImportCheckResult",
+   "namespace": "managedCMS.CMSSpecific",
+   "description": "Data specific to the website's content management system",
+   "properties": {
+    "wordpress": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportCheckResult",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportCheckResult",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Data specific to a WordPress website import check",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WebsiteTargetSpecCreation": {
+   "id": "WebsiteTargetSpecCreation",
+   "namespace": "managedCMS.CMSSpecific",
+   "description": "Parameters specific to the chosen content management system",
+   "properties": {
+    "wordpress": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecCreation",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Specific parameters to create a WordPress website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WebsiteTargetSpecImport": {
+   "id": "WebsiteTargetSpecImport",
+   "namespace": "managedCMS.CMSSpecific",
+   "description": "Data specific to the website's content management system",
+   "properties": {
+    "wordpress": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecImport",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecImport",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Data specific to a WordPress website import",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.LanguageEnum": {
+   "id": "LanguageEnum",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Available languages for WordPress websites",
+   "enum": [
+    "de_DE",
+    "en_GB",
+    "en_US",
+    "es_ES",
+    "fr_CA",
+    "fr_FR",
+    "it_IT",
+    "pl_PL",
+    "pt_PT"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteCreationTargetSpecCreation": {
+   "id": "WebsiteCreationTargetSpecCreation",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Part of target specification to create a WordPress website",
+   "properties": {
+    "language": {
+     "type": "managedCMS.CMSSpecific.WordPress.LanguageEnum",
+     "fullType": "managedCMS.CMSSpecific.WordPress.LanguageEnum",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Language to configure the website with",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteImportCheckResult": {
+   "id": "WebsiteImportCheckResult",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Data specific to a WordPress website import check",
+   "properties": {
+    "plugins": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportPlugin[]",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportPlugin[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Plugins installed on the source website",
+     "required": false
+    },
+    "themes": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportTheme[]",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportTheme[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Themes installed on the source website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteImportPlugin": {
+   "id": "WebsiteImportPlugin",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Information about a WordPress plugin",
+   "properties": {
+    "enabled": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the plugin is enabled or not",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the plugin",
+     "required": false
+    },
+    "version": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Version of the plugin",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteImportSelection": {
+   "id": "WebsiteImportSelection",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Selection of elements to import from a source WordPress website",
+   "properties": {
+    "comments": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import comments",
+     "required": false
+    },
+    "media": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import medias",
+     "required": false
+    },
+    "pages": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import pages",
+     "required": false
+    },
+    "plugins": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportPlugin[]",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportPlugin[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Plugins to import",
+     "required": false
+    },
+    "posts": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import posts",
+     "required": false
+    },
+    "tags": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import tags, categories, etc.",
+     "required": false
+    },
+    "themes": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportTheme[]",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportTheme[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Themes to import",
+     "required": false
+    },
+    "users": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Import users",
+     "required": false
+    },
+    "wholeDatabase": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Import the whole database",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteImportTheme": {
+   "id": "WebsiteImportTheme",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Information about a WordPress theme",
+   "properties": {
+    "active": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the theme is active or not",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the theme",
+     "required": false
+    },
+    "version": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Version of the theme",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecCreation": {
+   "id": "WebsiteTargetSpecCreation",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Part of target specification of a website describing current WordPress creation",
+   "properties": {
+    "language": {
+     "type": "managedCMS.CMSSpecific.WordPress.LanguageEnum",
+     "fullType": "managedCMS.CMSSpecific.WordPress.LanguageEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Which language to configure on the website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CMSSpecific.WordPress.WebsiteTargetSpecImport": {
+   "id": "WebsiteTargetSpecImport",
+   "namespace": "managedCMS.CMSSpecific.WordPress",
+   "description": "Data specific to a WordPress website import",
+   "properties": {
+    "selection": {
+     "type": "managedCMS.CMSSpecific.WordPress.WebsiteImportSelection",
+     "fullType": "managedCMS.CMSSpecific.WordPress.WebsiteImportSelection",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Selection of elements to import",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CustomerApproval": {
+   "id": "CustomerApproval",
+   "namespace": "managedCMS",
+   "description": "Customer approval given for an operation on a target resource",
+   "properties": {
+    "approvalCode": {
+     "type": "managedCMS.CustomerApprovalCodeEnum",
+     "fullType": "managedCMS.CustomerApprovalCodeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Code identifying the operation the customer approves",
+     "required": false
+    },
+    "approved": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the customer approved the operation",
+     "required": false
+    },
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date when the customer approval was registered",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the customer approval",
+     "required": false
+    },
+    "resourceId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the resource the approval targets",
+     "required": false
+    },
+    "resourceType": {
+     "type": "managedCMS.CustomerApprovalResourceTypeEnum",
+     "fullType": "managedCMS.CustomerApprovalResourceTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the resource the approval targets",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.CustomerApprovalCodeEnum": {
+   "id": "CustomerApprovalCodeEnum",
+   "namespace": "managedCMS",
+   "description": "Customer approval code enum",
+   "enum": [
+    "TECH_ACCESS_DISCLAIMER"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.CustomerApprovalPostPayload": {
+   "id": "CustomerApprovalPostPayload",
+   "namespace": "managedCMS",
+   "description": "Customer approval post payload",
+   "properties": {
+    "approvalCode": {
+     "type": "managedCMS.CustomerApprovalCodeEnum",
+     "fullType": "managedCMS.CustomerApprovalCodeEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Code identifying the operation the customer approves",
+     "required": true
+    },
+    "approved": {
+     "type": "boolean",
+     "fullType": "boolean",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Whether the customer approves the operation",
+     "required": true
+    },
+    "resourceId": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Identifier of the resource the approval targets",
+     "required": true
+    },
+    "resourceType": {
+     "type": "managedCMS.CustomerApprovalResourceTypeEnum",
+     "fullType": "managedCMS.CustomerApprovalResourceTypeEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Type of the resource the approval targets",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.CustomerApprovalResourceTypeEnum": {
+   "id": "CustomerApprovalResourceTypeEnum",
+   "namespace": "managedCMS",
+   "description": "Customer approval resource type enum",
+   "enum": [
+    "RESOURCE"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.DashboardApplicationPasswordCreation": {
+   "id": "DashboardApplicationPasswordCreation",
+   "namespace": "managedCMS",
+   "description": "Body to create an application password on a dashboard of a service",
+   "properties": {
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "CMS of the dashboard",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.Domain": {
+   "id": "Domain",
+   "namespace": "managedCMS",
+   "description": "A domain of a website",
+   "properties": {
+    "fqdn": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Fully Qualified Domain Name of the domain",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.Language": {
+   "id": "Language",
+   "namespace": "managedCMS",
+   "description": "A language a CMS can be configured with",
+   "properties": {
+    "code": {
+     "type": "managedCMS.LanguageEnum",
+     "fullType": "managedCMS.LanguageEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Code to send when setting the language of a CMS.",
+     "required": false
+    },
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Name of the language as displayed in the interfaces.",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.LanguageEnum": {
+   "id": "LanguageEnum",
+   "namespace": "managedCMS",
+   "description": "Available languages for websites",
+   "enum": [
+    "de_DE",
+    "en_GB",
+    "en_US",
+    "es_ES",
+    "fr_CA",
+    "fr_FR",
+    "it_IT",
+    "pl_PL",
+    "pt_PT"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.PHPVersionEnum": {
+   "id": "PHPVersionEnum",
+   "namespace": "managedCMS",
+   "description": "Supported PHP versions",
+   "enum": [
+    "7.4",
+    "8.1",
+    "8.2",
+    "8.3",
+    "8.4",
+    "8.5"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.ResetTechnicalPasswordBody": {
+   "id": "ResetTechnicalPasswordBody",
+   "namespace": "managedCMS",
+   "description": "Body to reset a technical (SFTP or PhpMyAdmin) password of a website",
+   "properties": {
+    "password": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "New password (9-30 alphanumeric characters, with at least one uppercase, one lowercase and one digit)",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.Service": {
+   "id": "Service",
+   "namespace": "managedCMS",
+   "description": "A Managed CMS service",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Computed hash used to control concurrent modification requests. Here, it represents the current target specification value",
+     "required": false
+    },
+    "currentState": {
+     "type": "managedCMS.ServiceCurrentState",
+     "fullType": "managedCMS.ServiceCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the service",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Ongoing asynchronous tasks related to the service",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the service",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Service readiness in the system",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceCurrentState": {
+   "id": "ServiceCurrentState",
+   "namespace": "managedCMS",
+   "description": "Current state of a Managed CMS service",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date of creation of the service",
+     "required": false
+    },
+    "dashboards": {
+     "type": "managedCMS.ServiceDashboards",
+     "fullType": "managedCMS.ServiceDashboards",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URLs of the service's dashboards",
+     "required": false
+    },
+    "plan": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Plan of the subscription",
+     "required": false
+    },
+    "quotas": {
+     "type": "managedCMS.ServiceQuotas",
+     "fullType": "managedCMS.ServiceQuotas",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Information about the service's quotas",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceDashboards": {
+   "id": "ServiceDashboards",
+   "namespace": "managedCMS",
+   "description": "URLs of a service's dashboards",
+   "properties": {
+    "wordpress": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "URL of the dashboard allowing to manage WordPress websites",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceDiskQuota": {
+   "id": "ServiceDiskQuota",
+   "namespace": "managedCMS",
+   "description": "Information about a service's disk quota",
+   "properties": {
+    "additionalQuotaBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Disk quota offered by the service's disk quota add-on, if exists, in bytes",
+     "required": false
+    },
+    "planQuotaBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Disk quota offered by the service's plan, in bytes",
+     "required": false
+    },
+    "totalQuotaBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Total disk quota of the service, in bytes",
+     "required": false
+    },
+    "totalUsageBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Total current disk usage of the service's websites, in bytes",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceEditionBody": {
+   "id": "ServiceEditionBody",
+   "namespace": "managedCMS",
+   "description": "Body to edit a service",
+   "properties": {
+    "targetSpec": {
+     "type": "managedCMS.ServiceEditionTargetSpec",
+     "fullType": "managedCMS.ServiceEditionTargetSpec",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Target specification to edit a service",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceEditionTargetSpec": {
+   "id": "ServiceEditionTargetSpec",
+   "namespace": "managedCMS",
+   "description": "Target specification to edit a service",
+   "properties": {
+    "flushCDNDate": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify this to trigger a flush of CDN of all websites attached to the service",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceQuotas": {
+   "id": "ServiceQuotas",
+   "namespace": "managedCMS",
+   "description": "Information about a service's quotas",
+   "properties": {
+    "disk": {
+     "type": "managedCMS.ServiceDiskQuota",
+     "fullType": "managedCMS.ServiceDiskQuota",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Information about the service's disk quota",
+     "required": false
+    },
+    "visits": {
+     "type": "managedCMS.ServiceVisitsQuota",
+     "fullType": "managedCMS.ServiceVisitsQuota",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Information about the service's visits quota",
+     "required": false
+    },
+    "websites": {
+     "type": "managedCMS.ServiceWebsitesQuota",
+     "fullType": "managedCMS.ServiceWebsitesQuota",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Information about the service's websites quota",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceVisitsQuota": {
+   "id": "ServiceVisitsQuota",
+   "namespace": "managedCMS",
+   "description": "Information about a service's visits quota",
+   "properties": {
+    "boosts": {
+     "type": "managedCMS.VisitsBoost[]",
+     "fullType": "managedCMS.VisitsBoost[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "List of visits boost currently existing on the service",
+     "required": false
+    },
+    "planQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Monthly visits quota offered by the service's plan",
+     "required": false
+    },
+    "totalAdditionalQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Total additional monthly visits quota offered by the service's visits boosts",
+     "required": false
+    },
+    "totalQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Total monthly visits quota of the service, including additional quota",
+     "required": false
+    },
+    "totalUsage": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Total visits on the service's websites during the current month",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceWebsitesQuota": {
+   "id": "ServiceWebsitesQuota",
+   "namespace": "managedCMS",
+   "description": "Information about a service's websites quota",
+   "properties": {
+    "additionalQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Websites quota offered by the service's websites quota add-on, if exists",
+     "required": false
+    },
+    "planQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Websites quota offered by the service's plan",
+     "required": false
+    },
+    "totalQuota": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Total websites quota of the service",
+     "required": false
+    },
+    "totalUsage": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Number of the websites currently existing on the service",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.ServiceWithIAM": {
+   "id": "Service",
+   "namespace": "managedCMS",
+   "description": "A Managed CMS service",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Computed hash used to control concurrent modification requests. Here, it represents the current target specification value",
+     "required": false
+    },
+    "currentState": {
+     "type": "managedCMS.ServiceCurrentState",
+     "fullType": "managedCMS.ServiceCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the service",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Ongoing asynchronous tasks related to the service",
+     "required": false
+    },
+    "iam": {
+     "type": "iam.ResourceMetadata",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "IAM resource metadata",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the service",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Service readiness in the system",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.TaskInputsEnum": {
+   "id": "TaskInputsEnum",
+   "namespace": "managedCMS",
+   "description": "Inputs which can be provided to a task",
+   "enum": [
+    "import.cmsSpecific.wordpress.selection"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.UpdateCurrentState": {
+   "id": "UpdateCurrentState",
+   "namespace": "managedCMS",
+   "description": "Current state of an update",
+   "properties": {
+    "cmsVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target CMS version of the update",
+     "required": false
+    },
+    "dryRun": {
+     "type": "managedCMS.UpdateCurrentStateDryRun",
+     "fullType": "managedCMS.UpdateCurrentStateDryRun",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current State of the dry run",
+     "required": false
+    },
+    "plannedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Planned date for the version update",
+     "required": false
+    },
+    "runtimeVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target runtime version of the update",
+     "required": false
+    },
+    "status": {
+     "type": "managedCMS.UpdateStatusEnum",
+     "fullType": "managedCMS.UpdateStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Status of the update",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.UpdateCurrentStateDryRun": {
+   "id": "UpdateCurrentStateDryRun",
+   "namespace": "managedCMS",
+   "description": "Current State of the dry run",
+   "properties": {
+    "date": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date of the dry run",
+     "required": false
+    },
+    "result": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Message associated with the update (e.g. error or progress)",
+     "required": false
+    },
+    "url": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Temporary URL of the website clone in case of dry run failure",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.UpdateStatusEnum": {
+   "id": "UpdateStatusEnum",
+   "namespace": "managedCMS",
+   "description": "Status of an update",
+   "enum": [
+    "TEST_DOING",
+    "TEST_DONE",
+    "TEST_FAILED",
+    "TEST_IMPOSSIBLE",
+    "UPDATE_DOING",
+    "UPDATE_DONE"
+   ],
+   "enumType": "string"
+  },
+  "managedCMS.UpdateTargetSpec": {
+   "id": "UpdateTargetSpec",
+   "namespace": "managedCMS",
+   "description": "Target specification of an update",
+   "properties": {
+    "cmsVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target CMS version of the update",
+     "required": false
+    },
+    "dryRun": {
+     "type": "managedCMS.UpdateTargetSpecDryRun",
+     "fullType": "managedCMS.UpdateTargetSpecDryRun",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target specification of the dry run",
+     "required": false
+    },
+    "plannedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Planned date for the version update",
+     "required": false
+    },
+    "runtimeVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target runtime version of the update",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.UpdateTargetSpecDryRun": {
+   "id": "UpdateTargetSpecDryRun",
+   "namespace": "managedCMS",
+   "description": "Target specification to dry run a website update",
+   "properties": {
+    "date": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Date of the dry run",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.VisitsBoost": {
+   "id": "VisitsBoost",
+   "namespace": "managedCMS",
+   "description": "Information about a visits boost",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date of creation of the boost",
+     "required": false
+    },
+    "currentAmount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current remaining amount of visits offered by the boost",
+     "required": false
+    },
+    "expiresAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date of expiration of the boost",
+     "required": false
+    },
+    "initialAmount": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Initial amount of visits offered by the boost",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.Website": {
+   "id": "Website",
+   "namespace": "managedCMS",
+   "description": "Information about a website",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Computed hash used to control concurrent modification requests",
+     "required": false
+    },
+    "currentState": {
+     "type": "managedCMS.WebsiteCurrentState",
+     "fullType": "managedCMS.WebsiteCurrentState",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the website",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Ongoing asynchronous tasks related to the website",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the website",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Website readiness in the system",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "managedCMS.WebsiteTargetSpec",
+     "fullType": "managedCMS.WebsiteTargetSpec",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target specification of the website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteCreationBody": {
+   "id": "WebsiteCreationBody",
+   "namespace": "managedCMS",
+   "description": "Body to create, import or clone a website",
+   "properties": {
+    "targetSpec": {
+     "type": "managedCMS.WebsiteCreationTargetSpec",
+     "fullType": "managedCMS.WebsiteCreationTargetSpec",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Target specification of the website",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.WebsiteCreationTargetSpec": {
+   "id": "WebsiteCreationTargetSpec",
+   "namespace": "managedCMS",
+   "description": "Target specification to create, import or clone a website",
+   "properties": {
+    "clone": {
+     "type": "managedCMS.WebsiteCreationTargetSpecClone",
+     "fullType": "managedCMS.WebsiteCreationTargetSpecClone",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target specification to clone an existing website of the same service",
+     "required": false
+    },
+    "creation": {
+     "type": "managedCMS.WebsiteCreationTargetSpecCreation",
+     "fullType": "managedCMS.WebsiteCreationTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target specification to create a website",
+     "required": false
+    },
+    "import": {
+     "type": "managedCMS.WebsiteCreationTargetSpecImport",
+     "fullType": "managedCMS.WebsiteCreationTargetSpecImport",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Target specification to import a website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteCreationTargetSpecClone": {
+   "id": "WebsiteCreationTargetSpecClone",
+   "namespace": "managedCMS",
+   "description": "Part of target specification to clone a website",
+   "properties": {
+    "sourceWebsiteId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Identifier of the website to clone, which must belong to the same service",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.WebsiteCreationTargetSpecCreation": {
+   "id": "WebsiteCreationTargetSpecCreation",
+   "namespace": "managedCMS",
+   "description": "Part of target specification to create a website",
+   "properties": {
+    "adminLogin": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Login to set when creating the administrator user",
+     "required": true
+    },
+    "adminPassword": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Password to set when creating the administrator user",
+     "required": true
+    },
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Which content management system to install",
+     "required": true
+    },
+    "cmsSpecific": {
+     "type": "managedCMS.CMSSpecific.WebsiteCreationTargetSpecCreation",
+     "fullType": "managedCMS.CMSSpecific.WebsiteCreationTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Parameters specific to the chosen content management system",
+     "required": false
+    },
+    "phpVersion": {
+     "type": "managedCMS.PHPVersionEnum",
+     "fullType": "managedCMS.PHPVersionEnum",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Which PHP version to use, latest by default",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteCreationTargetSpecImport": {
+   "id": "WebsiteCreationTargetSpecImport",
+   "namespace": "managedCMS",
+   "description": "Part of target specification to import a website",
+   "properties": {
+    "adminLogin": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Login of the source website's admin interface",
+     "required": true
+    },
+    "adminPassword": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Password of the source website's admin interface",
+     "required": true
+    },
+    "adminURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "URL of the source website's admin interface",
+     "required": true
+    },
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Content management system of the source website",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.WebsiteCurrentState": {
+   "id": "WebsiteCurrentState",
+   "namespace": "managedCMS",
+   "description": "Current state of a website",
+   "properties": {
+    "backups": {
+     "type": "managedCMS.WebsiteCurrentStateBackup[]",
+     "fullType": "managedCMS.WebsiteCurrentStateBackup[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Backups of the website, automatic and manual, being created or available, most recent first. Expired backups and backups being deleted are not listed. Download links are returned by the backupDownload route of the website. Null while the website is being created",
+     "required": false
+    },
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Content management system of the website",
+     "required": false
+    },
+    "cmsVersion": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "CMS version used by the website",
+     "required": false
+    },
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date of creation of the website",
+     "required": false
+    },
+    "databaseHost": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Database hostname to connect to the website's database",
+     "required": false
+    },
+    "databasePort": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Database port to connect to the website's database",
+     "required": false
+    },
+    "defaultFQDN": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Default technical FQDN of the website",
+     "required": false
+    },
+    "diskUsageBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current disk usage of the website, in bytes",
+     "required": false
+    },
+    "domains": {
+     "type": "managedCMS.Domain[]",
+     "fullType": "managedCMS.Domain[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Domains currently attached to the website, including the ones being detached",
+     "required": false
+    },
+    "import": {
+     "type": "managedCMS.WebsiteCurrentStateImport",
+     "fullType": "managedCMS.WebsiteCurrentStateImport",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Information about the current website import, if exists",
+     "required": false
+    },
+    "phpMyAdminURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "PhpMyAdmin URL to manage the website's database",
+     "required": false
+    },
+    "phpMyAdminUsername": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "PhpMyAdmin login used to manage the website's database",
+     "required": false
+    },
+    "phpVersion": {
+     "type": "managedCMS.PHPVersionEnum",
+     "fullType": "managedCMS.PHPVersionEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "PHP version used by the website",
+     "required": false
+    },
+    "plannedUpdate": {
+     "type": "managedCMS.UpdateCurrentState",
+     "fullType": "managedCMS.UpdateCurrentState",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current state of the planned update on the website, if any",
+     "required": false
+    },
+    "primaryFQDN": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Primary FQDN of the website",
+     "required": false
+    },
+    "serviceId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the service the website belongs to",
+     "required": false
+    },
+    "sftpHost": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "SFTP hostname to connect to the website's files",
+     "required": false
+    },
+    "sftpPort": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "SFTP port to connect to the website's files",
+     "required": false
+    },
+    "sftpUsername": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "SFTP login used to connect to the website's files",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteCurrentStateBackup": {
+   "id": "WebsiteCurrentStateBackup",
+   "namespace": "managedCMS",
+   "description": "Backup of a website, covering its files and its database",
+   "properties": {
+    "expiresAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Date after which the backup is deleted, null while the backup is being created",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the backup",
+     "required": false
+    },
+    "sizeBytes": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Size of the backup, in bytes, null while the backup is being created",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Date the backup was triggered at",
+     "required": false
+    },
+    "status": {
+     "type": "managedCMS.BackupStatusEnum",
+     "fullType": "managedCMS.BackupStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Status of the backup",
+     "required": false
+    },
+    "type": {
+     "type": "managedCMS.BackupTypeEnum",
+     "fullType": "managedCMS.BackupTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Whether the backup was taken automatically or requested by the customer",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteCurrentStateImport": {
+   "id": "WebsiteCurrentStateImport",
+   "namespace": "managedCMS",
+   "description": "Current state of a website import",
+   "properties": {
+    "checkResult": {
+     "type": "managedCMS.WebsiteImportCheckResult",
+     "fullType": "managedCMS.WebsiteImportCheckResult",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Result of the import check",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteEditionBody": {
+   "id": "WebsiteEditionBody",
+   "namespace": "managedCMS",
+   "description": "Body to edit a website",
+   "properties": {
+    "targetSpec": {
+     "type": "managedCMS.WebsiteEditionTargetSpec",
+     "fullType": "managedCMS.WebsiteEditionTargetSpec",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Target specification to edit a website",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteEditionTargetSpec": {
+   "id": "WebsiteEditionTargetSpec",
+   "namespace": "managedCMS",
+   "description": "Target specification to edit a website",
+   "properties": {
+    "createBackupDate": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify this to trigger a manual backup of the website, files and database. Cannot be combined with any other field",
+     "required": false
+    },
+    "deleteBackup": {
+     "type": "managedCMS.WebsiteEditionTargetSpecDeleteBackup",
+     "fullType": "managedCMS.WebsiteEditionTargetSpecDeleteBackup",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Set this to delete a manual backup of the website. Automatic backups cannot be deleted. Cannot be combined with any other field",
+     "required": false
+    },
+    "domains": {
+     "type": "managedCMS.Domain[]",
+     "fullType": "managedCMS.Domain[]",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Domains attached to the website",
+     "required": false
+    },
+    "flushCDNDate": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify this to trigger a flush of CDN of the website",
+     "required": false
+    },
+    "phpMyAdminPassword": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Set this to reset the website's PhpMyAdmin password (9-30 alphanumeric characters, with at least one uppercase, one lowercase and one digit)",
+     "required": false
+    },
+    "plannedUpdate": {
+     "type": "managedCMS.UpdateTargetSpec",
+     "fullType": "managedCMS.UpdateTargetSpec",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify this to trigger an update on the website, if any",
+     "required": false
+    },
+    "primaryFQDN": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify the primary FQDN of the website",
+     "required": false
+    },
+    "resetDatabasePasswordDate": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Modify this to trigger a reset of the website's database password",
+     "required": false
+    },
+    "restoreBackup": {
+     "type": "managedCMS.WebsiteEditionTargetSpecRestoreBackup",
+     "fullType": "managedCMS.WebsiteEditionTargetSpecRestoreBackup",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Set this to restore a backup on the website, files and database together. Cannot be combined with any other field",
+     "required": false
+    },
+    "sftpPassword": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "Set this to reset the website's SFTP password (9-30 alphanumeric characters, with at least one uppercase, one lowercase and one digit)",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteEditionTargetSpecDeleteBackup": {
+   "id": "WebsiteEditionTargetSpecDeleteBackup",
+   "namespace": "managedCMS",
+   "description": "Part of target specification to delete a backup of a website",
+   "properties": {
+    "backupId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Identifier of the backup to delete, which must be a manual backup of this website",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.WebsiteEditionTargetSpecRestoreBackup": {
+   "id": "WebsiteEditionTargetSpecRestoreBackup",
+   "namespace": "managedCMS",
+   "description": "Part of target specification to restore a backup on a website",
+   "properties": {
+    "backupId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Identifier of the backup to restore, which must be a READY backup of this website",
+     "required": true
+    }
+   }
+  },
+  "managedCMS.WebsiteImportCheckResult": {
+   "id": "WebsiteImportCheckResult",
+   "namespace": "managedCMS",
+   "description": "Result of a website import check",
+   "properties": {
+    "cmsSpecific": {
+     "type": "managedCMS.CMSSpecific.WebsiteImportCheckResult",
+     "fullType": "managedCMS.CMSSpecific.WebsiteImportCheckResult",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Data specific to the website's content management system",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteTargetSpec": {
+   "id": "WebsiteTargetSpec",
+   "namespace": "managedCMS",
+   "description": "Target specification of a website",
+   "properties": {
+    "clone": {
+     "type": "managedCMS.WebsiteTargetSpecClone",
+     "fullType": "managedCMS.WebsiteTargetSpecClone",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target specification of the clone this website originates from, if any",
+     "required": false
+    },
+    "creation": {
+     "type": "managedCMS.WebsiteTargetSpecCreation",
+     "fullType": "managedCMS.WebsiteTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target specification of the current website creation, if exists",
+     "required": false
+    },
+    "domains": {
+     "type": "managedCMS.Domain[]",
+     "fullType": "managedCMS.Domain[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Domains targeted for the website: the ones already attached plus the ones being attached, excluding the ones being detached",
+     "required": false
+    },
+    "import": {
+     "type": "managedCMS.WebsiteTargetSpecImport",
+     "fullType": "managedCMS.WebsiteTargetSpecImport",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Target specification of the current website import, if exists",
+     "required": false
+    },
+    "plannedUpdate": {
+     "type": "managedCMS.UpdateTargetSpec",
+     "fullType": "managedCMS.UpdateTargetSpec",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current state of the planned update on the website, if any",
+     "required": false
+    },
+    "restoreBackup": {
+     "type": "managedCMS.WebsiteTargetSpecRestoreBackup",
+     "fullType": "managedCMS.WebsiteTargetSpecRestoreBackup",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Backup being restored on the website, if any",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteTargetSpecClone": {
+   "id": "WebsiteTargetSpecClone",
+   "namespace": "managedCMS",
+   "description": "Part of target specification of a website describing the clone it originates from",
+   "properties": {
+    "sourceWebsiteId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the website this one was cloned from",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteTargetSpecCreation": {
+   "id": "WebsiteTargetSpecCreation",
+   "namespace": "managedCMS",
+   "description": "Part of target specification of a website describing current creation",
+   "properties": {
+    "adminLogin": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Login to set when creating the administrator user",
+     "required": false
+    },
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Which content management system to install",
+     "required": false
+    },
+    "cmsSpecific": {
+     "type": "managedCMS.CMSSpecific.WebsiteTargetSpecCreation",
+     "fullType": "managedCMS.CMSSpecific.WebsiteTargetSpecCreation",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Parameters specific to the chosen content management system",
+     "required": false
+    },
+    "phpVersion": {
+     "type": "managedCMS.PHPVersionEnum",
+     "fullType": "managedCMS.PHPVersionEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Which PHP version to use, latest by default",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteTargetSpecImport": {
+   "id": "WebsiteTargetSpecImport",
+   "namespace": "managedCMS",
+   "description": "Part of target specification of a website describing current import",
+   "properties": {
+    "adminLogin": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Login of the source website's admin interface",
+     "required": false
+    },
+    "adminURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "URL of the source website's admin interface'",
+     "required": false
+    },
+    "cms": {
+     "type": "managedCMS.CMSEnum",
+     "fullType": "managedCMS.CMSEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Content management system of the source website",
+     "required": false
+    },
+    "cmsSpecific": {
+     "type": "managedCMS.CMSSpecific.WebsiteTargetSpecImport",
+     "fullType": "managedCMS.CMSSpecific.WebsiteTargetSpecImport",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Data specific to the website's content management system",
+     "required": false
+    }
+   }
+  },
+  "managedCMS.WebsiteTargetSpecRestoreBackup": {
+   "id": "WebsiteTargetSpecRestoreBackup",
+   "namespace": "managedCMS",
+   "description": "Part of target specification of a website describing the backup being restored",
+   "properties": {
+    "backupId": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the backup being restored on the website",
+     "required": false
+    }
+   }
+  }
+ }
+}

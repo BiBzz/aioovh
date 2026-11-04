@@ -1,0 +1,805 @@
+{
+ "apiVersion": "1.0",
+ "apis": [
+  {
+   "path": "/finops/bucketExport",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      }
+     ],
+     "responseType": "finops.bucketExport.AsyncConfiguration[]",
+     "responseTypes": {
+      "200": "finops.bucketExport.AsyncConfiguration[]"
+     },
+     "noAuthentication": false,
+     "description": "List FinOps bucket export configurations. The target bucket must be S3™*-compatible",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "POST",
+     "parameters": [
+      {
+       "dataType": "finops.bucketExport.AsyncCreateConfiguration",
+       "paramType": "body",
+       "fullType": "finops.bucketExport.AsyncCreateConfiguration",
+       "required": true,
+       "description": "Request Body"
+      }
+     ],
+     "responseType": "finops.bucketExport.AsyncConfiguration",
+     "responseTypes": {
+      "200": "finops.bucketExport.AsyncConfiguration"
+     },
+     "noAuthentication": false,
+     "description": "Create a FinOps bucket export configuration. The target bucket must be S3™*-compatible",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/create",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/finops/bucketExport/{id}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "DELETE",
+     "parameters": [
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      }
+     ],
+     "responseType": "finops.bucketExport.AsyncConfiguration",
+     "responseTypes": {
+      "200": "finops.bucketExport.AsyncConfiguration"
+     },
+     "noAuthentication": false,
+     "description": "Delete a FinOps bucket export configuration. The target bucket must be S3™*-compatible",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/delete",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      }
+     ],
+     "responseType": "finops.bucketExport.AsyncConfiguration",
+     "responseTypes": {
+      "200": "finops.bucketExport.AsyncConfiguration"
+     },
+     "noAuthentication": false,
+     "description": "Get a FinOps bucket export configuration. The target bucket must be S3™*-compatible",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/get",
+       "required": true
+      }
+     ]
+    },
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "PUT",
+     "parameters": [
+      {
+       "dataType": "finops.bucketExport.AsyncConfiguration",
+       "paramType": "body",
+       "fullType": "finops.bucketExport.AsyncConfiguration",
+       "required": true,
+       "description": "Request Body"
+      },
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      }
+     ],
+     "responseType": "finops.bucketExport.AsyncConfiguration",
+     "responseTypes": {
+      "200": "finops.bucketExport.AsyncConfiguration"
+     },
+     "noAuthentication": false,
+     "description": "Modify a FinOps bucket export configuration. The target bucket must be S3™*-compatible",
+     "longDescription": "<sup>*</sup> S3 is a trademark filed by Amazon Technologies,Inc. OVHcloud's service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies,Inc.",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/edit",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/finops/bucketExport/{id}/event",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      }
+     ],
+     "responseType": "common.Event[]",
+     "responseTypes": {
+      "200": "common.Event[]"
+     },
+     "noAuthentication": false,
+     "description": "Get a list of events",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/event/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/finops/bucketExport/{id}/task",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "X-Pagination-Cursor",
+       "dataType": "string",
+       "paramType": "header",
+       "fullType": "string",
+       "required": false,
+       "description": "Pagination cursor"
+      },
+      {
+       "name": "X-Pagination-Size",
+       "dataType": "long",
+       "paramType": "header",
+       "fullType": "long",
+       "required": false,
+       "description": "Pagination size"
+      },
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      }
+     ],
+     "responseType": "common.Task[]",
+     "responseTypes": {
+      "200": "common.Task[]"
+     },
+     "noAuthentication": false,
+     "description": "Get a list of tasks",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/task/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  },
+  {
+   "path": "/finops/bucketExport/{id}/task/{taskId}",
+   "operations": [
+    {
+     "apiStatus": {
+      "description": "Beta version",
+      "value": "BETA"
+     },
+     "httpMethod": "GET",
+     "parameters": [
+      {
+       "name": "id",
+       "dataType": "string",
+       "paramType": "path",
+       "fullType": "string",
+       "required": true,
+       "description": "Id"
+      },
+      {
+       "name": "taskId",
+       "dataType": "uuid",
+       "paramType": "path",
+       "fullType": "uuid",
+       "required": true,
+       "description": "Task ID"
+      }
+     ],
+     "responseType": "common.Task",
+     "responseTypes": {
+      "200": "common.Task"
+     },
+     "noAuthentication": false,
+     "description": "Get a single task",
+     "iamActions": [
+      {
+       "name": "account:apiovh:finops/bucketExport/task/get",
+       "required": true
+      }
+     ]
+    }
+   ],
+   "description": ""
+  }
+ ],
+ "resourcePath": "/finops",
+ "basePath": "https://eu.api.ovh.com/v2",
+ "models": {
+  "common.CurrentTask": {
+   "id": "CurrentTask",
+   "namespace": "common",
+   "description": "Asynchronous operation currently running",
+   "properties": {
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the current task",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the task details",
+     "required": false
+    },
+    "status": {
+     "type": "common.CurrentTaskStatusEnum",
+     "fullType": "common.CurrentTaskStatusEnum",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Current global status of the current task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the current task",
+     "required": false
+    }
+   }
+  },
+  "common.CurrentTaskStatusEnum": {
+   "id": "CurrentTaskStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a task. A task in ERROR cannot be retried without your inputs. PENDING tasks will be executed as soon as possible. A RUNNING task is currently executing your original request. SCHEDULED is used for tasks that will be executed in the future",
+   "enum": [
+    "ERROR",
+    "PENDING",
+    "RUNNING",
+    "SCHEDULED",
+    "WAITING_USER_INPUT"
+   ],
+   "enumType": "string"
+  },
+  "common.Event": {
+   "id": "Event",
+   "namespace": "common",
+   "description": "Represents an event for an async envelope",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the event",
+     "required": false
+    },
+    "kind": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Nature of the event",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Link to the event related resource",
+     "required": false
+    },
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Description of what happened on the event",
+     "required": false
+    },
+    "type": {
+     "type": "common.EventTypeEnum",
+     "fullType": "common.EventTypeEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the event",
+     "required": false
+    }
+   }
+  },
+  "common.EventTypeEnum": {
+   "id": "EventTypeEnum",
+   "namespace": "common",
+   "description": "Nature of an event",
+   "enum": [
+    "TARGET_SPEC_UPDATE",
+    "TASK_ERROR",
+    "TASK_START",
+    "TASK_SUCCESS"
+   ],
+   "enumType": "string"
+  },
+  "common.ResourceStatusEnum": {
+   "id": "ResourceStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a resource",
+   "enum": [
+    "CREATING",
+    "CREATION_PLANNED",
+    "DELETING",
+    "ERROR",
+    "OUT_OF_SYNC",
+    "READY",
+    "SUSPENDED",
+    "UNKNOWN",
+    "UPDATING"
+   ],
+   "enumType": "string"
+  },
+  "common.Task": {
+   "id": "Task",
+   "namespace": "common",
+   "description": "Asynchronous operation",
+   "properties": {
+    "createdAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Creation date of the task",
+     "required": false
+    },
+    "errors": {
+     "type": "common.TaskError[]",
+     "fullType": "common.TaskError[]",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Errors that occurred on the task",
+     "required": false
+    },
+    "finishedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Ending date of the task",
+     "required": false
+    },
+    "id": {
+     "type": "uuid",
+     "fullType": "uuid",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Identifier of the task",
+     "required": false
+    },
+    "link": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Link to the related resource",
+     "required": false
+    },
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Description of the task",
+     "required": false
+    },
+    "progress": {
+     "type": "common.TaskProgress[]",
+     "fullType": "common.TaskProgress[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Progress steps of the asynchronous operation",
+     "required": false
+    },
+    "startedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": true,
+     "readOnly": true,
+     "description": "Starting date of the task",
+     "required": false
+    },
+    "status": {
+     "type": "common.TaskStatusEnum",
+     "fullType": "common.TaskStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current global status of the task",
+     "required": false
+    },
+    "type": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Type of the task",
+     "required": false
+    },
+    "updatedAt": {
+     "type": "datetime",
+     "fullType": "datetime",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Last update of the task",
+     "required": false
+    }
+   }
+  },
+  "common.TaskError": {
+   "id": "TaskError",
+   "namespace": "common",
+   "description": "Errors that occurred on the task",
+   "properties": {
+    "message": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Error description",
+     "required": false
+    }
+   }
+  },
+  "common.TaskProgress": {
+   "id": "TaskProgress",
+   "namespace": "common",
+   "description": "Detailed information about an asynchronous operation progress steps",
+   "properties": {
+    "name": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Progress step name",
+     "required": false
+    },
+    "status": {
+     "type": "common.TaskStatusEnum",
+     "fullType": "common.TaskStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current status of the progress step",
+     "required": false
+    }
+   }
+  },
+  "common.TaskStatusEnum": {
+   "id": "TaskStatusEnum",
+   "namespace": "common",
+   "description": "Current status of a task",
+   "enum": [
+    "DONE",
+    "ERROR",
+    "PENDING",
+    "RUNNING",
+    "SCHEDULED",
+    "WAITING_USER_INPUT"
+   ],
+   "enumType": "string"
+  },
+  "finops.bucketExport.AsyncConfiguration": {
+   "id": "AsyncConfiguration",
+   "namespace": "finops.bucketExport",
+   "description": "Bucket Export Configuration",
+   "properties": {
+    "checksum": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Checksum of the Bucket Export Configuration",
+     "required": false
+    },
+    "currentState": {
+     "type": "finops.bucketExport.Configuration",
+     "fullType": "finops.bucketExport.Configuration",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Current state of the billing account",
+     "required": false
+    },
+    "currentTasks": {
+     "type": "common.CurrentTask[]",
+     "fullType": "common.CurrentTask[]",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Task to do on this billing account",
+     "required": false
+    },
+    "id": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Unique identifier of the billing account",
+     "required": false
+    },
+    "resourceStatus": {
+     "type": "common.ResourceStatusEnum",
+     "fullType": "common.ResourceStatusEnum",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Billing account readiness in the system",
+     "required": false
+    },
+    "targetSpec": {
+     "type": "finops.bucketExport.Configuration",
+     "fullType": "finops.bucketExport.Configuration",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Target Spec for the FinOps Bucket Export Configuration",
+     "required": false
+    }
+   }
+  },
+  "finops.bucketExport.AsyncCreateConfiguration": {
+   "id": "AsyncCreateConfiguration",
+   "namespace": "finops.bucketExport",
+   "description": "FinOps Bucket Export creation parameters",
+   "properties": {
+    "targetSpec": {
+     "type": "finops.bucketExport.Configuration",
+     "fullType": "finops.bucketExport.Configuration",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Target Spec for the bucket export configuration",
+     "required": true
+    }
+   }
+  },
+  "finops.bucketExport.BucketConfiguration": {
+   "id": "BucketConfiguration",
+   "namespace": "finops.bucketExport",
+   "description": "Configuration of the target bucket, which must be S3™*-compatible",
+   "properties": {
+    "accessKey": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "S3™* access key",
+     "required": true
+    },
+    "bucketName": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Name of the bucket where the file will be put",
+     "required": true
+    },
+    "endpointURL": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Hostname used to reach the S3™* cluster",
+     "required": true
+    },
+    "pathPrefix": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Folder where the files will be created",
+     "required": false
+    },
+    "region": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "S3™* region name",
+     "required": true
+    },
+    "secretKey": {
+     "type": "password",
+     "fullType": "password",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "S3™* secret key",
+     "required": true
+    }
+   }
+  },
+  "finops.bucketExport.Configuration": {
+   "id": "Configuration",
+   "namespace": "finops.bucketExport",
+   "description": "FinOps bucket export configuration",
+   "properties": {
+    "bucketConfiguration": {
+     "type": "finops.bucketExport.BucketConfiguration",
+     "fullType": "finops.bucketExport.BucketConfiguration",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Configuration of the target bucket, which must be S3™*-compatible",
+     "required": false
+    },
+    "exportHour": {
+     "type": "long",
+     "fullType": "long",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "The hour (in UTC) we will deposit the file at. For example, if set to 7, the export will be triggered starting at 7:00 UTC. Only applicable to period=DAILY",
+     "required": false
+    },
+    "filePolicy": {
+     "type": "finops.bucketExport.FilePolicyEnum",
+     "fullType": "finops.bucketExport.FilePolicyEnum",
+     "canBeNull": false,
+     "readOnly": false,
+     "description": "Strategy for file creation",
+     "required": false
+    },
+    "period": {
+     "type": "finops.bucketExport.PeriodEnum",
+     "fullType": "finops.bucketExport.PeriodEnum",
+     "canBeNull": true,
+     "readOnly": false,
+     "description": "The period at which your finops data will be exported. Defaults to DAILY when omitted.",
+     "required": false
+    },
+    "scope": {
+     "type": "string",
+     "fullType": "string",
+     "canBeNull": false,
+     "readOnly": true,
+     "description": "Scope of this export",
+     "required": false
+    }
+   }
+  },
+  "finops.bucketExport.FilePolicyEnum": {
+   "id": "FilePolicyEnum",
+   "namespace": "finops.bucketExport",
+   "description": "Policy applied for file creation",
+   "enum": [
+    "CREATE",
+    "REPLACE"
+   ],
+   "enumType": "string"
+  },
+  "finops.bucketExport.PeriodEnum": {
+   "id": "PeriodEnum",
+   "namespace": "finops.bucketExport",
+   "description": "The period at which your finops data will be exported.",
+   "enum": [
+    "DAILY",
+    "HOURLY"
+   ],
+   "enumType": "string"
+  }
+ }
+}
