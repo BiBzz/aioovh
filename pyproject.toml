@@ -1,0 +1,76 @@
+[project]
+name = "aioovh"
+version = "0.1.0"
+description = "Asynchronous, fully typed client for every OVHcloud API, on httpx2 and pydantic"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Alexandre BERREBI", email = "alexandre.berrebi@businessagile.eu" },
+]
+requires-python = ">=3.12"
+keywords = ["ovh", "ovhcloud", "kimsufi", "soyoustart", "asyncio", "httpx", "pydantic", "sdk", "api", "cloud"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: AsyncIO",
+    "Framework :: Pydantic :: 2",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx2>=2.16.0",
+    "pydantic>=2.14.1",
+    "pydantic-settings>=2.16.0",
+    "stamina>=26.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/BiBzz/aioovh"
+Repository = "https://gitlab.com/businessagile/libraries/aioovh"
+Mirror = "https://github.com/BiBzz/aioovh"
+Issues = "https://gitlab.com/businessagile/libraries/aioovh/-/issues"
+Changelog = "https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "mypy==2.4.0",
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.17.1",
+    "typer==0.27.3",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/aioovh/v*/*/*.py" = ["E501", "E741"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests", "scripts"]
+plugins = ["pydantic.mypy"]
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+exclude = ["specs", ".gitlab-ci.yml"]
