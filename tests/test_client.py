@@ -6,7 +6,6 @@ from httpx2 import ConnectError, MockTransport, Request, Response
 from aioovh import (
     BadParametersError,
     NotGrantedCallError,
-    OVHClient,
     OVHConfigurationError,
     OVHSettings,
     OVHTransportError,
@@ -15,10 +14,12 @@ from aioovh import (
     ServerError,
     signature,
 )
+from aioovh._client import OVHClient
 from tests.conftest import (
     APPLICATION_KEY,
     APPLICATION_SECRET,
     CONSUMER_KEY,
+    EPOCH,
     NOW,
     Recorder,
 )
@@ -45,7 +46,7 @@ async def test_requests_are_signed_with_the_server_time(
     time_request, request = recorder.requests
     assert time_request.url.path == "/1.0/auth/time"
     assert "X-Ovh-Signature" not in time_request.headers
-    timestamp = str(int(NOW) + 5)
+    timestamp = str(EPOCH + 5)
     assert request.headers["X-Ovh-Application"] == APPLICATION_KEY
     assert request.headers["X-Ovh-Consumer"] == CONSUMER_KEY
     assert request.headers["X-Ovh-Timestamp"] == timestamp
@@ -74,7 +75,7 @@ async def test_the_body_is_signed_as_sent(
         "POST",
         "https://eu.api.ovh.com/1.0/me/task",
         '{"name": "x"}',
-        str(int(NOW) + 5),
+        str(EPOCH + 5),
     )
 
 

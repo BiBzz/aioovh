@@ -1,23 +1,23 @@
 import importlib
 import inspect
-from datetime import UTC, date, datetime
 from pathlib import Path
 
 import pytest
 from httpx2 import MockTransport
 from pydantic import BaseModel
+from whenever import Date, Instant
 
 import aioovh
-from aioovh import OVHClient
-from aioovh.v1.auth import AuthV1API
-from aioovh.v1.me import BillingBill, BillingCategoryEnum, MeV1API
-from aioovh.v2.iam import IamV2API
-from tests.conftest import NOW, Recorder
+from aioovh._client import OVHClient
+from aioovh._operations.v1.auth import AuthV1API
+from aioovh._operations.v1.me import BillingBill, BillingCategoryEnum, MeV1API
+from aioovh._operations.v2.iam import IamV2API
+from tests.conftest import EPOCH, Recorder
 
 PACKAGE = Path(aioovh.__file__).parent
 GENERATED_PACKAGES = sorted(
     "aioovh." + ".".join(init.parent.relative_to(PACKAGE).parts)
-    for init in PACKAGE.glob("v*/*/__init__.py")
+    for init in PACKAGE.glob("_operations/v*/*/__init__.py")
 )
 
 
@@ -61,14 +61,14 @@ async def test_a_listing_maps_its_filters(
     recorder.reply(body=["FR123", "FR124"])
 
     bills = await MeV1API(client).list_bill(
-        date_from=datetime(2026, 9, 30, tzinfo=UTC),
+        date_from=Instant.from_utc(2026, 9, 30),
         category=BillingCategoryEnum.AUTORENEW,
     )
 
     assert bills == ["FR123", "FR124"]
     params = recorder.requests[-1].url.params
     assert recorder.requests[-1].url.path == "/1.0/me/bill"
-    assert params["date.from"] == "2026-09-30T00:00:00+00:00"
+    assert params["date.from"] == "2026-09-30T00:00:00Z"
     assert params["category"] == "autorenew"
     assert "date.to" not in params
 
@@ -78,7 +78,7 @@ async def test_a_date_filter_accepts_a_plain_date(
 ) -> None:
     recorder.reply(body=[])
 
-    await MeV1API(client).list_bill(date_from=date(2026, 8, 31))
+    await MeV1API(client).list_bill(date_from=Date(2026, 8, 31))
 
     assert recorder.requests[-1].url.params["date.from"] == "2026-08-31"
 
@@ -92,7 +92,7 @@ async def test_a_model_is_parsed_from_its_wire_names(
 
     assert isinstance(bill, BillingBill)
     assert bill.bill_id == "FR123"
-    assert bill.date_.date() == date(2026, 10, 3)
+    assert bill.date == Instant.from_utc(2026, 10, 3, 8)
     assert bill.price_without_tax.value == 10.0
     assert recorder.requests[-1].url.path == "/1.0/me/bill/FR123"
 
@@ -108,10 +108,10 @@ async def test_an_unknown_enum_value_does_not_fail_the_response(
 
 
 async def test_an_unauthenticated_operation_is_not_signed(recorder: Recorder) -> None:
-    recorder.reply(body=int(NOW))
+    recorder.reply(body=EPOCH)
     client = OVHClient(transport=MockTransport(recorder))
 
-    assert await AuthV1API(client).get_time() == int(NOW)
+    assert await AuthV1API(client).get_time() == EPOCH
     assert "X-Ovh-Signature" not in recorder.requests[0].headers
 
 

@@ -5,8 +5,10 @@ from typing import Any
 import pytest
 import stamina
 from httpx2 import MockTransport, Request, Response
+from whenever import Instant
 
-from aioovh import OVHClient, OVHSettings
+from aioovh import OVH, OVHSettings
+from aioovh._client import OVHClient
 
 type Handler = Callable[[Request], Response]
 
@@ -54,7 +56,8 @@ def recorder() -> Recorder:
 APPLICATION_KEY = "7kbG7Bk7S9Nt7ZSV"
 APPLICATION_SECRET = "EXEgWIz07P0HYwtQDs7cNIqCiQaWSuHF"
 CONSUMER_KEY = "MtSwSrPpNjqfVSmJhLbPyr2i45lSDRBNa"
-NOW = 1_790_000_000.0
+EPOCH = 1_790_000_000
+NOW = Instant.from_timestamp(EPOCH)
 
 
 @pytest.fixture
@@ -69,5 +72,11 @@ def settings() -> OVHSettings:
 @pytest.fixture
 def client(recorder: Recorder, settings: OVHSettings) -> OVHClient:
     client = OVHClient(settings, transport=MockTransport(recorder), clock=lambda: NOW)
-    recorder.reply(body=int(NOW) + 5)
+    recorder.reply(body=EPOCH + 5)
     return client
+
+
+@pytest.fixture
+def ovh(recorder: Recorder, settings: OVHSettings) -> OVH:
+    recorder.reply(body=EPOCH + 5)
+    return OVH(settings=settings, transport=MockTransport(recorder), clock=lambda: NOW)
