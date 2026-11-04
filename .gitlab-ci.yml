@@ -1,0 +1,66 @@
+stages:
+  - verify
+  - publish
+
+default:
+  # uv 0.13.4 on Python 3.12, the oldest supported version; the non-slim image ships git
+  image: ghcr.io/astral-sh/uv:0.13.4-python3.12-trixie@sha256:62b4b66ebb8e2b59f09307693a12732eb56eca8b13a951a2da536dfed9ac5c55
+
+variables:
+  UV_CACHE_DIR: .uv-cache
+  UV_LINK_MODE: copy
+  UV_FROZEN: "1"
+
+.verify: &verify
+  stage: verify
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG =~ /^v\d/
+  cache:
+    key:
+      files:
+        - uv.lock
+    paths:
+      - .uv-cache
+  before_script:
+    - uv sync
+
+lint:
+  <<: *verify
+  script:
+    - uv run ruff check .
+    - uv run ruff format --check .
+    - uv run python scripts/generate.py
+    - git diff --exit-code -- src
+
+test:
+  <<: *verify
+  parallel:
+    matrix:
+      - UV_PYTHON: ["3.12", "3.13", "3.14"]
+  script:
+    - uv run pytest -q
+
+typecheck:
+  <<: *verify
+  script:
+    - uv run mypy
+
+publish:
+  stage: publish
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d/
+      when: manual
+  needs: [lint, test, typecheck]
+  environment:
+    name: pypi
+    url: https://pypi.org/project/aioovh/
+  # PyPI trusts this job over OIDC (trusted publishing), so no token is stored
+  id_tokens:
+    PYPI_ID_TOKEN:
+      aud: pypi
+  script:
+    - test "v$(uv version --short)" = "$CI_COMMIT_TAG"
+    - uv build
+    - uv publish --trusted-publishing always
