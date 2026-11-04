@@ -2101,8 +2101,8 @@ class TelephonyV1API:
         *,
         billing_account: str,
         service_name: str,
-        date_begin_from: datetime | None = None,
-        date_begin_to: datetime | None = None,
+        date_begin_from: datetime | date | None = None,
+        date_begin_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET /1.0/telephony/{billingAccount}/conference/{serviceName}/histories
@@ -2536,8 +2536,8 @@ class TelephonyV1API:
         billing_account: str,
         room_number: int,
         service_name: str,
-        date_begin_from: datetime | None = None,
-        date_begin_to: datetime | None = None,
+        date_begin_from: datetime | date | None = None,
+        date_begin_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET
@@ -13956,10 +13956,10 @@ class TelephonyV1API:
         billing_account: str,
         service_name: str,
         categories: TelephonySchedulerCategoryEnum | None = None,
-        date_end_from: datetime | None = None,
-        date_end_to: datetime | None = None,
-        date_start_from: datetime | None = None,
-        date_start_to: datetime | None = None,
+        date_end_from: datetime | date | None = None,
+        date_end_to: datetime | date | None = None,
+        date_start_from: datetime | date | None = None,
+        date_start_to: datetime | date | None = None,
     ) -> list[str]:
         """
         GET /1.0/telephony/{billingAccount}/scheduler/{serviceName}/events
@@ -14708,8 +14708,8 @@ class TelephonyV1API:
         *,
         billing_account: str,
         service_name: str,
-        creation_datetime_from: datetime | None = None,
-        creation_datetime_to: datetime | None = None,
+        creation_datetime_from: datetime | date | None = None,
+        creation_datetime_to: datetime | date | None = None,
         way_type: TelephonyFaxConsumptionWayTypeEnum | None = None,
     ) -> list[int]:
         """
@@ -14952,8 +14952,8 @@ class TelephonyV1API:
         *,
         billing_account: str,
         service_name: str,
-        creation_datetime_from: datetime | None = None,
-        creation_datetime_to: datetime | None = None,
+        creation_datetime_from: datetime | date | None = None,
+        creation_datetime_to: datetime | date | None = None,
         destination_type: TelephonyVoiceConsumptionDestinationTypeEnum | None = None,
         plan_type: TelephonyVoiceConsumptionPlanTypeEnum | None = None,
         way_type: TelephonyVoiceConsumptionWayTypeEnum | None = None,
@@ -15021,8 +15021,8 @@ class TelephonyV1API:
         *,
         billing_account: str,
         service_name: str,
-        creation_datetime_from: datetime | None = None,
-        creation_datetime_to: datetime | None = None,
+        creation_datetime_from: datetime | date | None = None,
+        creation_datetime_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET /1.0/telephony/{billingAccount}/service/{serviceName}/repaymentConsumption
@@ -15137,8 +15137,8 @@ class TelephonyV1API:
         *,
         billing_account: str,
         service_name: str,
-        creation_datetime_from: datetime | None = None,
-        creation_datetime_to: datetime | None = None,
+        creation_datetime_from: datetime | date | None = None,
+        creation_datetime_to: datetime | date | None = None,
         destination_type: TelephonyVoiceConsumptionDestinationTypeEnum | None = None,
         plan_type: TelephonyVoiceConsumptionPlanTypeEnum | None = None,
         way_type: TelephonyVoiceConsumptionWayTypeEnum | None = None,

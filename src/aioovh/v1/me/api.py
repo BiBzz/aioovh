@@ -1539,8 +1539,8 @@ class MeV1API:
         self,
         *,
         category: BillingCategoryEnum | None = None,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -2431,8 +2431,8 @@ class MeV1API:
     async def list_consumption_usage_history(
         self,
         *,
-        begin_date: datetime,
-        end_date: datetime,
+        begin_date: datetime | date,
+        end_date: datetime | date,
     ) -> list[MeConsumptionTransaction]:
         """
         GET /1.0/me/consumption/usage/history
@@ -2543,8 +2543,8 @@ class MeV1API:
         self,
         *,
         category: BillingCategoryEnum | None = None,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -2989,8 +2989,8 @@ class MeV1API:
     async def list_deposit(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -3408,8 +3408,8 @@ class MeV1API:
         self,
         *,
         category: BillingCategoryEnum | None = None,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -3725,8 +3725,8 @@ class MeV1API:
     async def list_fidelity_account_movements(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET /1.0/me/fidelityAccount/movements
@@ -4732,8 +4732,8 @@ class MeV1API:
     async def list_order(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET /1.0/me/order
@@ -5346,8 +5346,8 @@ class MeV1API:
         self,
         *,
         ovh_account_id: str,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
     ) -> list[int]:
         """
         GET /1.0/me/ovhAccount/{ovhAccountId}/movements
@@ -6247,8 +6247,8 @@ class MeV1API:
     async def list_refund(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -6369,8 +6369,8 @@ class MeV1API:
     async def list_reverse_bill(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """
@@ -7446,8 +7446,8 @@ class MeV1API:
     async def list_withdrawal(
         self,
         *,
-        date_from: datetime | None = None,
-        date_to: datetime | None = None,
+        date_from: datetime | date | None = None,
+        date_to: datetime | date | None = None,
         order_id: int | None = None,
     ) -> list[str]:
         """

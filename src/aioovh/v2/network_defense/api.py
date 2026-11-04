@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import AsyncIterator
-from datetime import datetime
+from datetime import date, datetime
 
 from aioovh._client import NEXT_CURSOR_HEADER, OVHClient, paginate_cursor, parse
 from aioovh.v2.network_defense.models import (
@@ -34,8 +34,8 @@ class NetworkDefenseV2API:
         *,
         x_pagination_cursor: str | None = None,
         x_pagination_size: int | None = None,
-        after: datetime | None = None,
-        before: datetime | None = None,
+        after: datetime | date | None = None,
+        before: datetime | date | None = None,
         ongoing_only: bool | None = None,
         region: NetworkDefenseRegionEnum | None = None,
         subnets: list[str] | None = None,
@@ -471,11 +471,11 @@ class NetworkDefenseV2API:
     async def get_vac_traffic(
         self,
         *,
-        after: datetime,
+        after: datetime | date,
         subnet: str,
         x_pagination_cursor: str | None = None,
         x_pagination_size: int | None = None,
-        before: datetime | None = None,
+        before: datetime | date | None = None,
     ) -> NetworkDefenseVacTrafficResponse:
         """
         GET /v2/networkDefense/vac/traffic

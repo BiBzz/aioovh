@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import AsyncIterator
-from datetime import datetime
+from datetime import date, datetime
 
 from aioovh._client import NEXT_CURSOR_HEADER, OVHClient, paginate_cursor, parse
 from aioovh.v2.notification.models import (
@@ -356,8 +356,8 @@ class NotificationV2API:
         x_pagination_cursor: str | None = None,
         x_pagination_size: int | None = None,
         category: list[str] | None = None,
-        created_after: datetime | None = None,
-        created_before: datetime | None = None,
+        created_after: datetime | date | None = None,
+        created_before: datetime | date | None = None,
         priority: list[NotificationHistoryNotificationPriorityEnum] | None = None,
         sort_created_at: NotificationSortOrderEnum | None = None,
         tags: dict[str, list[NotificationHistoryTagFilter]] | None = None,
@@ -406,8 +406,8 @@ class NotificationV2API:
         *,
         x_pagination_size: int | None = None,
         category: list[str] | None = None,
-        created_after: datetime | None = None,
-        created_before: datetime | None = None,
+        created_after: datetime | date | None = None,
+        created_before: datetime | date | None = None,
         priority: list[NotificationHistoryNotificationPriorityEnum] | None = None,
         sort_created_at: NotificationSortOrderEnum | None = None,
         tags: dict[str, list[NotificationHistoryTagFilter]] | None = None,
@@ -448,8 +448,8 @@ class NotificationV2API:
         *,
         x_pagination_size: int | None = None,
         category: list[str] | None = None,
-        created_after: datetime | None = None,
-        created_before: datetime | None = None,
+        created_after: datetime | date | None = None,
+        created_before: datetime | date | None = None,
         priority: list[NotificationHistoryNotificationPriorityEnum] | None = None,
         sort_created_at: NotificationSortOrderEnum | None = None,
         tags: dict[str, list[NotificationHistoryTagFilter]] | None = None,

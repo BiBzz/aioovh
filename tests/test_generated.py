@@ -73,6 +73,16 @@ async def test_a_listing_maps_its_filters(
     assert "date.to" not in params
 
 
+async def test_a_date_filter_accepts_a_plain_date(
+    client: OVHClient, recorder: Recorder
+) -> None:
+    recorder.reply(body=[])
+
+    await MeV1API(client).list_bill(date_from=date(2026, 8, 31))
+
+    assert recorder.requests[-1].url.params["date.from"] == "2026-08-31"
+
+
 async def test_a_model_is_parsed_from_its_wire_names(
     client: OVHClient, recorder: Recorder
 ) -> None:

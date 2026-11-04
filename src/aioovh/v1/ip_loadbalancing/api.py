@@ -1755,7 +1755,7 @@ class IpLoadbalancingV1API:
         self,
         *,
         service_name: str,
-        expire_date: datetime | None = None,
+        expire_date: datetime | date | None = None,
         fingerprint: str | None = None,
         serial: str | None = None,
         type_: IpLoadbalancingSslTypeEnum | None = None,
@@ -1924,10 +1924,10 @@ class IpLoadbalancingV1API:
         *,
         service_name: str,
         action: IpLoadbalancingTaskActionEnum | None = None,
-        creation_date_from: datetime | None = None,
-        creation_date_to: datetime | None = None,
-        done_date_from: datetime | None = None,
-        done_date_to: datetime | None = None,
+        creation_date_from: datetime | date | None = None,
+        creation_date_to: datetime | date | None = None,
+        done_date_from: datetime | date | None = None,
+        done_date_to: datetime | date | None = None,
         status: IpLoadbalancingTaskStatusEnum | None = None,
     ) -> list[int]:
         """

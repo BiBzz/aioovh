@@ -74,6 +74,8 @@ generator fails rather than emit a duplicate.
   types (`date`, `datetime`, `time`) get a trailing underscore and an alias
   to the wire name: `bill.date_`.
 - A query parameter whose type is an object (`iamTags`) is sent as JSON.
+- A `datetime` query filter (`date.from`) also accepts a `date`, which
+  OVHcloud reads as midnight.
 
 ## Requests
 

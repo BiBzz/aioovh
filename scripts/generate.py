@@ -341,6 +341,12 @@ def build_operations(module: Module, generator: Generator) -> None:
                     whole_body = True
                     wire = "body"
                 param_name = identifier(wire)
+                annotation = generator.annotation(
+                    parameter.get("fullType") or parameter["dataType"]
+                )
+                if location == "query" and annotation == "datetime":
+                    annotation = "datetime | date"
+                    module.uses.add("date")
                 while param_name in seen:
                     param_name += "_"
                 seen.add(param_name)
@@ -349,9 +355,7 @@ def build_operations(module: Module, generator: Generator) -> None:
                         param_name,
                         wire,
                         location,
-                        generator.annotation(
-                            parameter.get("fullType") or parameter["dataType"]
-                        ),
+                        annotation,
                         bool(parameter.get("required")) or location == "path",
                         parameter.get("description"),
                     )

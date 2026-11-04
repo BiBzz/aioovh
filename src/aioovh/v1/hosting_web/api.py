@@ -854,7 +854,7 @@ class HostingWebV1API:
         self,
         *,
         service_name: str,
-        date: datetime | None = None,
+        date: datetime | date | None = None,
     ) -> list[datetime]:
         """
         GET /1.0/hosting/web/{serviceName}/boostHistory
@@ -2054,10 +2054,10 @@ class HostingWebV1API:
         *,
         name: str,
         service_name: str,
-        creation_date_from: datetime | None = None,
-        creation_date_to: datetime | None = None,
-        deletion_date_from: datetime | None = None,
-        deletion_date_to: datetime | None = None,
+        creation_date_from: datetime | date | None = None,
+        creation_date_to: datetime | date | None = None,
+        deletion_date_from: datetime | date | None = None,
+        deletion_date_to: datetime | date | None = None,
         type_: HostingWebDatabaseDumpDateEnum | None = None,
     ) -> list[int]:
         """
@@ -2428,11 +2428,11 @@ class HostingWebV1API:
         self,
         *,
         service_name: str,
-        creation_date_from: datetime | None = None,
-        creation_date_to: datetime | None = None,
+        creation_date_from: datetime | date | None = None,
+        creation_date_to: datetime | date | None = None,
         database_name: str | None = None,
-        deletion_date_from: datetime | None = None,
-        deletion_date_to: datetime | None = None,
+        deletion_date_from: datetime | date | None = None,
+        deletion_date_to: datetime | date | None = None,
         orphan: bool | None = None,
     ) -> list[int]:
         """
