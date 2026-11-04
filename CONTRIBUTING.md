@@ -18,7 +18,7 @@ These are the gates CI runs on every merge request:
 ```bash
 uv run ruff check .
 uv run ruff format --check .
-uv run python scripts/generate.py && git diff --exit-code -- src
+uv run python scripts/generate.py && git diff --exit-code -- src docs
 uv run mypy
 uv run pytest -q
 ```
@@ -27,14 +27,19 @@ The tests run on Python 3.12, 3.13 and 3.14 in CI.
 
 ## Generated code
 
-Everything under `src/aioovh/v1/` and `src/aioovh/v2/` is generated from `specs/` and
-starts with a line saying so. Change the generator
-(`scripts/generate.py`) or the hand-written runtime (`src/aioovh/_*.py`),
-never the output, then regenerate:
+Everything under `src/aioovh/_operations/` and the area packages
+(`src/aioovh/billing/`...) is generated, as are `docs/objects.md` and
+`docs/coverage.md`; each generated file starts with a line saying so. Change
+the generators (`scripts/operations.py`, `scripts/objects.py`), the mapping
+(`mapping.yaml`) or the hand-written runtime (`src/aioovh/_*.py`), never the
+output, then regenerate:
 
 ```bash
 uv run python scripts/generate.py
 ```
+
+The generator stops on a root missing from `mapping.yaml` or on a name clash.
+Read the diff of `docs/objects.md`: it is the public surface.
 
 To pick up what OVHcloud changed in its APIs:
 

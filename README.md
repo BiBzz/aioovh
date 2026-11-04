@@ -2,39 +2,50 @@
 
 Asynchronous, fully typed Python client for every
 [OVHcloud API](https://eu.api.ovh.com/console/), versions 1.0 and v2, built on
-[httpx2](https://pypi.org/project/httpx2/) and
-[pydantic](https://docs.pydantic.dev/).
-
-It keeps what the official [`ovh`](https://pypi.org/project/ovh/) package
-offers, endpoints, `OVH_*` variables, signed requests and raw
-`get` / `post` / `put` / `delete` calls, and adds a typed method and pydantic
-models for each of the 7,000-odd operations OVHcloud publishes:
+[httpx2](https://pypi.org/project/httpx2/), [pydantic](https://docs.pydantic.dev/)
+and [whenever](https://whenever.readthedocs.io/).
 
 ```python
-await client.get("/me/bill", **{"date.from": "2026-10-01"})  # raw, untyped
-await MeV1API(client).list_bill(date_from=datetime(2026, 10, 1, tzinfo=UTC))  # typed
+from whenever import Date
+
+from aioovh import OVH
+
+async with OVH() as ovh:  # OVH_* from the environment
+    async for bill in ovh.billing.bills.filter(date_from=Date(2026, 10, 1)):
+        print(bill.bill_id, bill.date, bill.price_without_tax.value)
+        async for line in bill.details:
+            print("  ", line.description, line.total_price.value)
+
+    await ovh.compute.vps("vps-1234.vps.ovh.net").reboot()
+    account = await ovh.account
 ```
 
 ## Why it exists
 
-The official package is synchronous: every call goes through `requests` and
-blocks the event loop of an asynchronous application, and every answer is a
-plain `dict`. `aioovh` is asynchronous down to the socket:
+The official [`ovh`](https://pypi.org/project/ovh/) package is synchronous and
+untyped: `client.get("/me/bill/FR123")` blocks the event loop and returns a
+`dict`, and the paths are the API's own (`/me`, `/cloud/project/{id}/...`).
 
-- one `httpx2.AsyncClient` per `OVHClient`, connections reused;
-- the `$1$` request signature, computed on the exact URL and body sent, with
-  the clock offset read once from `/auth/time`;
-- OAuth2 client credentials as an alternative to application keys;
-- every request and response typed, checked by `mypy --strict`;
-- throttling and transient failures retried with
-  [stamina](https://stamina.hynek.me/), each attempt freshly signed, a `POST`
-  only when OVHcloud cannot have processed it;
-- typed errors (`ResourceNotFoundError`, `NotGrantedCallError`...) that keep
-  OVHcloud's message and query id;
-- the v2 cursor pagination walked for you (`_iter`, `_all`).
+`aioovh` is asynchronous down to the socket and organised around what you
+manipulate:
 
-The code is generated from the schemas the API serves itself, committed in
-[`specs/`](specs/): 70 APIs in version 1.0 and 18 in v2.
+- **business areas** shared with its sibling
+  [aioscaleway](https://pypi.org/project/aioscaleway/): `compute`, `storage`,
+  `network`, `billing`, `domains`, `email`, `telecom`...; `/me` disappears,
+  its content goes where it belongs (`ovh.billing.bills`, `ovh.iam.ssh_keys`);
+- **collections** you iterate with `async for` and narrow with `filter()`; the
+  1.0 lists of identifiers are loaded for you, a few objects at a time, and the
+  v2 cursor pages are followed;
+- **references** that act without a request to read them first, and that
+  `await` loads; **objects** that are references too, with typed fields;
+- **no API version in any name**;
+- the `$1$` request signature on the exact URL and body sent, with the clock
+  offset read once from `/auth/time`, or an OAuth2 bearer token.
+
+Everything is generated from the schemas the API serves, committed in
+[`specs/`](specs/): 88 APIs and about 7,300 operations. Every operation is
+reachable, through the objects or through `ovh.raw`, and
+[`docs/coverage.md`](docs/coverage.md) says where.
 
 ## Installation
 
@@ -42,123 +53,92 @@ The code is generated from the schemas the API serves itself, committed in
 uv add aioovh
 ```
 
-or:
-
-```bash
-pip install aioovh
-```
-
 Python 3.12 or later.
 
 ## Usage
 
+### Client
+
 ```python
-import asyncio
-from datetime import UTC, datetime
-
-from aioovh import OVHClient, OVHSettings
-from aioovh.v1.me import MeV1API
-
-
-async def main() -> None:
-    settings = OVHSettings(
-        endpoint="ovh-eu",
-        application_key="...",
-        application_secret="...",
-        consumer_key="...",
-    )
-    async with OVHClient(settings) as client:
-        me = MeV1API(client)
-        for bill_id in await me.list_bill(date_from=datetime(2026, 10, 1, tzinfo=UTC)):
-            bill = await me.get_bill(bill_id=bill_id)
-            print(bill.bill_id, bill.date_, bill.price_without_tax.value)
-
-
-asyncio.run(main())
+ovh = OVH(
+    endpoint="ovh-eu",
+    application_key="...",
+    application_secret="...",
+    consumer_key="...",
+    default_project="...",  # Public Cloud project used when none is given
+)
 ```
 
-### Modules and method names
+Every value left out is read from the variables of the official package
+(`OVH_ENDPOINT`, `OVH_APPLICATION_KEY`, `OVH_APPLICATION_SECRET`,
+`OVH_CONSUMER_KEY`, `OVH_CLIENT_ID`, `OVH_CLIENT_SECRET`), plus
+`OVH_DEFAULT_PROJECT` and `OVH_MAX_CONCURRENCY` (objects loaded at once when a
+list only returns identifiers, 8 by default).
 
-One module per API, under the version it belongs to: `aioovh.v1.me`,
-`aioovh.v1.dedicated_server`, `aioovh.v2.iam`. Each holds an API class
-(`MeV1API`, `DedicatedServerV1API`, `IamV2API`) and the models of that API,
-named after their OVHcloud type (`billing.Bill` is `BillingBill`).
+### Collections, references, objects
 
-Method names come from the path and the HTTP method:
+| You write | You get | Requests |
+| --- | --- | --- |
+| `ovh.billing.bills` | a collection | none |
+| `ovh.billing.bills.filter(date_from=Date(2026, 10, 1))` | the same collection, narrowed | none |
+| `async for b in ovh.billing.bills` | loaded objects | the list, then one per object |
+| `ovh.billing.bills(bill_id)` | a reference | none |
+| `await ovh.billing.bills(bill_id)` | a loaded object | one |
+| `await ovh.compute.vps(name).reboot()` | the action's result | one |
+| `[i async for i in ovh.billing.bills.ids()]` | identifiers only | one |
 
-| Call                                           | Method                                 |
-| ---------------------------------------------- | -------------------------------------- |
-| `GET /me/bill` (a list)                        | `list_bill()`                          |
-| `GET /me/bill/{billId}`                        | `get_bill(bill_id=...)`                |
-| `GET /me/bill/{billId}/details`                | `list_bill_details(bill_id=...)`       |
-| `POST /dedicated/server/{serviceName}/reboot`  | `reboot(service_name=...)`             |
-| `POST /me/billing/group` (create)              | `create_billing_group(...)`            |
-| `PUT /me/billing/group/{groupId}`              | `update_billing_group(...)`            |
-| `DELETE /me/billing/group/{groupId}`           | `delete_billing_group(...)`            |
+A loaded object is also a reference. It cannot load itself when printed or
+read, because those are synchronous; mypy flags a field read on a bare
+reference.
 
-Every argument is keyword-only and snake case: `date.from` is `date_from`,
-`serviceName` is `service_name`. Each docstring starts with the HTTP call it
-makes.
-
-### Configuration
-
-`OVHSettings` is a `pydantic-settings` object. Left empty, it reads the same
-environment variables as the official package:
-
-| Variable                 | Setting              |
-| ------------------------ | -------------------- |
-| `OVH_ENDPOINT`           | `endpoint`           |
-| `OVH_APPLICATION_KEY`    | `application_key`    |
-| `OVH_APPLICATION_SECRET` | `application_secret` |
-| `OVH_CONSUMER_KEY`       | `consumer_key`       |
-| `OVH_CLIENT_ID`          | `client_id`          |
-| `OVH_CLIENT_SECRET`      | `client_secret`      |
-
-The endpoint is one of `ovh-eu`, `ovh-ca`, `ovh-us`, `kimsufi-eu`,
-`kimsufi-ca`, `soyoustart-eu` and `soyoustart-ca`, or a URL. With `client_id`
-and `client_secret` set, requests carry an OAuth2 bearer token instead of a
-signature. Timeouts and the retry policy are settings too.
-
-### Pagination
-
-The v2 API pages with a cursor header. Every operation that accepts one gets
-two helpers:
+Public Cloud resources take their project as a keyword, defaulting to
+`default_project`:
 
 ```python
-async for policy in iam.list_policy_iter():
+async for instance in ovh.compute.instances.filter(project=project_id):
     ...
-policies = await iam.list_policy_all()
 ```
 
-### Errors
+### Names
+
+Collections are named after what they hold (`bills`, `dedicated_servers`,
+`ssh_keys`); under them, the OVHcloud segments in snake case
+(`bill.details`, `server.service_infos()`). Actions are methods named after
+their path (`reboot()`, `change_contact()`), updates `update_...`. The full
+tree is in [docs/objects.md](docs/objects.md).
+
+### Types and errors
+
+Arguments and fields are typed; enumerations and nested models of an area live
+in its `types` module. Dates are `whenever.Instant` and `whenever.Date`.
+Enumerations are open.
 
 ```python
 from aioovh import NotGrantedCallError, OVHAPIError, ResourceNotFoundError
 
 try:
-    await me.get_bill(bill_id="FR123")
-except ResourceNotFoundError:
-    ...
+    await ovh.billing.bills("FR123")
 except NotGrantedCallError:
     ...  # the consumer key lacks this route
 except OVHAPIError as error:
     print(error.status_code, error.error_code, error.message, error.query_id)
 ```
 
-### Values added after generation
+### The raw layer
 
-Enumerations are open: a value OVHcloud adds later is accepted and keeps its
-text instead of failing the whole response. Fields unknown to the models are
-kept in `model_extra`.
+`ovh.raw` keeps the official package's untyped calls:
+
+```python
+await ovh.raw.get("/me/bill", **{"date.from": "2026-10-01"})
+```
 
 ## Development
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). The design choices are in
+See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [docs/architecture.md](docs/architecture.md).
 
 The source lives on [GitLab](https://gitlab.com/businessagile/libraries/aioovh),
-mirrored to [GitHub](https://github.com/BiBzz/aioovh). A sibling package covers
-Scaleway: [aioscaleway](https://pypi.org/project/aioscaleway/).
+mirrored to [GitHub](https://github.com/BiBzz/aioovh).
 
 ## License
 
