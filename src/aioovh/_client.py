@@ -1,9 +1,7 @@
 import asyncio
 import hashlib
 import json
-import time
 from collections.abc import AsyncIterator, Awaitable, Callable, Mapping
-from datetime import date, datetime
 from enum import Enum
 from http import HTTPStatus
 from types import TracebackType
@@ -21,6 +19,7 @@ from httpx2 import (
 )
 from pydantic import BaseModel, TypeAdapter
 from stamina import retry_context
+from whenever import Date, Instant
 
 from aioovh._endpoints import ENDPOINTS, Endpoint
 from aioovh._errors import (
@@ -46,16 +45,7 @@ NEVER_PROCESSED_STATUSES = frozenset(
 TOKEN_EXPIRY_MARGIN_SECONDS = 30
 NEXT_CURSOR_HEADER = "x-pagination-cursor-next"
 type QueryValue = (
-    str
-    | int
-    | float
-    | bool
-    | Enum
-    | datetime
-    | date
-    | dict[str, Any]
-    | BaseModel
-    | None
+    str | int | float | bool | Enum | Instant | Date | dict[str, Any] | BaseModel | None
 )
 type Query = Mapping[str, QueryValue | list[Any]]
 type QueryPairs = list[tuple[str, str | int | float | bool | None]]
@@ -101,8 +91,8 @@ def query_value(value: Any) -> str:
         return "true" if value else "false"
     if isinstance(value, Enum):
         return str(value.value)
-    if isinstance(value, datetime | date):
-        return value.isoformat()
+    if isinstance(value, Instant | Date):
+        return value.format_iso()
     return str(value)
 
 
@@ -121,8 +111,8 @@ def encode_body(value: Any) -> Any:
         return value.model_dump(mode="json", by_alias=True, exclude_unset=True)
     if isinstance(value, Enum):
         return value.value
-    if isinstance(value, datetime | date):
-        return value.isoformat()
+    if isinstance(value, Instant | Date):
+        return value.format_iso()
     if isinstance(value, dict):
         return {
             key: encode_body(item) for key, item in value.items() if item is not None
@@ -156,11 +146,10 @@ def endpoint(settings: OVHSettings) -> Endpoint:
 
 
 class OVHClient:
-    """Authenticated, retrying HTTP access to the OVHcloud API.
+    """Authenticated, retrying HTTP access to the OVHcloud API (`OVH().raw`).
 
-    Every generated API class takes this client: `MeV1API(client)`. The raw
-    `get`, `post`, `put`, `patch` and `delete` methods cover any path, as the
-    official `ovh.Client` does.
+    Its `get`, `post`, `put`, `patch` and `delete` cover any path, untyped, as
+    the official `ovh.Client` does.
     """
 
     def __init__(
@@ -169,7 +158,7 @@ class OVHClient:
         *,
         transport: AsyncBaseTransport | None = None,
         http_client: AsyncClient | None = None,
-        clock: Callable[[], float] = time.time,
+        clock: Callable[[], Instant] = Instant.now,
     ) -> None:
         self.settings = OVHSettings() if settings is None else settings
         self.endpoint = endpoint(self.settings)
@@ -182,12 +171,12 @@ class OVHClient:
         )
         self._time_delta: int | None = None
         self._token: str | None = None
-        self._token_expiry = 0.0
+        self._token_expiry: Instant | None = None
         self._lock = asyncio.Lock()
 
-    @classmethod
-    def from_values(cls, **values: Any) -> Self:
-        return cls(OVHSettings(**values))
+    @property
+    def http_client(self) -> AsyncClient:
+        return self._http
 
     async def __aenter__(self) -> Self:
         return self
@@ -226,11 +215,15 @@ class OVHClient:
             async with self._lock:
                 if self._time_delta is None:
                     response = await self.request("GET", "/1.0/auth/time", auth=False)
-                    self._time_delta = int(response.json()) - int(self._clock())
+                    self._time_delta = int(response.json()) - self._clock().timestamp()
         return self._time_delta
 
     async def _access_token(self) -> str:
-        if self._token is not None and self._clock() < self._token_expiry:
+        if (
+            self._token is not None
+            and self._token_expiry is not None
+            and self._clock() < self._token_expiry
+        ):
             return self._token
         token_url = self.endpoint.token_url
         if token_url is None:
@@ -260,11 +253,8 @@ class OVHClient:
             )
         payload = response.json()
         self._token = str(payload["access_token"])
-        self._token_expiry = (
-            self._clock()
-            + float(payload.get("expires_in", 3600))
-            - TOKEN_EXPIRY_MARGIN_SECONDS
-        )
+        lifetime = int(payload.get("expires_in", 3600)) - TOKEN_EXPIRY_MARGIN_SECONDS
+        self._token_expiry = self._clock().add(seconds=lifetime)
         return self._token
 
     async def _authenticate(self, request: Request, body: str) -> None:
@@ -279,7 +269,7 @@ class OVHClient:
                 "This call needs credentials: application_key, application_secret "
                 "and consumer_key (OVH_*), or client_id and client_secret."
             )
-        timestamp = str(int(self._clock()) + await self.time_delta())
+        timestamp = str(self._clock().timestamp() + await self.time_delta())
         request.headers.update(
             {
                 "X-Ovh-Application": key,

@@ -19,6 +19,7 @@ from aioovh._errors import (
     TooManyRequestsError,
 )
 from aioovh._models import OVHModel
+from aioovh._root import OVH
 from aioovh._settings import OVHSettings
 
 __all__ = [
@@ -30,6 +31,7 @@ __all__ = [
     "InvalidKeyError",
     "NotCredentialError",
     "NotGrantedCallError",
+    "OVH",
     "OVHAPIError",
     "OVHClient",
     "OVHConfigurationError",

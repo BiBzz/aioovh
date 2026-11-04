@@ -29,6 +29,7 @@ dependencies = [
     "pydantic>=2.14.1",
     "pydantic-settings>=2.16.0",
     "stamina>=26.1.0",
+    "whenever>=0.11.0",
 ]
 
 [project.urls]
@@ -43,6 +44,7 @@ dev = [
     "mypy==2.4.0",
     "pytest==9.1.1",
     "pytest-asyncio==1.4.0",
+    "pyyaml==6.0.3",
     "ruff==0.17.1",
     "typer==0.27.3",
 ]
@@ -60,13 +62,21 @@ target-version = "py312"
 select = ["E", "F", "I", "UP", "B", "SIM", "C4"]
 
 [tool.ruff.lint.per-file-ignores]
-"src/aioovh/v*/*/*.py" = ["E501", "E741"]
+"src/aioovh/_operations/**/*.py" = ["E501", "E741"]
+"src/aioovh/*/resources.py" = ["E501"]
+"src/aioovh/*/types.py" = ["E501"]
+# the generators hold code templates, whose lines are those of the output
+"scripts/*.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.12"
 strict = true
 files = ["src", "tests", "scripts"]
 plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["yaml"]
+ignore_missing_imports = true
 
 [build-system]
 requires = ["hatchling==1.32.4"]

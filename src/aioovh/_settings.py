@@ -13,6 +13,8 @@ class OVHSettings(BaseSettings):
     consumer_key: SecretStr | None = None
     client_id: str | None = None
     client_secret: SecretStr | None = None
+    default_project: str | None = None
+    max_concurrency: int = 8
     timeout: float = 180.0
     retry_attempts: int = 5
     retry_timeout: float | None = 120.0

@@ -1,4 +1,6 @@
-from pydantic import BaseModel, ConfigDict
+from typing import Any
+
+from pydantic import BaseModel, ConfigDict, PrivateAttr
 
 
 class OVHModel(BaseModel):
@@ -10,3 +12,6 @@ class OVHModel(BaseModel):
         serialize_by_alias=True,
         protected_namespaces=(),
     )
+
+    _session: Any = PrivateAttr(default=None)
+    _key: dict[str, str | None] = PrivateAttr(default_factory=dict)

@@ -1,0 +1,196 @@
+# Where every part of the OVHcloud API goes in the object layer.
+#
+# roots: an API path (as written in the schemas, versions left out) and what
+# it becomes. The longest matching root wins.
+#   namespace: business area (shared with aioscaleway)
+#   name: collection name (a path ending in a collection with items)
+#   area: true for a path that is not a resource (`/me`, `/iam`): its
+#     children become collections or methods of the namespace
+#   scope: path parameters of the root that become keywords with a default
+#     from the settings, as a project
+roots:
+  # compute
+  /dedicated/server: {namespace: compute, name: dedicated_servers}
+  /dedicated/cluster: {namespace: compute, name: dedicated_clusters}
+  /dedicated/housing: {namespace: compute, name: housings}
+  /dedicated/installationTemplate: {namespace: compute, name: installation_templates}
+  /vps: {namespace: compute, name: vps}
+  /cloud/project/{serviceName}/instance: {namespace: compute, name: instances, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/image: {namespace: compute, name: images, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/flavor: {namespace: compute, name: flavors, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/compute: {namespace: compute, area: true, prefix: public_cloud, scope: {projectId: project}}
+
+  # storage and backup
+  /dedicated/nasha: {namespace: storage, name: nas}
+  /dedicated/ceph: {namespace: storage, name: ceph_clusters}
+  /storage: {namespace: storage, area: true}
+  /cloud/project/{serviceName}/volume: {namespace: storage, name: volumes, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/snapshot: {namespace: storage, name: snapshots, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/storage: {namespace: storage, name: object_containers, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/storage: {namespace: storage, area: true, prefix: public_cloud, scope: {projectId: project}}
+  /veeamCloudConnect: {namespace: backup, name: veeam_cloud_connect}
+  /veeam/veeamEnterprise: {namespace: backup, name: veeam_enterprise}
+  /backupServices: {namespace: backup, area: true}
+
+  # network
+  /ip: {namespace: network, name: ips}
+  /ipLoadbalancing: {namespace: network, name: load_balancers}
+  /vrack: {namespace: network, name: vracks}
+  /vrackServices: {namespace: network, area: true}
+  /ovhCloudConnect: {namespace: network, name: interconnects}
+  /cdn/dedicated: {namespace: network, name: cdns}
+  /sslGateway: {namespace: network, name: ssl_gateways}
+  /networkDefense: {namespace: network, area: true}
+  /cloud/project/{serviceName}/network: {namespace: network, area: true, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/loadbalancer: {namespace: network, name: cloud_load_balancers, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/ip: {namespace: network, name: cloud_ips, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/network: {namespace: network, name: networks, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/gateway: {namespace: network, name: gateways, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/loadbalancer: {namespace: network, name: public_cloud_load_balancers, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/publicIp: {namespace: network, name: public_ips, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/securityGroup: {namespace: network, name: security_groups, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/privateEndpoint: {namespace: network, name: private_endpoints, scope: {projectId: project}}
+
+  # kubernetes
+  /cloud/project/{serviceName}/kube: {namespace: kubernetes, name: clusters, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/containerRegistry: {namespace: kubernetes, name: registries, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/managedKubernetes: {namespace: kubernetes, area: true, prefix: public_cloud, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/rancher: {namespace: kubernetes, name: rancher, scope: {projectId: project}}
+
+  # databases, analytics, ai
+  /cloud/project/{serviceName}/database: {namespace: databases, area: true, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/managedDatabase: {namespace: databases, area: true, prefix: managed, scope: {projectId: project}}
+  /hosting/privateDatabase: {namespace: web_hosting, name: private_databases}
+  /publicCloud/project/{projectId}/managedAnalytics: {namespace: analytics, area: true, scope: {projectId: project}}
+  /cluster/hadoop: {namespace: analytics, name: hadoop_clusters}
+  /cloud/project/{serviceName}/ai: {namespace: ai, area: true, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/lab: {namespace: ai, name: labs, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/quantum: {namespace: ai, area: true, prefix: quantum, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/ai: {namespace: ai, area: true, prefix: public_cloud, scope: {projectId: project}}
+
+  # email, domains, web hosting
+  /email/domain: {namespace: email, name: mail_domains}
+  /email/exchange: {namespace: email, area: true}
+  /email/mxplan: {namespace: email, name: mx_plans}
+  /email/pro: {namespace: email, name: email_pro}
+  /zimbra: {namespace: email, area: true}
+  /msServices: {namespace: email, name: microsoft_services}
+  /domain: {namespace: domains, name: domains}
+  /domain/zone: {namespace: domains, name: dns_zones}
+  /allDom: {namespace: domains, name: domain_packs}
+  /ssl: {namespace: domains, name: ssl_certificates}
+  /hosting/web: {namespace: web_hosting, name: hostings}
+  /webhosting: {namespace: web_hosting, area: true}
+  /managedCMS: {namespace: web_hosting, area: true, prefix: cms}
+
+  # observability
+  /dbaas/logs: {namespace: observability, name: logs}
+  /cloud/project/{serviceName}/alerting: {namespace: observability, name: alerts, scope: {serviceName: project}}
+
+  # iam
+  /iam: {namespace: iam, area: true}
+  /okms: {namespace: iam, area: true, prefix: kms}
+  /secret: {namespace: iam, area: true}
+  /account: {namespace: iam, area: true}
+  /me/api: {namespace: iam, area: true, prefix: api}
+  /me/identity: {namespace: iam, area: true}
+  /me/subAccount: {namespace: iam, name: sub_accounts}
+  /me/accessRestriction: {namespace: iam, area: true}
+  /me/sshKey: {namespace: iam, name: ssh_keys}
+  /cloud/project/{serviceName}/user: {namespace: iam, name: cloud_users, scope: {serviceName: project}}
+  /cloud/project/{serviceName}/sshkey: {namespace: iam, name: cloud_ssh_keys, scope: {serviceName: project}}
+  /publicCloud/project/{projectId}/sshKey: {namespace: iam, name: public_cloud_ssh_keys, scope: {projectId: project}}
+  /publicCloud/project/{projectId}/keyManager: {namespace: iam, area: true, prefix: public_cloud, scope: {projectId: project}}
+
+  # account
+  /me: {namespace: account, area: true}
+  /auth: {namespace: account, area: true}
+  /cloud: {namespace: account, area: true}
+  /cloud/project: {namespace: account, name: cloud_projects}
+  /publicCloud: {namespace: account, area: true}
+  /publicCloud/project: {namespace: account, name: public_cloud_projects}
+  /newAccount: {namespace: account, area: true}
+  /partner: {namespace: account, area: true}
+  /startup: {namespace: account, area: true}
+  /support: {namespace: account, area: true}
+  /notification: {namespace: account, area: true}
+  /location: {namespace: account, name: locations}
+  /contact: {namespace: account, area: true}
+  /stack/mis: {namespace: account, name: mis_stacks}
+  /vip: {namespace: account, name: vip}
+  /supply/mondialRelay: {namespace: account, area: true}
+
+  # billing
+  /me/bill: {namespace: billing, name: bills}
+  /me/refund: {namespace: billing, name: refunds}
+  /me/correctiveInvoice: {namespace: billing, name: corrective_invoices}
+  /me/downPaymentInvoice: {namespace: billing, name: down_payment_invoices}
+  /me/reverseBill: {namespace: billing, name: reverse_bills}
+  /me/deposit: {namespace: billing, name: deposits}
+  /me/debtAccount: {namespace: billing, area: true}
+  /me/payment: {namespace: billing, area: true}
+  /me/paymentMean: {namespace: billing, area: true}
+  /me/credit: {namespace: billing, area: true}
+  /me/voucher: {namespace: billing, area: true}
+  /me/fidelityAccount: {namespace: billing, area: true}
+  /me/ovhAccount: {namespace: billing, name: ovh_accounts}
+  /me/withdrawal: {namespace: billing, name: withdrawals}
+  /me/consumption: {namespace: billing, area: true}
+  /me/billing: {namespace: billing, area: true}
+  /me/availableAutomaticPaymentMeans: {namespace: billing, area: true}
+  /services: {namespace: billing, name: services}
+  /service: {namespace: billing, name: service_lifecycle}
+  /finops: {namespace: billing, area: true}
+
+  # orders
+  /order: {namespace: orders, area: true}
+  /me/order: {namespace: orders, name: orders}
+  /commercialCatalog: {namespace: orders, area: true}
+  /price: {namespace: orders, area: true}
+
+  # telecom
+  /telephony: {namespace: telecom, name: telephony}
+  /sms: {namespace: telecom, name: sms}
+  /freefax: {namespace: telecom, name: fax}
+  /xdsl: {namespace: telecom, name: xdsl}
+  /pack/xdsl: {namespace: telecom, name: xdsl_packs}
+  /pack/siptrunk: {namespace: telecom, name: sip_trunks}
+  /overTheBox: {namespace: telecom, name: over_the_box}
+  /connectivity: {namespace: telecom, area: true}
+  /me/telephony: {namespace: telecom, area: true}
+  /me/xdsl: {namespace: telecom, area: true}
+  /me/fax: {namespace: telecom, area: true}
+
+  # licenses
+  /license/cloudLinux: {namespace: licenses, name: cloud_linux}
+  /license/cpanel: {namespace: licenses, name: cpanel}
+  /license/directadmin: {namespace: licenses, name: directadmin}
+  /license/hycu: {namespace: licenses, name: hycu}
+  /license/office: {namespace: licenses, name: office}
+  /license/officePrepaid: {namespace: licenses, name: office_prepaid}
+  /license/plesk: {namespace: licenses, name: plesk}
+  /license/redhat: {namespace: licenses, name: redhat}
+  /license/sqlserver: {namespace: licenses, name: sqlserver}
+  /license/virtuozzo: {namespace: licenses, name: virtuozzo}
+  /license/windows: {namespace: licenses, name: windows}
+  /license/worklight: {namespace: licenses, name: worklight}
+  /saas/csp2: {namespace: licenses, name: microsoft_csp}
+
+  # virtualization
+  /dedicatedCloud: {namespace: virtualization, name: vmware}
+  /nutanix: {namespace: virtualization, name: nutanix}
+  /vmwareCloudDirector: {namespace: virtualization, area: true}
+  /horizonView: {namespace: virtualization, name: virtual_desktops}
+  /videocenter: {namespace: virtualization, area: true}
+
+# Collection names inside an area or under a resource, keyed by
+# "<namespace>:<path segments>" as docs/objects.md shows them.
+collections: {}
+
+# Member names, keyed by "<namespace>:<path segments>:<generated name>".
+members: {}
+
+# APIs kept in the operations layer only, with the reason.
+raw_only:
+  /metrics: every operation is deprecated
+  /products: models only, no operation

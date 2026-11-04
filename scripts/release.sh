@@ -48,7 +48,7 @@ uv sync --frozen --quiet
 uv run ruff check .
 uv run ruff format --check .
 uv run python scripts/generate.py >/dev/null
-git diff --quiet -- src || die "the generated code differs from specs/, regenerate first"
+git diff --quiet -- src docs || die "the generated code differs from specs/, regenerate first"
 uv run mypy
 uv run pytest -q
 

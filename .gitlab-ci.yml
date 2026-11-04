@@ -32,7 +32,7 @@ lint:
     - uv run ruff check .
     - uv run ruff format --check .
     - uv run python scripts/generate.py
-    - git diff --exit-code -- src
+    - git diff --exit-code -- src docs
 
 test:
   <<: *verify
