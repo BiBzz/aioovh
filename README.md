@@ -5,6 +5,8 @@ Asynchronous, fully typed Python client for every
 [httpx2](https://pypi.org/project/httpx2/), [pydantic](https://docs.pydantic.dev/)
 and [whenever](https://whenever.readthedocs.io/).
 
+**Documentation**: https://aioovh.businessagile.eu
+
 ```python
 from whenever import Date
 

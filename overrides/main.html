@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "aioovh",
+  "url": "https://aioovh.businessagile.eu/",
+  "creator": {
+    "@type": "Organization",
+    "name": "Business Agile",
+    "url": "https://businessagile.eu",
+    "identifier": {"@type": "PropertyValue", "propertyID": "SIREN", "value": "817753155"},
+    "address": {"@type": "PostalAddress", "streetAddress": "9 bis boulevard Jean Jaurès", "postalCode": "92100", "addressLocality": "Boulogne-Billancourt", "addressCountry": "FR"}
+  }
+}
+</script>
+{% endblock %}

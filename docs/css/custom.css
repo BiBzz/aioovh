@@ -1,0 +1,5 @@
+.md-copyright { flex-grow: 1; }
+.md-copyright__highlight { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 2rem; }
+.ba-credit { display: inline-flex; align-items: center; gap: 0.4em; }
+.ba-logo { display: inline-flex; align-items: center; }
+.ba-logo img { height: 40px; width: auto; }

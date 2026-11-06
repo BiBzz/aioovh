@@ -1,0 +1,85 @@
+site_name: aioovh
+site_description: aioovh, every OVHcloud API in Python, fully async and strongly typed.
+site_url: https://aioovh.businessagile.eu/
+theme:
+  variant: classic
+  name: material
+  custom_dir: overrides
+  font: false
+  palette:
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/lightbulb-auto
+      name: Switch to light mode
+  - media: '(prefers-color-scheme: light)'
+    scheme: default
+    primary: blue
+    accent: deep orange
+    toggle:
+      icon: material/lightbulb
+      name: Switch to dark mode
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: blue
+    accent: deep orange
+    toggle:
+      icon: material/lightbulb-outline
+      name: Switch to system preference
+  features:
+  - content.code.annotate
+  - content.code.copy
+  - navigation.footer
+  - navigation.indexes
+  - navigation.instant
+  - navigation.tabs
+  - navigation.top
+  - navigation.tracking
+  - search.highlight
+  - search.suggest
+  - toc.follow
+  icon:
+    repo: simple/gitlab
+  logo: img/icon-white.svg
+  favicon: img/icon-white.svg
+  language: en
+repo_name: businessagile/libraries/aioovh
+repo_url: https://gitlab.com/businessagile/libraries/aioovh
+edit_uri: ""
+copyright: >-
+  <span class="ba-credit">Made by <span class="ba-logo"><a href="https://businessagile.eu" target="_blank" rel="noopener"><img src="/img/business-agile-logo.png" alt="Business Agile" height="40"></a>,</span> European custom development studio</span>
+  <span class="ba-legal"><a href="/about/legal-notice/">Legal notice</a> · <a href="/about/privacy/">Privacy and cookies</a></span>
+
+extra:
+  generator: false
+
+nav:
+  - aioovh: index.md
+  - features.md
+  - design.md
+  - Reference:
+    - objects.md
+    - architecture.md
+    - coverage.md
+  - About:
+    - about/legal-notice.md
+    - about/privacy.md
+
+markdown_extensions:
+  abbr: null
+  attr_list: null
+  md_in_html: null
+  tables: null
+  toc:
+    permalink: true
+  admonition: null
+  pymdownx.details: null
+  pymdownx.superfences: null
+  pymdownx.highlight:
+    line_spans: __span
+  pymdownx.inlinehilite: null
+  pymdownx.emoji:
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - css/custom.css

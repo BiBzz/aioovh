@@ -1,5 +1,6 @@
 stages:
   - verify
+  - docs
   - publish
 
 default:
@@ -46,6 +47,31 @@ typecheck:
   <<: *verify
   script:
     - uv run mypy
+
+.docs: &docs
+  stage: docs
+  needs: []
+  cache:
+    key:
+      files:
+        - uv.lock
+    paths:
+      - .uv-cache
+  script:
+    - uv sync --group docs
+    - uv run zensical build --clean
+
+docs:
+  <<: *docs
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+pages:
+  <<: *docs
+  pages:
+    publish: site
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 publish:
   stage: publish
