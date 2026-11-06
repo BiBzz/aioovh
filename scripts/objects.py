@@ -2,6 +2,7 @@
 
 import re
 from collections import Counter, defaultdict
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -969,7 +970,7 @@ class Renderer:
         scope_names = set(resource.scope.values())
         arguments.append(
             "**{k: v for k, v in self._criteria.items() if k not in "
-            + repr(scope_names or {"_"})
+            + set_literal(scope_names or {"_"})
             + "}"
         )
         method = listing.operation.method_name
@@ -1104,6 +1105,11 @@ class Renderer:
         lines += [f"    {name!r}," for name in sorted(names)]
         lines.append("]")
         return "\n".join(lines) + "\n"
+
+
+def set_literal(values: Iterable[str]) -> str:
+    """A set written in a stable order, so that the generated code never drifts."""
+    return "{" + ", ".join(repr(value) for value in sorted(values)) + "}"
 
 
 def module_id(module: Module) -> str:
