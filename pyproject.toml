@@ -8,6 +8,9 @@ license-files = ["LICENSE"]
 authors = [
     { name = "Alexandre BERREBI", email = "alexandre.berrebi@businessagile.eu" },
 ]
+maintainers = [
+    { name = "Business Agile", email = "contact@businessagile.eu" },
+]
 requires-python = ">=3.12"
 keywords = ["ovh", "ovhcloud", "kimsufi", "soyoustart", "asyncio", "httpx", "pydantic", "sdk", "api", "cloud"]
 classifiers = [

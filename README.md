@@ -142,6 +142,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and
 The source lives on [GitLab](https://gitlab.com/businessagile/libraries/aioovh),
 mirrored to [GitHub](https://github.com/BiBzz/aioovh).
 
+## Author
+
+Created by [Alexandre BERREBI](https://businessagile.eu/en/about), maintained by
+[Business Agile](https://businessagile.eu).
+
 ## License
 
 MIT, see [LICENSE](LICENSE).
