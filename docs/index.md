@@ -22,6 +22,8 @@
 
 **Source Code**: <a href="https://gitlab.com/businessagile/libraries/aioovh" target="_blank">https://gitlab.com/businessagile/libraries/aioovh</a>
 
+**Issues and pull requests**: <a href="https://github.com/BiBzz/aioovh" target="_blank">github.com/BiBzz/aioovh</a>
+
 **Created by**: <a href="https://businessagile.eu/en/about" target="_blank">Alexandre BERREBI</a>, maintained by <a href="https://businessagile.eu" target="_blank">Business Agile</a>
 
 ---

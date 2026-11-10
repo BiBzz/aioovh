@@ -10,7 +10,7 @@ authors:
     affiliation: Business Agile
     website: https://businessagile.eu/en/about
 version: 0.1.0
-date-released: 2026-11-10
+date-released: 2026-11-11
 license: MIT
 url: https://aioovh.businessagile.eu
 repository-code: https://gitlab.com/businessagile/libraries/aioovh

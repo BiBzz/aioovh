@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # Tag a release: the version and the changelog entry are merged through a merge
-# request first, then this script signs the tag that lets CI publish to PyPI.
+# request first, then this script signs the tag; the GitLab mirror carries it to
+# GitHub, whose Release workflow publishes to PyPI.
 #
 #   scripts/release.sh [--yes]
 #
@@ -69,5 +70,5 @@ if ! $assume_yes; then
 fi
 
 git push "$REMOTE" "$tag"
-printf '\n%s is pushed. Its pipeline waits on the manual publish job:\n  %s/-/pipelines?scope=tags\n' \
-    "$tag" "$(git remote get-url "$REMOTE" | sed -E 's#^git@([^:]+):#https://\1/#; s#\.git$##')"
+printf '\n%s is pushed. Once the mirror carries it to GitHub, approve the pypi environment:\n  %s\n' \
+    "$tag" "https://github.com/BiBzz/aioovh/actions/workflows/release.yml"

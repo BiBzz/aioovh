@@ -140,7 +140,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [docs/architecture.md](docs/architecture.md).
 
 The source lives on [GitLab](https://gitlab.com/businessagile/libraries/aioovh),
-mirrored to [GitHub](https://github.com/BiBzz/aioovh).
+mirrored to [GitHub](https://github.com/BiBzz/aioovh), where
+[issues](https://github.com/BiBzz/aioovh/issues) and pull requests are welcome.
 
 ## Author
 

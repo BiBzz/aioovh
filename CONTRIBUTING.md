@@ -1,5 +1,20 @@
 # Contributing
 
+## Issues and pull requests
+
+Report bugs, ask questions and propose changes on
+[GitHub](https://github.com/BiBzz/aioovh): [issues](https://github.com/BiBzz/aioovh/issues) and pull requests against `development`
+are welcome there, and your commits do not need to be signed.
+
+The code is reviewed and merged on
+[GitLab](https://gitlab.com/businessagile/libraries/aioovh), which mirrors
+itself to GitHub. A pull request is picked up into a GitLab merge request that
+links back to it, keeps you as the author of your commits, and runs the full
+CI. Once merged, the mirror brings the commits to GitHub, which marks the pull
+request as merged; if they had to be rebased, the pull request is closed with
+a link to the commit. Do not expect the GitHub merge button to work: only the
+mirror writes to `development`.
+
 ## Setting up
 
 The project is managed with [uv](https://docs.astral.sh/uv/), 0.13 or later:
@@ -13,7 +28,8 @@ supports.
 
 ## The checks
 
-These are the gates CI runs on every merge request:
+These are the gates CI runs on every merge request on GitLab, and GitHub
+Actions on every pull request:
 
 ```bash
 uv run ruff check .
@@ -57,7 +73,7 @@ of their own: its diff is the list of API changes.
 Work branches off `development`, the default branch, and lands through a
 merge request. Everything in the repository is written in English, and commit
 messages follow the Angular convention: `feat(client): ...`,
-`fix(generator): ...`, `docs: ...`. Commits are signed.
+`fix(generator): ...`, `docs: ...`. Maintainers sign their commits and tags.
 
 ## The changelog
 
@@ -84,18 +100,17 @@ The format is [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
    changelog has the section, replays the checks, signs the `v0.2.0` tag with
    the changelog entry as its message, and pushes it after asking.
 
-3. The tag pipeline runs the checks again, then stops on the manual `publish`
-   job. Starting it is the point of no return: a version on PyPI can be yanked,
-   but its files can never be uploaded again. The job builds the wheel and the
-   sdist and uploads them with PyPI trusted publishing, so no token is stored
-   anywhere.
-
-The GitLab project mirrors itself to GitHub, tags included.
+3. The GitLab mirror carries the tag to GitHub, where the `Release` workflow
+   checks the tag matches the version, replays the checks, then waits for a
+   reviewer to approve the `pypi` environment. Approving it is the point of no
+   return: a version on PyPI can be yanked, but its files can never be uploaded
+   again. The workflow builds the wheel and the sdist and uploads them with
+   PyPI trusted publishing, so no token is stored anywhere.
 
 ### What PyPI trusts
 
-The trusted publisher declared on PyPI for `aioovh` is the GitLab project
-`businessagile/libraries/aioovh`, pipeline file `.gitlab-ci.yml`,
-environment `pypi`. Renaming the project, the file or the environment breaks
-the upload until the publisher is updated on PyPI. Tags matching `v*` are
-protected, so only maintainers can start a release.
+The trusted publisher declared on PyPI for `aioovh` is the GitHub repository
+`BiBzz/aioovh`, workflow `release.yml`, environment `pypi`. Renaming the
+repository, the workflow or the environment breaks the upload until the
+publisher is updated on PyPI. Tags matching `v*` are protected on GitLab, and
+on GitHub only the mirror may create them.

@@ -1,7 +1,6 @@
 stages:
   - verify
   - docs
-  - publish
 
 default:
   # uv 0.13.4 on Python 3.12, the oldest supported version; the non-slim image ships git
@@ -72,21 +71,3 @@ pages:
     publish: site
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-publish:
-  stage: publish
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^v\d/
-      when: manual
-  needs: [lint, test, typecheck]
-  environment:
-    name: pypi
-    url: https://pypi.org/project/aioovh/
-  # PyPI trusts this job over OIDC (trusted publishing), so no token is stored
-  id_tokens:
-    PYPI_ID_TOKEN:
-      aud: pypi
-  script:
-    - test "v$(uv version --short)" = "$CI_COMMIT_TAG"
-    - uv build
-    - uv publish --trusted-publishing always

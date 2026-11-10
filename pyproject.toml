@@ -40,7 +40,7 @@ Homepage = "https://aioovh.businessagile.eu"
 Documentation = "https://aioovh.businessagile.eu"
 Repository = "https://gitlab.com/businessagile/libraries/aioovh"
 Mirror = "https://github.com/BiBzz/aioovh"
-Issues = "https://gitlab.com/businessagile/libraries/aioovh/-/issues"
+Issues = "https://github.com/BiBzz/aioovh/issues"
 Changelog = "https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/CHANGELOG.md"
 
 [dependency-groups]
