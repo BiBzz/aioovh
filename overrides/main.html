@@ -3,16 +3,52 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "aioovh",
-  "url": "https://aioovh.businessagile.eu/",
-  "creator": {
-    "@type": "Organization",
-    "name": "Business Agile",
-    "url": "https://businessagile.eu",
-    "identifier": {"@type": "PropertyValue", "propertyID": "SIREN", "value": "817753155"},
-    "address": {"@type": "PostalAddress", "streetAddress": "9 bis boulevard Jean Jaurès", "postalCode": "92100", "addressLocality": "Boulogne-Billancourt", "addressCountry": "FR"}
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "aioovh",
+      "url": "https://aioovh.businessagile.eu/",
+      "author": {"@id": "https://businessagile.eu/#alexandre-berrebi"},
+      "publisher": {"@id": "https://businessagile.eu/#organization"}
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "aioovh",
+      "description": "Asynchronous, fully typed Python client for every OVHcloud API.",
+      "url": "https://aioovh.businessagile.eu/",
+      "codeRepository": "https://gitlab.com/businessagile/libraries/aioovh",
+      "programmingLanguage": "Python",
+      "runtimePlatform": "Python 3.12+",
+      "license": "https://opensource.org/license/mit",
+      "author": {"@id": "https://businessagile.eu/#alexandre-berrebi"},
+      "maintainer": {"@id": "https://businessagile.eu/#organization"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://businessagile.eu/#alexandre-berrebi",
+      "name": "Alexandre BERREBI",
+      "givenName": "Alexandre",
+      "familyName": "BERREBI",
+      "jobTitle": "Founder and developer",
+      "url": "https://businessagile.eu/en/about",
+      "worksFor": {"@id": "https://businessagile.eu/#organization"},
+      "sameAs": [
+        "https://www.linkedin.com/in/alexandreberrebi/",
+        "https://github.com/BiBzz",
+        "https://gitlab.com/BiBzz",
+        "https://substack.com/@alexandreberrebi"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://businessagile.eu/#organization",
+      "name": "Business Agile",
+      "url": "https://businessagile.eu",
+      "identifier": {"@type": "PropertyValue", "propertyID": "SIREN", "value": "817753155"},
+      "address": {"@type": "PostalAddress", "streetAddress": "9 bis boulevard Jean Jaurès", "postalCode": "92100", "addressLocality": "Boulogne-Billancourt", "addressCountry": "FR"},
+      "founder": {"@id": "https://businessagile.eu/#alexandre-berrebi"}
+    }
+  ]
 }
 </script>
 {% endblock %}

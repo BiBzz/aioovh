@@ -22,6 +22,8 @@
 
 **Source Code**: <a href="https://gitlab.com/businessagile/libraries/aioovh" target="_blank">https://gitlab.com/businessagile/libraries/aioovh</a>
 
+**Created by**: <a href="https://businessagile.eu/en/about" target="_blank">Alexandre BERREBI</a>, maintained by <a href="https://businessagile.eu" target="_blank">Business Agile</a>
+
 ---
 
 aioovh is a client for the **OVHcloud APIs**, versions 1.0 and v2, organised around what you manipulate (bills, servers, domains, Public Cloud instances) rather than the API's paths. It is **async from end to end**, **strongly typed**, and covers **every published API**, not only the popular ones.

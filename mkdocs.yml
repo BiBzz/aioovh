@@ -46,6 +46,7 @@ repo_name: businessagile/libraries/aioovh
 repo_url: https://gitlab.com/businessagile/libraries/aioovh
 edit_uri: ""
 copyright: >-
+  <span class="ba-author">Created by <a href="https://businessagile.eu/en/about" target="_blank" rel="noopener">Alexandre BERREBI</a></span>
   <span class="ba-credit">Made by <span class="ba-logo"><a href="https://businessagile.eu" target="_blank" rel="noopener"><img src="/img/business-agile-logo.png" alt="Business Agile" height="40"></a>,</span> European custom development studio</span>
   <span class="ba-legal"><a href="/about/legal-notice/">Legal notice</a> · <a href="/about/privacy/">Privacy and cookies</a></span>
 
