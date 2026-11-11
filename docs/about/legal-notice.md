@@ -35,4 +35,4 @@ Téléphone : +1 415 829 2854
 
 ## Content and license
 
-The documentation and the source code of aioovh are published under the [MIT license](https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/LICENSE).
+The documentation and the source code of aioovh are published under the [MIT license](https://github.com/BiBzz/aioovh/blob/development/LICENSE).

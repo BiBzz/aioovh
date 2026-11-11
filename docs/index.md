@@ -15,7 +15,7 @@ description: "Asynchronous, fully typed Python client for every OVHcloud API, or
     <em>aioovh, every OVHcloud API in Python, fully async and strongly typed.</em>
 </p>
 <p align="center">
-<a href="https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/LICENSE" target="_blank"><img src="img/badges/license.svg" alt="License: MIT"></a>
+<a href="https://github.com/BiBzz/aioovh/blob/development/LICENSE" target="_blank"><img src="img/badges/license.svg" alt="License: MIT"></a>
 <img src="img/badges/status.svg" alt="Status: beta">
 <img src="img/badges/python.svg" alt="Python 3.12+">
 </p>
@@ -24,9 +24,7 @@ description: "Asynchronous, fully typed Python client for every OVHcloud API, or
 
 **Documentation**: <a href="https://aioovh.businessagile.eu" target="_blank">https://aioovh.businessagile.eu</a>
 
-**Source Code**: <a href="https://gitlab.com/businessagile/libraries/aioovh" target="_blank">https://gitlab.com/businessagile/libraries/aioovh</a>
-
-**Issues and pull requests**: <a href="https://github.com/BiBzz/aioovh" target="_blank">github.com/BiBzz/aioovh</a>
+**Source Code**: <a href="https://github.com/BiBzz/aioovh" target="_blank">https://github.com/BiBzz/aioovh</a>
 
 **Created by**: <a href="https://businessagile.eu/en/about" target="_blank">Alexandre BERREBI</a>, maintained by <a href="https://businessagile.eu" target="_blank">Business Agile</a>
 
@@ -114,4 +112,4 @@ Arguments, fields and results are typed, and checked with `mypy --strict`. Dates
 
 ## License
 
-This project is licensed under the terms of the [MIT license](https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/LICENSE).
+This project is licensed under the terms of the [MIT license](https://github.com/BiBzz/aioovh/blob/development/LICENSE).

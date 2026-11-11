@@ -139,8 +139,7 @@ await ovh.raw.get("/me/bill", **{"date.from": "2026-10-01"})
 See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [docs/architecture.md](docs/architecture.md).
 
-The source lives on [GitLab](https://gitlab.com/businessagile/libraries/aioovh),
-mirrored to [GitHub](https://github.com/BiBzz/aioovh), where
+The source is on [GitHub](https://github.com/BiBzz/aioovh), where
 [issues](https://github.com/BiBzz/aioovh/issues) and pull requests are welcome.
 
 ## Author

@@ -31,5 +31,5 @@ First version published on PyPI.
 - `ovh.raw`, the underlying client, with the official package's raw calls.
 - Type information shipped with the package (`py.typed`).
 
-[Unreleased]: https://gitlab.com/businessagile/libraries/aioovh/-/compare/v0.1.0...development
-[0.1.0]: https://gitlab.com/businessagile/libraries/aioovh/-/tags/v0.1.0
+[Unreleased]: https://github.com/BiBzz/aioovh/compare/v0.1.0...development
+[0.1.0]: https://github.com/BiBzz/aioovh/releases/tag/v0.1.0

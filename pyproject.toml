@@ -38,10 +38,9 @@ dependencies = [
 [project.urls]
 Homepage = "https://aioovh.businessagile.eu"
 Documentation = "https://aioovh.businessagile.eu"
-Repository = "https://gitlab.com/businessagile/libraries/aioovh"
-Mirror = "https://github.com/BiBzz/aioovh"
+Repository = "https://github.com/BiBzz/aioovh"
 Issues = "https://github.com/BiBzz/aioovh/issues"
-Changelog = "https://gitlab.com/businessagile/libraries/aioovh/-/blob/development/CHANGELOG.md"
+Changelog = "https://github.com/BiBzz/aioovh/blob/development/CHANGELOG.md"
 
 [dependency-groups]
 dev = [

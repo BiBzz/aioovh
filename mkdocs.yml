@@ -38,12 +38,12 @@ theme:
   - search.suggest
   - toc.follow
   icon:
-    repo: simple/gitlab
+    repo: simple/github
   logo: img/icon-white.svg
   favicon: img/favicon.svg
   language: en
-repo_name: businessagile/libraries/aioovh
-repo_url: https://gitlab.com/businessagile/libraries/aioovh
+repo_name: BiBzz/aioovh
+repo_url: https://github.com/BiBzz/aioovh
 edit_uri: ""
 copyright: >-
   <span class="ba-author">Created by <a href="https://businessagile.eu/en/about" target="_blank" rel="noopener">Alexandre BERREBI</a></span>
