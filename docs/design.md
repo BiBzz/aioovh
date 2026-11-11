@@ -1,6 +1,10 @@
+---
+description: "Design principles, scope and roadmap of aioovh, the asynchronous and fully typed Python client for OVHcloud."
+---
+
 # Design and roadmap
 
-aioovh is developed in the open. This page states what it aims at, what it leaves out, and what comes next. Discussion happens in the [GitLab issues](https://gitlab.com/businessagile/libraries/aioovh/-/issues).
+aioovh is developed in the open. This page states what it aims at, what it leaves out, and what comes next. Discussion happens in the [GitHub issues](https://github.com/BiBzz/aioovh/issues).
 
 ## Principles
 

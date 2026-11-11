@@ -1,3 +1,7 @@
+---
+description: "Privacy on the aioovh documentation site: no cookie, no analytics, no third party font or script."
+---
+
 # Privacy and cookies
 
 This site sets **no cookie**, runs **no analytics** and loads **no third party font or script**.

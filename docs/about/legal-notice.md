@@ -1,3 +1,7 @@
+---
+description: "Legal notice of the aioovh documentation site, published by Business Agile."
+---
+
 # Legal notice
 
 Information required by French law (loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, article 6).

@@ -40,7 +40,7 @@ theme:
   icon:
     repo: simple/gitlab
   logo: img/icon-white.svg
-  favicon: img/icon-white.svg
+  favicon: img/favicon.svg
   language: en
 repo_name: businessagile/libraries/aioovh
 repo_url: https://gitlab.com/businessagile/libraries/aioovh

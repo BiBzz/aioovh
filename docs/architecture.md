@@ -1,8 +1,12 @@
+---
+description: "How aioovh is built: a generated operations layer, an object layer on top, and the generator that keeps both in step with the OVHcloud APIs."
+---
+
 # Architecture
 
-The conventions shared with aioscaleway are in the Business Agile conventions
-(`backend/08-python-api-clients.md`, draft in
-`/opt/businessagile/libraries/conventions-clients-api.md`). This file covers
+aioovh and its sibling [aioscaleway](https://aioscaleway.businessagile.eu) follow the same
+conventions: business areas, collections you iterate, references you await,
+one method per action, described in [Features](features.md). This page covers
 what is specific to OVHcloud.
 
 ## Two layers

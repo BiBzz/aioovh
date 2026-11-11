@@ -1,5 +1,27 @@
 {% extends "base.html" %}
+{% block htmltitle %}
+{% if page and page.url == "" %}
+<title>{{ config.site_name }}: async, typed Python client for every OVHcloud API</title>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock %}
 {% block extrahead %}
+{% set description = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+{% if page and page.canonical_url %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ config.site_name }}">
+<meta property="og:title" content="{% if page.url == "" %}{{ config.site_name }}: async, typed Python client for every OVHcloud API{% else %}{{ page.title | striptags }} - {{ config.site_name }}{% endif %}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ page.canonical_url }}">
+<meta property="og:image" content="https://aioovh.businessagile.eu/img/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="aioovh">
+<meta name="twitter:card" content="summary_large_image">
+{% else %}
+<meta name="robots" content="noindex">
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
