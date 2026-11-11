@@ -83,8 +83,9 @@ The format is [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## Releasing
 
-1. In a merge request, bump `version` in `pyproject.toml`, run `uv lock`, and
-   turn the `## [Unreleased]` section into the release:
+1. In a merge request, bump `version` in `pyproject.toml` and `version` and
+   `date-released` in `CITATION.cff`, run `uv lock`, and turn the
+   `## [Unreleased]` section into the release:
 
    ```bash
    python3 scripts/roll_changelog.py 0.2.0
